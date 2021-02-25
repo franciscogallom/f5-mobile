@@ -6,6 +6,7 @@ import { colors } from "../assets/colors"
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
 
+import Axios from "axios"
 interface NewUser {
   user: string
   password: string
@@ -25,11 +26,15 @@ const SignUp = () => {
     position: "posición en la cancha",
   })
 
-  const handleSignUp = (): void => {
+  const createUser = () => {
+    Axios.post("http://10.0.2.2:3001/create", newUser).then(() => {
+      console.log("User adding.")
+    })
+  }
+
+  const onSignUp = (): void => {
     newUser.email === newUser.emailVerification
-      ? alert(
-          `user: ${newUser.user}, password: ${newUser.password}, email: ${newUser.email}, celular: ${newUser.phone}, posicion: ${newUser.position}`
-        )
+      ? createUser()
       : alert("Algo salio mal! Verifica tu confirmación de email.")
   }
 
@@ -67,7 +72,7 @@ const SignUp = () => {
         setDataType={(position: string) => setNewUser({ ...newUser, position })}
       />
 
-      <ButtonOne text="registrarme" handleTap={handleSignUp} />
+      <ButtonOne text="registrarme" handleTap={onSignUp} />
     </View>
   )
 }

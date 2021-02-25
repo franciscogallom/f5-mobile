@@ -16,9 +16,7 @@ export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false)
 
   if (fontsLoaded) {
-    return (
-      <LogIn/>
-    )
+    return <LogIn />
   } else {
     return (
       <AppLoading
