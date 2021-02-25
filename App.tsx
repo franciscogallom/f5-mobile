@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import AppLoading from "expo-app-loading"
 import * as Font from "expo-font"
 
-import LogIn from "./screens/LogIn"
+import SignUp from "./screens/SignUp"
 
 const getFonts = () =>
   Font.loadAsync({
@@ -12,11 +12,11 @@ const getFonts = () =>
     "poppins-extrabold-italic": require("./assets/fonts/Poppins-ExtraBoldItalic.ttf"),
   })
 
-export default function App() {
+export default function App(): JSX.Element {
   const [fontsLoaded, setFontsLoaded] = useState(false)
 
   if (fontsLoaded) {
-    return <LogIn />
+    return <SignUp />
   } else {
     return (
       <AppLoading

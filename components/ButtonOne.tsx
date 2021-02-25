@@ -5,13 +5,13 @@ import { colors } from "../assets/colors"
 
 interface Props {
   text: string
-  handleTap: Function
+  handleTap: () => void
 }
 
-const ButtonOne: React.FC<Props> = ({ text, handleTap }) => {
+const ButtonOne: React.FC<Props> = (props: Props) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={() => handleTap()}>
-      <Text style={styles.buttonText}>{text}</Text>
+    <TouchableOpacity style={styles.button} onPress={() => props.handleTap()}>
+      <Text style={styles.buttonText}>{props.text}</Text>
     </TouchableOpacity>
   )
 }

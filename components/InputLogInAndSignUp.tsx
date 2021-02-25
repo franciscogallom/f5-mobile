@@ -5,16 +5,16 @@ import { colors } from "../assets/colors"
 
 interface Props {
   dataType: string
-  setDataType: Function
+  setDataType: (dataType: string) => void
 }
 
-const InputLogInAndSignUp: React.FC<Props> = ({ dataType, setDataType }) => {
+const InputLogInAndSignUp: React.FC<Props> = (props: Props) => {
   return (
     <TextInput
       style={inputLogInAndSignUp.input}
-      value={dataType}
-      onChangeText={(text) => setDataType(text)}
-      onFocus={() => setDataType("")}
+      value={props.dataType}
+      onChangeText={(text) => props.setDataType(text)}
+      onFocus={() => props.setDataType("")}
     />
   )
 }

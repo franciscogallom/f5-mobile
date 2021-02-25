@@ -6,7 +6,7 @@ import { colors } from "../assets/colors"
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
 
-const LogIn = () => {
+const LogIn = (): JSX.Element => {
   const [user, setUser] = useState<string>("usuario.")
   const [password, setPassword] = useState<string>("contraseña.")
 

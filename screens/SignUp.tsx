@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { View, StyleSheet } from "react-native"
 
 import { colors } from "../assets/colors"
 
@@ -16,7 +16,7 @@ interface NewUser {
   position: string
 }
 
-const SignUp = () => {
+const SignUp = (): JSX.Element => {
   const [newUser, setNewUser] = useState<NewUser>({
     user: "usuario.",
     password: "password.",
