@@ -1,8 +1,13 @@
 import React, { useState } from "react"
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import AppLoading from "expo-app-loading"
 import * as Font from "expo-font"
 
+import { colors } from "./assets/colors"
+
 import SignUp from "./screens/SignUp"
+import LogIn from "./screens/LogIn"
+import GoBack from "./components/GoBack"
 
 const getFonts = () =>
   Font.loadAsync({
@@ -13,10 +18,28 @@ const getFonts = () =>
   })
 
 export default function App(): JSX.Element {
-  const [fontsLoaded, setFontsLoaded] = useState(false)
+  const [fontsLoaded, setFontsLoaded] = useState<boolean>(false)
+  const [haveAccount, setHaveAccount] = useState<boolean>(true)
 
   if (fontsLoaded) {
-    return <SignUp />
+    return haveAccount ? (
+      <View style={app.container}>
+        <LogIn />
+        <TouchableOpacity
+          style={app.goToSignUp}
+          onPress={() => setHaveAccount(false)}
+        >
+          <Text style={app.text}>
+            No tenes cuenta? <Text style={app.callToAction}>Registrate!</Text>
+          </Text>
+        </TouchableOpacity>
+      </View>
+    ) : (
+      <View style={app.container}>
+        <SignUp />
+        <GoBack text="volver atrás" handleTap={() => setHaveAccount(true)} />
+      </View>
+    )
   } else {
     return (
       <AppLoading
@@ -27,3 +50,26 @@ export default function App(): JSX.Element {
     )
   }
 }
+
+const app = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.primary,
+  },
+  goToSignUp: {
+    height: 25,
+  },
+  text: {
+    color: colors.secondary,
+    fontFamily: "poppins-extrabold",
+    fontSize: 12.5,
+    marginBottom: 100,
+  },
+  callToAction: {
+    color: colors.tertiary,
+    textDecorationLine: "underline",
+    textDecorationColor: colors.tertiary,
+  },
+})

@@ -1,8 +1,6 @@
 import React, { useState } from "react"
 import { View, StyleSheet } from "react-native"
 
-import { colors } from "../assets/colors"
-
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
 
@@ -23,7 +21,7 @@ const SignUp = (): JSX.Element => {
     email: "email.",
     emailVerification: "repetir email.",
     phone: "celular.",
-    position: "posición en la cancha",
+    position: "posición en la cancha.",
   })
 
   const createUser = () => {
@@ -79,21 +77,7 @@ const SignUp = (): JSX.Element => {
 
 const logIn = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.primary,
-  },
-  text: {
-    color: colors.secondary,
-    fontFamily: "poppins-extrabold",
-    fontSize: 12.5,
-    marginBottom: 100,
-  },
-  goToSignUp: {
-    color: colors.tertiary,
-    textDecorationLine: "underline",
-    textDecorationColor: colors.tertiary,
   },
 })
 
