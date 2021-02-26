@@ -17,11 +17,13 @@ const LogIn = (): JSX.Element => {
       <InputLogInAndSignUp
         dataType={user}
         setDataType={(text: string) => setUser(text)}
+        isPassword={false}
       />
 
       <InputLogInAndSignUp
         dataType={password}
         setDataType={(text: string) => setPassword(text)}
+        isPassword={true}
       />
 
       <ButtonOne text="iniciar sesión" handleTap={handleLogIn} />

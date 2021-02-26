@@ -11,7 +11,6 @@ interface NewUser {
   email: string
   emailVerification: string
   phone: string
-  position: string
 }
 
 const SignUp = (): JSX.Element => {
@@ -21,7 +20,6 @@ const SignUp = (): JSX.Element => {
     email: "email.",
     emailVerification: "repetir email.",
     phone: "celular.",
-    position: "posición en la cancha.",
   })
 
   const createUser = () => {
@@ -41,16 +39,19 @@ const SignUp = (): JSX.Element => {
       <InputLogInAndSignUp
         dataType={newUser.user}
         setDataType={(user: string) => setNewUser({ ...newUser, user })}
+        isPassword={false}
       />
 
       <InputLogInAndSignUp
         dataType={newUser.password}
         setDataType={(password: string) => setNewUser({ ...newUser, password })}
+        isPassword={true}
       />
 
       <InputLogInAndSignUp
         dataType={newUser.email}
         setDataType={(email: string) => setNewUser({ ...newUser, email })}
+        isPassword={false}
       />
 
       <InputLogInAndSignUp
@@ -58,16 +59,13 @@ const SignUp = (): JSX.Element => {
         setDataType={(emailVerification: string) =>
           setNewUser({ ...newUser, emailVerification })
         }
+        isPassword={false}
       />
 
       <InputLogInAndSignUp
         dataType={newUser.phone}
         setDataType={(phone: string) => setNewUser({ ...newUser, phone })}
-      />
-
-      <InputLogInAndSignUp
-        dataType={newUser.position}
-        setDataType={(position: string) => setNewUser({ ...newUser, position })}
+        isPassword={false}
       />
 
       <ButtonOne text="registrarme" handleTap={onSignUp} />

@@ -2,9 +2,9 @@ import React from "react"
 import { TextInput, StyleSheet } from "react-native"
 
 import { colors } from "../assets/colors"
-
 interface Props {
   dataType: string
+  isPassword: boolean
   setDataType: (dataType: string) => void
 }
 
@@ -15,6 +15,7 @@ const InputLogInAndSignUp: React.FC<Props> = (props: Props) => {
       value={props.dataType}
       onChangeText={(text) => props.setDataType(text)}
       onFocus={() => props.setDataType("")}
+      secureTextEntry={props.isPassword}
     />
   )
 }
