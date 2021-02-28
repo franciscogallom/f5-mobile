@@ -13,7 +13,7 @@ const InputLogInAndSignUp: React.FC<Props> = (props: Props) => {
     <TextInput
       style={inputLogInAndSignUp.input}
       value={props.dataType}
-      onChangeText={(text) => props.setDataType(text)}
+      onChangeText={props.setDataType}
       onFocus={() => props.setDataType("")}
       secureTextEntry={props.isPassword}
     />

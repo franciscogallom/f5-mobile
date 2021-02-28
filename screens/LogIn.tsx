@@ -1,33 +1,36 @@
-import React, { useState } from "react"
+import React from "react"
 import { View, StyleSheet } from "react-native"
+
+import { Formik } from "formik"
 
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
 
 const LogIn = (): JSX.Element => {
-  const [user, setUser] = useState<string>("usuario.")
-  const [password, setPassword] = useState<string>("contraseña.")
-
-  const handleLogIn = (): void => {
-    alert(`user: ${user}, password: ${password}`)
-  }
-
   return (
-    <View style={logIn.container}>
-      <InputLogInAndSignUp
-        dataType={user}
-        setDataType={(text: string) => setUser(text)}
-        isPassword={false}
-      />
-
-      <InputLogInAndSignUp
-        dataType={password}
-        setDataType={(text: string) => setPassword(text)}
-        isPassword={true}
-      />
-
-      <ButtonOne text="iniciar sesión" handleTap={handleLogIn} />
-    </View>
+    <Formik
+      initialValues={{
+        user: "usuario.",
+        password: "contraseña.",
+      }}
+      onSubmit={(values) => alert(`${values.user} ${values.password}`)}
+    >
+      {({ handleChange, handleSubmit, values }) => (
+        <View style={logIn.container}>
+          <InputLogInAndSignUp
+            dataType={values.user}
+            isPassword={false}
+            setDataType={handleChange("user")}
+          />
+          <InputLogInAndSignUp
+            dataType={values.password}
+            isPassword={true}
+            setDataType={handleChange("password")}
+          />
+          <ButtonOne text="iniciar sesión" handleTap={handleSubmit} />
+        </View>
+      )}
+    </Formik>
   )
 }
 

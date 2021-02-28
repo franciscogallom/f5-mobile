@@ -1,5 +1,7 @@
-import React, { useState } from "react"
+import React from "react"
 import { View, StyleSheet } from "react-native"
+
+import { Formik } from "formik"
 
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
@@ -14,66 +16,62 @@ interface NewUser {
 }
 
 const SignUp = (): JSX.Element => {
-  const [newUser, setNewUser] = useState<NewUser>({
-    user: "usuario.",
-    password: "password.",
-    email: "email.",
-    emailVerification: "repetir email.",
-    phone: "celular.",
-  })
-
-  const createUser = () => {
-    Axios.post("http://10.0.2.2:3001/create", newUser).then(() => {
-      console.log("User adding.")
+  const createUser = (values: NewUser) => {
+    Axios.post("http://10.0.2.2:3001/create", values).then(() => {
+      console.log("user adding.")
     })
   }
 
-  const onSignUp = (): void => {
-    newUser.email === newUser.emailVerification
-      ? createUser()
-      : alert("Algo salio mal! Verifica tu confirmación de email.")
-  }
-
   return (
-    <View style={logIn.container}>
-      <InputLogInAndSignUp
-        dataType={newUser.user}
-        setDataType={(user: string) => setNewUser({ ...newUser, user })}
-        isPassword={false}
-      />
-
-      <InputLogInAndSignUp
-        dataType={newUser.password}
-        setDataType={(password: string) => setNewUser({ ...newUser, password })}
-        isPassword={true}
-      />
-
-      <InputLogInAndSignUp
-        dataType={newUser.email}
-        setDataType={(email: string) => setNewUser({ ...newUser, email })}
-        isPassword={false}
-      />
-
-      <InputLogInAndSignUp
-        dataType={newUser.emailVerification}
-        setDataType={(emailVerification: string) =>
-          setNewUser({ ...newUser, emailVerification })
-        }
-        isPassword={false}
-      />
-
-      <InputLogInAndSignUp
-        dataType={newUser.phone}
-        setDataType={(phone: string) => setNewUser({ ...newUser, phone })}
-        isPassword={false}
-      />
-
-      <ButtonOne text="registrarme" handleTap={onSignUp} />
-    </View>
+    <Formik
+      initialValues={{
+        user: "usuario.",
+        password: "contraseña.",
+        email: "email.",
+        emailVerification: "repetir email.",
+        phone: "celular (opcional).",
+      }}
+      onSubmit={(values) =>
+        values.email === values.emailVerification
+          ? createUser(values)
+          : alert("Algo salio mal! Verifica tu confirmación de email.")
+      }
+    >
+      {({ handleChange, handleSubmit, values }) => (
+        <View style={signUp.container}>
+          <InputLogInAndSignUp
+            dataType={values.user}
+            isPassword={false}
+            setDataType={handleChange("user")}
+          />
+          <InputLogInAndSignUp
+            dataType={values.password}
+            isPassword={true}
+            setDataType={handleChange("password")}
+          />
+          <InputLogInAndSignUp
+            dataType={values.email}
+            isPassword={false}
+            setDataType={handleChange("email")}
+          />
+          <InputLogInAndSignUp
+            dataType={values.emailVerification}
+            isPassword={false}
+            setDataType={handleChange("emailVerification")}
+          />
+          <InputLogInAndSignUp
+            dataType={values.phone}
+            isPassword={false}
+            setDataType={handleChange("phone")}
+          />
+          <ButtonOne text="registrarme" handleTap={handleSubmit} />
+        </View>
+      )}
+    </Formik>
   )
 }
 
-const logIn = StyleSheet.create({
+const signUp = StyleSheet.create({
   container: {
     alignItems: "center",
   },

@@ -10,10 +10,7 @@ interface Props {
 
 const ButtonOne: React.FC<Props> = (props: Props) => {
   return (
-    <TouchableOpacity
-      style={buttonOne.button}
-      onPress={() => props.handleTap()}
-    >
+    <TouchableOpacity style={buttonOne.button} onPress={props.handleTap}>
       <Text style={buttonOne.buttonText}>{props.text}</Text>
     </TouchableOpacity>
   )
