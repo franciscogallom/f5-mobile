@@ -25,8 +25,8 @@ const LogIn = (): JSX.Element => {
   return (
     <Formik
       initialValues={{
-        user: "usuario.",
-        password: "contraseña.",
+        user: "",
+        password: "",
       }}
       onSubmit={(values) => handleLogIn(values)}
     >
@@ -34,11 +34,13 @@ const LogIn = (): JSX.Element => {
         <View style={logIn.container}>
           <InputLogInAndSignUp
             dataType={values.user}
+            placeholder="usuario"
             isPassword={false}
             setDataType={handleChange("user")}
           />
           <InputLogInAndSignUp
             dataType={values.password}
+            placeholder="contraseña"
             isPassword={true}
             setDataType={handleChange("password")}
           />

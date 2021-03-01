@@ -1,15 +1,14 @@
 import React from "react"
-import { View, StyleSheet, Text } from "react-native"
+import { View, StyleSheet } from "react-native"
 
 import { Formik } from "formik"
 import * as yup from "yup"
-
-import { colors } from "../assets/colors"
+import Axios from "axios"
 
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
+import ErrorText from "../components/ErrorText"
 
-import Axios from "axios"
 interface NewUser {
   user: string
   password: string
@@ -21,36 +20,41 @@ interface NewUser {
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
 const schema = yup.object({
-  user: yup.string().required().min(3).max(20),
-  password: yup.string().required().min(5).max(30),
-  email: yup.string().required().email().max(75),
+  user: yup.string().required("el usuario es requerido").min(3).max(20),
+  password: yup.string().required("la contraseña es requerida").min(5).max(30),
+  email: yup
+    .string()
+    .required("el email es requerido")
+    .email("email inválido")
+    .max(75),
   emailVerification: yup
     .string()
-    .required()
     .email()
-    .oneOf([yup.ref("email"), null], "emails don't match"),
+    .oneOf([yup.ref("email"), null], "los emails no coinciden"),
   phone: yup
     .string()
     .min(5)
     .max(25)
-    .matches(phoneRegExp, "invalid phone number"),
+    .matches(phoneRegExp, "número de celular inválido"),
 })
 
 const createUser = (values: NewUser) => {
-  Axios.post("http://10.0.2.2:3001/create", values).then(() => {
-    console.log("user adding.")
+  Axios.post("http://10.0.2.2:3001/create", values).then((response) => {
+    console.log(response)
   })
 }
+
+// TRANSFORMAR A ESPAÑOL LOS ERRORES DE MIN Y MAX DE YUP.
 
 const SignUp = (): JSX.Element => {
   return (
     <Formik
       initialValues={{
-        user: "usuario.",
-        password: "contraseña.",
-        email: "email.",
-        emailVerification: "repetir email.",
-        phone: "celular (opcional).",
+        user: "",
+        password: "",
+        email: "",
+        emailVerification: "",
+        phone: "",
       }}
       validationSchema={schema}
       onSubmit={(values) => createUser(values)}
@@ -59,38 +63,41 @@ const SignUp = (): JSX.Element => {
         <View style={signUp.container}>
           <InputLogInAndSignUp
             dataType={values.user}
+            placeholder="usuario"
             isPassword={false}
             setDataType={handleChange("user")}
           />
-          <Text style={signUp.errortext}>{touched.user && errors.user}</Text>
+          {touched.user && <ErrorText text={`${errors.user}`} />}
           <InputLogInAndSignUp
             dataType={values.password}
+            placeholder="contraseña"
             isPassword={true}
             setDataType={handleChange("password")}
           />
-          <Text style={signUp.errortext}>
-            {touched.password && errors.password}
-          </Text>
+          {touched.password && <ErrorText text={`${errors.password}`} />}
           <InputLogInAndSignUp
             dataType={values.email}
+            placeholder="email"
             isPassword={false}
             setDataType={handleChange("email")}
           />
-          <Text style={signUp.errortext}>{touched.email && errors.email}</Text>
+          {touched.email && <ErrorText text={`${errors.email}`} />}
           <InputLogInAndSignUp
             dataType={values.emailVerification}
+            placeholder="repetir email"
             isPassword={false}
             setDataType={handleChange("emailVerification")}
           />
-          <Text style={signUp.errortext}>
-            {touched.emailVerification && errors.emailVerification}
-          </Text>
+          {touched.emailVerification && (
+            <ErrorText text={`${errors.emailVerification}`} />
+          )}
           <InputLogInAndSignUp
             dataType={values.phone}
+            placeholder="celular (opcional)"
             isPassword={false}
             setDataType={handleChange("phone")}
           />
-          <Text style={signUp.errortext}>{touched.phone && errors.phone}</Text>
+          {touched.phone && <ErrorText text={`${errors.phone}`} />}
           <ButtonOne text="registrarme" handleTap={handleSubmit} />
         </View>
       )}
@@ -101,9 +108,6 @@ const SignUp = (): JSX.Element => {
 const signUp = StyleSheet.create({
   container: {
     alignItems: "center",
-  },
-  errortext: {
-    color: colors.quaternary,
   },
 })
 
