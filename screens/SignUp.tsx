@@ -19,6 +19,16 @@ interface NewUser {
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
+yup.setLocale({
+  mixed: {
+    default: "campo inválido",
+  },
+  string: {
+    min: ({ min }: { min: number }) => `mínimo ${min} caracteres`,
+    max: ({ max }: { max: number }) => `máximo ${max} caracteres`,
+  },
+})
+
 const schema = yup.object({
   user: yup.string().required("el usuario es requerido").min(3).max(20),
   password: yup.string().required("la contraseña es requerida").min(5).max(30),
@@ -29,7 +39,6 @@ const schema = yup.object({
     .max(75),
   emailVerification: yup
     .string()
-    .email()
     .oneOf([yup.ref("email"), null], "los emails no coinciden"),
   phone: yup
     .string()
@@ -43,8 +52,6 @@ const createUser = (values: NewUser) => {
     console.log(response)
   })
 }
-
-// TRANSFORMAR A ESPAÑOL LOS ERRORES DE MIN Y MAX DE YUP.
 
 const SignUp = (): JSX.Element => {
   return (
