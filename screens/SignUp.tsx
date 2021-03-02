@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import { View, StyleSheet } from "react-native"
 
 import { Formik } from "formik"
-import * as yup from "yup"
 import Axios from "axios"
+
+import { userSchema } from "../schemas/user"
 
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
@@ -17,43 +18,22 @@ interface NewUser {
   phone: string
 }
 
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-
-yup.setLocale({
-  mixed: {
-    default: "campo inválido",
-  },
-  string: {
-    min: ({ min }: { min: number }) => `mínimo ${min} caracteres`,
-    max: ({ max }: { max: number }) => `máximo ${max} caracteres`,
-  },
-})
-
-const schema = yup.object({
-  user: yup.string().required("el usuario es requerido").min(3).max(20),
-  password: yup.string().required("la contraseña es requerida").min(5).max(30),
-  email: yup
-    .string()
-    .required("el email es requerido")
-    .email("email inválido")
-    .max(75),
-  emailVerification: yup
-    .string()
-    .oneOf([yup.ref("email"), null], "los emails no coinciden"),
-  phone: yup
-    .string()
-    .min(5)
-    .max(25)
-    .matches(phoneRegExp, "número de celular inválido"),
-})
-
-const createUser = (values: NewUser) => {
-  Axios.post("http://10.0.2.2:3001/user/create", values).then((response) => {
-    console.log(response)
-  })
-}
-
 const SignUp = (): JSX.Element => {
+  const [error, setError] = useState("")
+
+  const createUser = (values: NewUser) => {
+    Axios.post("http://10.0.2.2:3001/user/create", values)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch(() => {
+        setError("algo salió mal, intenta nuevamente")
+        setTimeout(() => {
+          setError("")
+        }, 5000)
+      })
+  }
+
   return (
     <Formik
       initialValues={{
@@ -63,7 +43,7 @@ const SignUp = (): JSX.Element => {
         emailVerification: "",
         phone: "",
       }}
-      validationSchema={schema}
+      validationSchema={userSchema}
       onSubmit={(values) => createUser(values)}
     >
       {({ handleChange, handleSubmit, values, touched, errors }) => (
@@ -105,6 +85,7 @@ const SignUp = (): JSX.Element => {
             setDataType={handleChange("phone")}
           />
           {touched.phone && <ErrorText text={`${errors.phone}`} />}
+          {error !== "" && <ErrorText text={`${error}`} />}
           <ButtonOne text="registrarme" handleTap={handleSubmit} />
         </View>
       )}
