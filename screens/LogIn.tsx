@@ -17,7 +17,7 @@ const LogIn = (): JSX.Element => {
   const [logInStatus, setLogInStatus] = useState("")
 
   const handleLogIn = (values: User) => {
-    Axios.post("http://10.0.2.2:3001/login", values).then((response) => {
+    Axios.post("http://10.0.2.2:3001/user/login", values).then((response) => {
       setLogInStatus(response.data.message || "successful login")
     })
   }

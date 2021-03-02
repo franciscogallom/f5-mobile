@@ -48,7 +48,7 @@ const schema = yup.object({
 })
 
 const createUser = (values: NewUser) => {
-  Axios.post("http://10.0.2.2:3001/create", values).then((response) => {
+  Axios.post("http://10.0.2.2:3001/user/create", values).then((response) => {
     console.log(response)
   })
 }
