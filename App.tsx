@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import AppLoading from "expo-app-loading"
 import * as Font from "expo-font"
@@ -17,12 +17,12 @@ const getFonts = () =>
     "poppins-extrabold-italic": require("./assets/fonts/Poppins-ExtraBoldItalic.ttf"),
   })
 
-export default function App(): JSX.Element {
-  const [fontsLoaded, setFontsLoaded] = useState<boolean>(false)
-  const [haveAccount, setHaveAccount] = useState<boolean>(true)
+const App: FC = () => {
+  const [fontsLoaded, setFontsLoaded] = useState(false)
+  const [haveAccount, setHaveAccount] = useState(true)
 
-  if (fontsLoaded) {
-    return haveAccount ? (
+  return fontsLoaded ? (
+    haveAccount ? (
       <View style={app.container}>
         <LogIn />
         <TouchableOpacity
@@ -40,15 +40,13 @@ export default function App(): JSX.Element {
         <GoBack text="volver atrás" handleTap={() => setHaveAccount(true)} />
       </View>
     )
-  } else {
-    return (
-      <AppLoading
-        startAsync={getFonts}
-        onFinish={() => setFontsLoaded(true)}
-        onError={console.warn}
-      />
-    )
-  }
+  ) : (
+    <AppLoading
+      startAsync={getFonts}
+      onFinish={() => setFontsLoaded(true)}
+      onError={console.warn}
+    />
+  )
 }
 
 const app = StyleSheet.create({
@@ -73,3 +71,5 @@ const app = StyleSheet.create({
     textDecorationColor: colors.tertiary,
   },
 })
+
+export default App

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { View, StyleSheet } from "react-native"
 
 import { Formik } from "formik"
@@ -18,7 +18,7 @@ interface NewUser {
   phone: string
 }
 
-const SignUp = (): JSX.Element => {
+const SignUp: FC = () => {
   const [error, setError] = useState("")
   const [userExists, setUserExists] = useState(false)
 

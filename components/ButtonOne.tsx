@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { TouchableOpacity, Text, StyleSheet } from "react-native"
 
 import { colors } from "../assets/colors"
@@ -8,10 +8,10 @@ interface Props {
   handleTap: () => void
 }
 
-const ButtonOne: React.FC<Props> = (props: Props) => {
+const ButtonOne: FC<Props> = ({ text, handleTap }: Props) => {
   return (
-    <TouchableOpacity style={buttonOne.button} onPress={props.handleTap}>
-      <Text style={buttonOne.buttonText}>{props.text}</Text>
+    <TouchableOpacity style={buttonOne.button} onPress={handleTap}>
+      <Text style={buttonOne.buttonText}>{text}</Text>
     </TouchableOpacity>
   )
 }

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { TextInput, StyleSheet } from "react-native"
 
 import { colors } from "../assets/colors"
@@ -9,15 +9,20 @@ interface Props {
   setDataType: (dataType: string) => void
 }
 
-const InputLogInAndSignUp: React.FC<Props> = (props: Props) => {
+const InputLogInAndSignUp: FC<Props> = ({
+  dataType,
+  placeholder,
+  isPassword,
+  setDataType,
+}: Props) => {
   return (
     <TextInput
       style={inputLogInAndSignUp.input}
-      value={props.dataType}
-      placeholder={`${props.placeholder}.`}
+      value={dataType}
+      placeholder={`${placeholder}.`}
       placeholderTextColor="#949494"
-      onChangeText={props.setDataType}
-      secureTextEntry={props.isPassword}
+      onChangeText={setDataType}
+      secureTextEntry={isPassword}
     />
   )
 }

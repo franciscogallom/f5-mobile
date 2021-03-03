@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { View, StyleSheet } from "react-native"
 
 import { Formik } from "formik"
@@ -13,7 +13,7 @@ interface User {
   password: string
 }
 
-const LogIn = (): JSX.Element => {
+const LogIn: FC = () => {
   const [logInStatus, setLogInStatus] = useState("")
 
   const handleLogIn = (values: User) => {

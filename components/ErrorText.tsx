@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { Text, StyleSheet } from "react-native"
 
 import { colors } from "../assets/colors"
@@ -7,10 +7,10 @@ interface Props {
   text: string
 }
 
-const ErrorText: React.FC<Props> = (props: Props) => {
+const ErrorText: FC<Props> = ({ text }: Props) => {
   return (
     <Text style={errorText.text}>
-      {props.text && props.text !== "undefined" && `${props.text}.`}
+      {text && text !== "undefined" && `${text}.`}
     </Text>
   )
 }

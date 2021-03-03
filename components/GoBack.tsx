@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { TouchableOpacity, Text, StyleSheet } from "react-native"
 
 import { colors } from "../assets/colors"
@@ -8,10 +8,10 @@ interface Props {
   handleTap: () => void
 }
 
-const GoBack: React.FC<Props> = (props: Props) => {
+const GoBack: FC<Props> = ({ text, handleTap }: Props) => {
   return (
-    <TouchableOpacity onPress={() => props.handleTap()}>
-      <Text style={goBack.text}>{`< ${props.text}`}</Text>
+    <TouchableOpacity onPress={() => handleTap()}>
+      <Text style={goBack.text}>{`< ${text}`}</Text>
     </TouchableOpacity>
   )
 }
