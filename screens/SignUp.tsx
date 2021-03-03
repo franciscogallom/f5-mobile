@@ -20,17 +20,30 @@ interface NewUser {
 
 const SignUp = (): JSX.Element => {
   const [error, setError] = useState("")
+  const [userExists, setUserExists] = useState(false)
 
   const createUser = (values: NewUser) => {
-    Axios.post("http://10.0.2.2:3001/user/create", values)
-      .then((response) => {
-        console.log(response)
-      })
-      .catch(() => {
-        setError("algo salió mal, intenta nuevamente")
+    // verify that the user doesn't exist.
+    Axios.get(`http://10.0.2.2:3001/user/${values.user}`)
+      // if i find it, the user already exist and i notify the user.
+      .then(() => {
+        setUserExists(true)
         setTimeout(() => {
-          setError("")
-        }, 5000)
+          setUserExists(false)
+        }, 7000)
+      })
+      // if i not find it, i can create the user.
+      .catch(() => {
+        Axios.post("http://10.0.2.2:3001/user/create", values)
+          .then((response) => {
+            console.log(response)
+          })
+          .catch(() => {
+            setError("algo salió mal, intenta nuevamente")
+            setTimeout(() => {
+              setError("")
+            }, 5000)
+          })
       })
   }
 
@@ -54,7 +67,11 @@ const SignUp = (): JSX.Element => {
             isPassword={false}
             setDataType={handleChange("user")}
           />
-          {touched.user && <ErrorText text={`${errors.user}`} />}
+          {userExists ? (
+            <ErrorText text="el usuario ya existe" />
+          ) : (
+            touched.user && <ErrorText text={`${errors.user}`} />
+          )}
           <InputLogInAndSignUp
             dataType={values.password}
             placeholder="contraseña"
@@ -85,7 +102,7 @@ const SignUp = (): JSX.Element => {
             setDataType={handleChange("phone")}
           />
           {touched.phone && <ErrorText text={`${errors.phone}`} />}
-          {error !== "" && <ErrorText text={`${error}`} />}
+          {error !== "" && !userExists && <ErrorText text={`${error}`} />}
           <ButtonOne text="registrarme" handleTap={handleSubmit} />
         </View>
       )}
