@@ -5,14 +5,14 @@ import { colors } from "../assets/colors"
 interface Props {
   dataType: string
   placeholder: string
-  isPassword: boolean
+  secureTextEntry?: boolean
   setDataType: (dataType: string) => void
 }
 
 const InputLogInAndSignUp: FC<Props> = ({
   dataType,
   placeholder,
-  isPassword,
+  secureTextEntry,
   setDataType,
 }: Props) => {
   return (
@@ -22,7 +22,7 @@ const InputLogInAndSignUp: FC<Props> = ({
       placeholder={`${placeholder}.`}
       placeholderTextColor="#949494"
       onChangeText={setDataType}
-      secureTextEntry={isPassword}
+      secureTextEntry={secureTextEntry}
     />
   )
 }

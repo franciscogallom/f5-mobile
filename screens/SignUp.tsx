@@ -64,7 +64,6 @@ const SignUp: FC = () => {
           <InputLogInAndSignUp
             dataType={values.user}
             placeholder="usuario"
-            isPassword={false}
             setDataType={handleChange("user")}
           />
           {userExists ? (
@@ -75,21 +74,19 @@ const SignUp: FC = () => {
           <InputLogInAndSignUp
             dataType={values.password}
             placeholder="contraseña"
-            isPassword={true}
+            secureTextEntry
             setDataType={handleChange("password")}
           />
           {touched.password && <ErrorText text={`${errors.password}`} />}
           <InputLogInAndSignUp
             dataType={values.email}
             placeholder="email"
-            isPassword={false}
             setDataType={handleChange("email")}
           />
           {touched.email && <ErrorText text={`${errors.email}`} />}
           <InputLogInAndSignUp
             dataType={values.emailVerification}
             placeholder="repetir email"
-            isPassword={false}
             setDataType={handleChange("emailVerification")}
           />
           {touched.emailVerification && (
@@ -98,7 +95,6 @@ const SignUp: FC = () => {
           <InputLogInAndSignUp
             dataType={values.phone}
             placeholder="celular (opcional)"
-            isPassword={false}
             setDataType={handleChange("phone")}
           />
           {touched.phone && <ErrorText text={`${errors.phone}`} />}
