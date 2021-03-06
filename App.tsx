@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   StyleSheet,
+  ImageBackground,
 } from "react-native"
 import AppLoading from "expo-app-loading"
 import * as Font from "expo-font"
@@ -29,33 +30,36 @@ const App: FC = () => {
   const [haveAccount, setHaveAccount] = useState(true)
 
   return fontsLoaded ? (
-    haveAccount ? (
+    <ImageBackground
+      source={require("./assets/images/background.jpg")}
+      style={styles.image}
+    >
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.container}>
-          <LogIn />
-          <TouchableOpacity
-            style={styles.goToSignUp}
-            onPress={() => setHaveAccount(false)}
-          >
-            <Text style={styles.text}>
-              No tenes cuenta?{" "}
-              <Text style={styles.callToAction}>Registrate!</Text>
-            </Text>
-          </TouchableOpacity>
-        </View>
+        {haveAccount ? (
+          <View style={styles.container}>
+            <LogIn />
+            <TouchableOpacity
+              style={styles.goToSignUp}
+              onPress={() => setHaveAccount(false)}
+            >
+              <Text style={styles.text}>
+                No tenes cuenta?{" "}
+                <Text style={styles.callToAction}>Registrate!</Text>
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={styles.container}>
+            <SignUp />
+            <GoBack
+              icon="back"
+              text="volver atrás"
+              handleTap={() => setHaveAccount(true)}
+            />
+          </View>
+        )}
       </TouchableWithoutFeedback>
-    ) : (
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.container}>
-          <SignUp />
-          <GoBack
-            icon="back"
-            text="volver atrás"
-            handleTap={() => setHaveAccount(true)}
-          />
-        </View>
-      </TouchableWithoutFeedback>
-    )
+    </ImageBackground>
   ) : (
     <AppLoading
       startAsync={getFonts}
@@ -66,11 +70,19 @@ const App: FC = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  image: {
     flex: 1,
+    resizeMode: "cover",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.primary,
+  },
+  container: {
+    width: 350,
+    height: 650,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(25, 20, 20, 0.95)",
   },
   goToSignUp: {
     height: 25,
