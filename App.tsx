@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
-  Alert,
   StyleSheet,
 } from "react-native"
 import AppLoading from "expo-app-loading"
