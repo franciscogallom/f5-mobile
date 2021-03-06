@@ -9,13 +9,13 @@ interface Props {
 
 const ErrorText: FC<Props> = ({ text }: Props) => {
   return (
-    <Text style={errorText.text}>
+    <Text style={styles.text}>
       {text && text !== "undefined" && `${text}.`}
     </Text>
   )
 }
 
-const errorText = StyleSheet.create({
+const styles = StyleSheet.create({
   text: {
     color: colors.quaternary,
     fontFamily: "poppins-bold-italic",

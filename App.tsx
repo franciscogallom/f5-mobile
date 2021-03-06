@@ -23,19 +23,20 @@ const App: FC = () => {
 
   return fontsLoaded ? (
     haveAccount ? (
-      <View style={app.container}>
+      <View style={styles.container}>
         <LogIn />
         <TouchableOpacity
-          style={app.goToSignUp}
+          style={styles.goToSignUp}
           onPress={() => setHaveAccount(false)}
         >
-          <Text style={app.text}>
-            No tenes cuenta? <Text style={app.callToAction}>Registrate!</Text>
+          <Text style={styles.text}>
+            No tenes cuenta?{" "}
+            <Text style={styles.callToAction}>Registrate!</Text>
           </Text>
         </TouchableOpacity>
       </View>
     ) : (
-      <View style={app.container}>
+      <View style={styles.container}>
         <SignUp />
         <GoBack text="volver atrás" handleTap={() => setHaveAccount(true)} />
       </View>
@@ -49,7 +50,7 @@ const App: FC = () => {
   )
 }
 
-const app = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",

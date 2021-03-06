@@ -10,13 +10,13 @@ interface Props {
 
 const ButtonOne: FC<Props> = ({ text, handleTap }: Props) => {
   return (
-    <TouchableOpacity style={buttonOne.button} onPress={handleTap}>
-      <Text style={buttonOne.buttonText}>{text}</Text>
+    <TouchableOpacity style={styles.button} onPress={handleTap}>
+      <Text style={styles.buttonText}>{text}</Text>
     </TouchableOpacity>
   )
 }
 
-const buttonOne = StyleSheet.create({
+const styles = StyleSheet.create({
   button: {
     backgroundColor: "transparent",
     margin: 20,

@@ -17,7 +17,7 @@ const InputLogInAndSignUp: FC<Props> = ({
 }: Props) => {
   return (
     <TextInput
-      style={inputLogInAndSignUp.input}
+      style={styles.input}
       value={dataType}
       placeholder={`${placeholder}.`}
       placeholderTextColor="#949494"
@@ -27,7 +27,7 @@ const InputLogInAndSignUp: FC<Props> = ({
   )
 }
 
-const inputLogInAndSignUp = StyleSheet.create({
+const styles = StyleSheet.create({
   input: {
     color: colors.secondary,
     margin: 10,

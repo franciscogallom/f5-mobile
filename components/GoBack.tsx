@@ -11,12 +11,12 @@ interface Props {
 const GoBack: FC<Props> = ({ text, handleTap }: Props) => {
   return (
     <TouchableOpacity onPress={() => handleTap()}>
-      <Text style={goBack.text}>{`< ${text}`}</Text>
+      <Text style={styles.text}>{`< ${text}`}</Text>
     </TouchableOpacity>
   )
 }
 
-const goBack = StyleSheet.create({
+const styles = StyleSheet.create({
   text: {
     color: colors.tertiary,
     fontFamily: "poppins-extrabold-italic",

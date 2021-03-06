@@ -27,7 +27,7 @@ const SignUp: FC = () => {
       onSubmit={(values) => createUser(values, setUserExists, setError)}
     >
       {({ handleChange, handleSubmit, values, touched, errors }) => (
-        <View style={signUp.container}>
+        <View style={styles.container}>
           <InputLogInAndSignUp
             dataType={values.user}
             placeholder="usuario"
@@ -73,7 +73,7 @@ const SignUp: FC = () => {
   )
 }
 
-const signUp = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     alignItems: "center",
   },

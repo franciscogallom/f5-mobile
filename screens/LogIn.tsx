@@ -31,7 +31,7 @@ const LogIn: FC = () => {
       onSubmit={(values) => handleLogIn(values)}
     >
       {({ handleChange, handleSubmit, values }) => (
-        <View style={logIn.container}>
+        <View style={styles.container}>
           <InputLogInAndSignUp
             dataType={values.user}
             placeholder="usuario"
@@ -51,7 +51,7 @@ const LogIn: FC = () => {
   )
 }
 
-const logIn = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     alignItems: "center",
   },
