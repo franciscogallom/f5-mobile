@@ -35,11 +35,13 @@ const LogIn: FC = () => {
           <InputLogInAndSignUp
             dataType={values.user}
             placeholder="usuario"
+            icon="user"
             setDataType={handleChange("user")}
           />
           <InputLogInAndSignUp
             dataType={values.password}
             placeholder="contraseña"
+            icon="lock"
             secureTextEntry
             setDataType={handleChange("password")}
           />

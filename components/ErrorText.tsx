@@ -8,18 +8,19 @@ interface Props {
 }
 
 const ErrorText: FC<Props> = ({ text }: Props) => {
-  return (
-    <Text style={styles.text}>
-      {text && text !== "undefined" && `${text}.`}
-    </Text>
-  )
+  return text && text !== "undefined" ? (
+    <Text style={styles.text}>{`${text}.`}</Text>
+  ) : null
 }
 
 const styles = StyleSheet.create({
   text: {
+    marginBottom: 1,
+    width: 200,
+    justifyContent: "flex-end",
     color: colors.quaternary,
     fontFamily: "poppins-bold-italic",
-    padding: 1,
+    fontSize: 12,
   },
 })
 

@@ -48,7 +48,11 @@ const App: FC = () => {
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
           <SignUp />
-          <GoBack text="volver atrás" handleTap={() => setHaveAccount(true)} />
+          <GoBack
+            icon="back"
+            text="volver atrás"
+            handleTap={() => setHaveAccount(true)}
+          />
         </View>
       </TouchableWithoutFeedback>
     )
