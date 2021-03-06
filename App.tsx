@@ -1,5 +1,13 @@
 import React, { FC, useState } from "react"
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Alert,
+  StyleSheet,
+} from "react-native"
 import AppLoading from "expo-app-loading"
 import * as Font from "expo-font"
 
@@ -23,23 +31,27 @@ const App: FC = () => {
 
   return fontsLoaded ? (
     haveAccount ? (
-      <View style={styles.container}>
-        <LogIn />
-        <TouchableOpacity
-          style={styles.goToSignUp}
-          onPress={() => setHaveAccount(false)}
-        >
-          <Text style={styles.text}>
-            No tenes cuenta?{" "}
-            <Text style={styles.callToAction}>Registrate!</Text>
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.container}>
+          <LogIn />
+          <TouchableOpacity
+            style={styles.goToSignUp}
+            onPress={() => setHaveAccount(false)}
+          >
+            <Text style={styles.text}>
+              No tenes cuenta?{" "}
+              <Text style={styles.callToAction}>Registrate!</Text>
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableWithoutFeedback>
     ) : (
-      <View style={styles.container}>
-        <SignUp />
-        <GoBack text="volver atrás" handleTap={() => setHaveAccount(true)} />
-      </View>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.container}>
+          <SignUp />
+          <GoBack text="volver atrás" handleTap={() => setHaveAccount(true)} />
+        </View>
+      </TouchableWithoutFeedback>
     )
   ) : (
     <AppLoading
