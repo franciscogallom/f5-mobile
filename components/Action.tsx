@@ -6,7 +6,7 @@ import { colors } from "../assets/colors"
 
 interface Props {
   text: string
-  icon: "back"
+  icon: "back" | "adduser"
   handleTap: () => void
 }
 
@@ -14,7 +14,7 @@ const GoBack: FC<Props> = ({ text, handleTap, icon }: Props) => {
   return (
     <TouchableOpacity style={styles.container} onPress={() => handleTap()}>
       <AntDesign name={icon} size={24} color={colors.tertiary} />
-      <Text style={styles.text}>{text}</Text>
+      <Text style={styles.text}>{text}.</Text>
     </TouchableOpacity>
   )
 }
@@ -22,6 +22,7 @@ const GoBack: FC<Props> = ({ text, handleTap, icon }: Props) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    padding: 10,
   },
   text: {
     marginLeft: 5,

@@ -1,7 +1,15 @@
 import React, { FC, useState } from "react"
-import { View, StyleSheet } from "react-native"
+import { StackNavigationProp } from "@react-navigation/stack"
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native"
 
 import { Formik } from "formik"
+
+import { colors } from "../assets/colors"
 
 import { userSchema } from "../schemas/user"
 import { createUser } from "../services/createUser"
@@ -9,8 +17,23 @@ import { createUser } from "../services/createUser"
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
 import ErrorText from "../components/ErrorText"
+import GoBack from "../components/Action"
 
-const SignUp: FC = () => {
+type RootStackParamList = {
+  LogIn: undefined
+  SignUp: undefined
+}
+
+type SignUpScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "SignUp"
+>
+
+type Props = {
+  navigation: SignUpScreenNavigationProp
+}
+
+const SignUp: FC<Props> = ({ navigation }: Props) => {
   const [error, setError] = useState("")
   const [userExists, setUserExists] = useState(false)
 
@@ -27,52 +50,59 @@ const SignUp: FC = () => {
       onSubmit={(values) => createUser(values, setUserExists, setError)}
     >
       {({ handleChange, handleSubmit, values, touched, errors }) => (
-        <View style={styles.container}>
-          <InputLogInAndSignUp
-            dataType={values.user}
-            placeholder="usuario"
-            icon="user"
-            setDataType={handleChange("user")}
-          />
-          {userExists ? (
-            <ErrorText text="el usuario ya existe" />
-          ) : (
-            touched.user && <ErrorText text={`${errors.user}`} />
-          )}
-          <InputLogInAndSignUp
-            dataType={values.password}
-            placeholder="contraseña"
-            icon="lock"
-            secureTextEntry
-            setDataType={handleChange("password")}
-          />
-          {touched.password && <ErrorText text={`${errors.password}`} />}
-          <InputLogInAndSignUp
-            dataType={values.email}
-            placeholder="email"
-            icon="mail"
-            setDataType={handleChange("email")}
-          />
-          {touched.email && <ErrorText text={`${errors.email}`} />}
-          <InputLogInAndSignUp
-            dataType={values.emailVerification}
-            placeholder="repetir email"
-            icon="sync"
-            setDataType={handleChange("emailVerification")}
-          />
-          {touched.emailVerification && (
-            <ErrorText text={`${errors.emailVerification}`} />
-          )}
-          <InputLogInAndSignUp
-            dataType={values.phone}
-            placeholder="celular (opcional)"
-            icon="mobile1"
-            setDataType={handleChange("phone")}
-          />
-          {touched.phone && <ErrorText text={`${errors.phone}`} />}
-          {error !== "" && !userExists && <ErrorText text={`${error}`} />}
-          <ButtonOne text="registrarme" handleTap={handleSubmit} />
-        </View>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <View style={styles.container}>
+            <InputLogInAndSignUp
+              dataType={values.user}
+              placeholder="usuario"
+              icon="user"
+              setDataType={handleChange("user")}
+            />
+            {userExists ? (
+              <ErrorText text="el usuario ya existe" />
+            ) : (
+              touched.user && <ErrorText text={`${errors.user}`} />
+            )}
+            <InputLogInAndSignUp
+              dataType={values.password}
+              placeholder="contraseña"
+              icon="lock"
+              secureTextEntry
+              setDataType={handleChange("password")}
+            />
+            {touched.password && <ErrorText text={`${errors.password}`} />}
+            <InputLogInAndSignUp
+              dataType={values.email}
+              placeholder="email"
+              icon="mail"
+              setDataType={handleChange("email")}
+            />
+            {touched.email && <ErrorText text={`${errors.email}`} />}
+            <InputLogInAndSignUp
+              dataType={values.emailVerification}
+              placeholder="repetir email"
+              icon="sync"
+              setDataType={handleChange("emailVerification")}
+            />
+            {touched.emailVerification && (
+              <ErrorText text={`${errors.emailVerification}`} />
+            )}
+            <InputLogInAndSignUp
+              dataType={values.phone}
+              placeholder="celular (opcional)"
+              icon="mobile1"
+              setDataType={handleChange("phone")}
+            />
+            {touched.phone && <ErrorText text={`${errors.phone}`} />}
+            {error !== "" && !userExists && <ErrorText text={`${error}`} />}
+            <ButtonOne text="crear cuenta" handleTap={handleSubmit} />
+            <GoBack
+              icon="back"
+              text="volver atrás"
+              handleTap={() => navigation.goBack()}
+            />
+          </View>
+        </TouchableWithoutFeedback>
       )}
     </Formik>
   )
@@ -80,7 +110,10 @@ const SignUp: FC = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.primary,
   },
 })
 
