@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     color: colors.secondary,
     margin: 5,
     padding: 5,
-    width: 170,
+    width: "40%",
     backgroundColor: "transparent",
     fontFamily: "poppins-bold-italic",
   },
