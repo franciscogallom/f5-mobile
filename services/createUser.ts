@@ -14,7 +14,7 @@ export const createUser = (
   setError: (str: string) => void
 ): void => {
   // verify that the user doesn't exist.
-  Axios.get(`http://10.0.2.2:3001/user/${newUser.user}`)
+  Axios.get(`http://10.0.2.2:3001/users/${newUser.user}`)
     // if i find it, the user already exist and i notify the user.
     .then(() => {
       setUserExists(true)
@@ -24,7 +24,7 @@ export const createUser = (
     })
     // if i not find it, i can create the user.
     .catch(() => {
-      Axios.post("http://10.0.2.2:3001/user/create", newUser)
+      Axios.post("http://10.0.2.2:3001/users/create", newUser)
         .then((response) => {
           console.log(response)
         })
