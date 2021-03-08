@@ -2,7 +2,7 @@ import React, { FC, useState } from "react"
 import AppLoading from "expo-app-loading"
 import * as Font from "expo-font"
 
-import { StartNavigator } from "./routes/startStack"
+import { AppNavigator } from "./routes/appStack"
 
 const getFonts = () =>
   Font.loadAsync({
@@ -16,7 +16,7 @@ const App: FC = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false)
 
   return fontsLoaded ? (
-    <StartNavigator />
+    <AppNavigator isLoggedIn={true} />
   ) : (
     <AppLoading
       startAsync={getFonts}
