@@ -2,7 +2,9 @@ import React, { FC, useState } from "react"
 import AppLoading from "expo-app-loading"
 import * as Font from "expo-font"
 
-import { AppNavigator } from "./routes/appStack"
+import AppNavigator from "./routes/appStack"
+import { Provider } from "react-redux"
+import { store } from "./redux/store"
 
 const getFonts = () =>
   Font.loadAsync({
@@ -16,7 +18,9 @@ const App: FC = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false)
 
   return fontsLoaded ? (
-    <AppNavigator isLoggedIn={true} />
+    <Provider store={store}>
+      <AppNavigator />
+    </Provider>
   ) : (
     <AppLoading
       startAsync={getFonts}

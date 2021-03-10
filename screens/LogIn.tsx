@@ -9,8 +9,10 @@ import {
 
 import { Formik } from "formik"
 import Axios from "axios"
+import { useDispatch } from "react-redux"
 
 import { colors } from "../assets/colors"
+import { addUser } from "../redux/actions"
 
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
@@ -38,11 +40,16 @@ type Props = {
 
 const LogIn: FC<Props> = ({ navigation }: Props) => {
   const [logInStatus, setLogInStatus] = useState("")
+  const dispatch = useDispatch()
 
   const handleLogIn = (values: User) => {
-    Axios.post("http://10.0.2.2:3001/users/login", values).then((response) => {
-      setLogInStatus(response.data.message || "successful login")
-    })
+    Axios.post("http://10.0.2.2:3001/users/login", values)
+      .then(() => {
+        dispatch(addUser(values.user))
+      })
+      .catch((e) => {
+        setLogInStatus(e.response.data.message || "algo salio mal..")
+      })
   }
 
   return (

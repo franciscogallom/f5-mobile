@@ -8,6 +8,7 @@ import {
 } from "react-native"
 
 import { Formik } from "formik"
+import { useDispatch } from "react-redux"
 
 import { colors } from "../assets/colors"
 
@@ -37,6 +38,8 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
   const [error, setError] = useState("")
   const [userExists, setUserExists] = useState(false)
 
+  const dispatch = useDispatch()
+
   return (
     <Formik
       initialValues={{
@@ -47,7 +50,9 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
         phone: "",
       }}
       validationSchema={userSchema}
-      onSubmit={(values) => createUser(values, setUserExists, setError)}
+      onSubmit={(values) =>
+        createUser(values, setUserExists, setError, dispatch)
+      }
     >
       {({ handleChange, handleSubmit, values, touched, errors }) => (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

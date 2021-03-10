@@ -1,4 +1,7 @@
 import Axios from "axios"
+import { Dispatch } from "react"
+import { addUser } from "../redux/actions"
+import { Action } from "../redux/actions"
 
 interface NewUser {
   user: string
@@ -11,7 +14,8 @@ interface NewUser {
 export const createUser = (
   newUser: NewUser,
   setUserExists: (bool: boolean) => void,
-  setError: (str: string) => void
+  setError: (str: string) => void,
+  dispatch: Dispatch<Action>
 ): void => {
   // verify that the user doesn't exist.
   Axios.get(`http://10.0.2.2:3001/users/${newUser.user}`)
@@ -25,11 +29,11 @@ export const createUser = (
     // if i not find it, i can create the user.
     .catch(() => {
       Axios.post("http://10.0.2.2:3001/users/create", newUser)
-        .then((response) => {
-          console.log(response)
+        .then(() => {
+          dispatch(addUser(newUser.user))
         })
         .catch(() => {
-          setError("algo salió mal, intenta nuevamente")
+          setError("algo salió mal..")
           setTimeout(() => {
             setError("")
           }, 5000)
