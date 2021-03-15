@@ -9,6 +9,7 @@ interface Props {
   secureTextEntry?: boolean
   icon: "user" | "mail" | "lock" | "sync" | "mobile1"
   setDataType: (dataType: string) => void
+  onBlur?: ((e: unknown) => void) | undefined
 }
 const InputLogInAndSignUp: FC<Props> = ({
   dataType,
@@ -16,6 +17,7 @@ const InputLogInAndSignUp: FC<Props> = ({
   secureTextEntry,
   icon,
   setDataType,
+  onBlur,
 }: Props) => {
   return (
     <View style={styles.input}>
@@ -27,6 +29,7 @@ const InputLogInAndSignUp: FC<Props> = ({
         placeholderTextColor="#949494"
         onChangeText={setDataType}
         secureTextEntry={secureTextEntry}
+        onBlur={onBlur}
       />
     </View>
   )

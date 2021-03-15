@@ -16,7 +16,7 @@ const ErrorText: FC<Props> = ({ text }: Props) => {
 const styles = StyleSheet.create({
   text: {
     marginBottom: 1,
-    width: 200,
+    width: "47.5%",
     justifyContent: "flex-end",
     color: colors.quaternary,
     fontFamily: "poppins-bold-italic",

@@ -54,7 +54,14 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
         createUser(values, setUserExists, setError, dispatch)
       }
     >
-      {({ handleChange, handleSubmit, values, touched, errors }) => (
+      {({
+        handleChange,
+        handleSubmit,
+        handleBlur,
+        values,
+        touched,
+        errors,
+      }) => (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.container}>
             <InputLogInAndSignUp
@@ -62,6 +69,7 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
               placeholder="usuario"
               icon="user"
               setDataType={handleChange("user")}
+              onBlur={values.user ? handleBlur("user") : undefined}
             />
             {userExists ? (
               <ErrorText text="el usuario ya existe" />
@@ -74,6 +82,7 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
               icon="lock"
               secureTextEntry
               setDataType={handleChange("password")}
+              onBlur={values.password ? handleBlur("password") : undefined}
             />
             {touched.password && <ErrorText text={`${errors.password}`} />}
             <InputLogInAndSignUp
@@ -81,6 +90,7 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
               placeholder="email"
               icon="mail"
               setDataType={handleChange("email")}
+              onBlur={values.email ? handleBlur("email") : undefined}
             />
             {touched.email && <ErrorText text={`${errors.email}`} />}
             <InputLogInAndSignUp
@@ -88,6 +98,11 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
               placeholder="repetir email"
               icon="sync"
               setDataType={handleChange("emailVerification")}
+              onBlur={
+                values.emailVerification
+                  ? handleBlur("emailVerification")
+                  : undefined
+              }
             />
             {touched.emailVerification && (
               <ErrorText text={`${errors.emailVerification}`} />
@@ -97,6 +112,7 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
               placeholder="celular (opcional)"
               icon="mobile1"
               setDataType={handleChange("phone")}
+              onBlur={values.phone ? handleBlur("phone") : undefined}
             />
             {touched.phone && <ErrorText text={`${errors.phone}`} />}
             {error !== "" && !userExists && <ErrorText text={`${error}`} />}

@@ -23,7 +23,6 @@ export const userSchema = yup.object({
     .oneOf([yup.ref("email"), null], "los emails no coinciden"),
   phone: yup
     .string()
-    .min(5, "mínimo 5 números")
     .max(25, "máximo 25 números")
     .matches(phoneRegExp, "número de celular inválido"),
 })
