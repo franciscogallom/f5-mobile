@@ -19,6 +19,7 @@ import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
 import ErrorText from "../components/ErrorText"
 import GoBack from "../components/Action"
+import Loader from '../components/Loader'
 
 type RootStackParamList = {
   LogIn: undefined
@@ -36,6 +37,7 @@ type Props = {
 
 const SignUp: FC<Props> = ({ navigation }: Props) => {
   const [error, setError] = useState("")
+  const [loader, setLoader] = useState(false)
   const [userExists, setUserExists] = useState(false)
 
   const dispatch = useDispatch()
@@ -50,9 +52,7 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
         phone: "",
       }}
       validationSchema={userSchema}
-      onSubmit={(values) =>
-        createUser(values, setUserExists, setError, dispatch)
-      }
+      onSubmit={(values) => createUser(values, dispatch, setUserExists, setError, setLoader)}
     >
       {({
         handleChange,
@@ -62,68 +62,71 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
         touched,
         errors,
       }) => (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <View style={styles.container}>
-            <InputLogInAndSignUp
-              dataType={values.user}
-              placeholder="usuario"
-              icon="user"
-              setDataType={handleChange("user")}
-              onBlur={values.user ? handleBlur("user") : undefined}
-            />
-            {userExists ? (
-              <ErrorText text="el usuario ya existe" />
-            ) : (
-              touched.user && <ErrorText text={`${errors.user}`} />
-            )}
-            <InputLogInAndSignUp
-              dataType={values.password}
-              placeholder="contraseña"
-              icon="lock"
-              secureTextEntry
-              setDataType={handleChange("password")}
-              onBlur={values.password ? handleBlur("password") : undefined}
-            />
-            {touched.password && <ErrorText text={`${errors.password}`} />}
-            <InputLogInAndSignUp
-              dataType={values.email}
-              placeholder="email"
-              icon="mail"
-              setDataType={handleChange("email")}
-              onBlur={values.email ? handleBlur("email") : undefined}
-            />
-            {touched.email && <ErrorText text={`${errors.email}`} />}
-            <InputLogInAndSignUp
-              dataType={values.emailVerification}
-              placeholder="repetir email"
-              icon="sync"
-              setDataType={handleChange("emailVerification")}
-              onBlur={
-                values.emailVerification
-                  ? handleBlur("emailVerification")
-                  : undefined
-              }
-            />
-            {touched.emailVerification && (
-              <ErrorText text={`${errors.emailVerification}`} />
-            )}
-            <InputLogInAndSignUp
-              dataType={values.phone}
-              placeholder="celular (opcional)"
-              icon="mobile1"
-              setDataType={handleChange("phone")}
-              onBlur={values.phone ? handleBlur("phone") : undefined}
-            />
-            {touched.phone && <ErrorText text={`${errors.phone}`} />}
-            {error !== "" && !userExists && <ErrorText text={`${error}`} />}
-            <ButtonOne text="crear cuenta" handleTap={handleSubmit} />
-            <GoBack
-              icon="back"
-              text="volver atrás"
-              handleTap={() => navigation.goBack()}
-            />
-          </View>
-        </TouchableWithoutFeedback>
+        <>
+          {loader && <Loader />}
+          <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={styles.container}>
+              <InputLogInAndSignUp
+                dataType={values.user}
+                placeholder="usuario"
+                icon="user"
+                setDataType={handleChange("user")}
+                onBlur={values.user ? handleBlur("user") : undefined}
+              />
+              {userExists ? (
+                <ErrorText text="el usuario ya existe" />
+              ) : (
+                touched.user && <ErrorText text={`${errors.user}`} />
+              )}
+              <InputLogInAndSignUp
+                dataType={values.password}
+                placeholder="contraseña"
+                icon="lock"
+                secureTextEntry
+                setDataType={handleChange("password")}
+                onBlur={values.password ? handleBlur("password") : undefined}
+              />
+              {touched.password && <ErrorText text={`${errors.password}`} />}
+              <InputLogInAndSignUp
+                dataType={values.email}
+                placeholder="email"
+                icon="mail"
+                setDataType={handleChange("email")}
+                onBlur={values.email ? handleBlur("email") : undefined}
+              />
+              {touched.email && <ErrorText text={`${errors.email}`} />}
+              <InputLogInAndSignUp
+                dataType={values.emailVerification}
+                placeholder="repetir email"
+                icon="sync"
+                setDataType={handleChange("emailVerification")}
+                onBlur={
+                  values.emailVerification
+                    ? handleBlur("emailVerification")
+                    : undefined
+                }
+              />
+              {touched.emailVerification && (
+                <ErrorText text={`${errors.emailVerification}`} />
+              )}
+              <InputLogInAndSignUp
+                dataType={values.phone}
+                placeholder="celular (opcional)"
+                icon="mobile1"
+                setDataType={handleChange("phone")}
+                onBlur={values.phone ? handleBlur("phone") : undefined}
+              />
+              {touched.phone && <ErrorText text={`${errors.phone}`} />}
+              {error !== "" && !userExists && <ErrorText text={`${error}`} />}
+              <ButtonOne text="crear cuenta" handleTap={handleSubmit} />
+              <GoBack
+                icon="back"
+                text="volver atrás"
+                handleTap={() => navigation.goBack()}
+              />
+            </View>
+          </TouchableWithoutFeedback>
+        </>
       )}
     </Formik>
   )

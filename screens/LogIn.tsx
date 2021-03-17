@@ -18,6 +18,7 @@ import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
 import ErrorText from "../components/ErrorText"
 import Action from "../components/Action"
+import Loader from "../components/Loader"
 
 interface User {
   user: string
@@ -40,9 +41,11 @@ type Props = {
 
 const LogIn: FC<Props> = ({ navigation }: Props) => {
   const [logInStatus, setLogInStatus] = useState("")
+  const [loader, setLoader] = useState(false)
   const dispatch = useDispatch()
 
   const handleLogIn = (values: User) => {
+    setLoader(true)
     Axios.post("http://10.0.2.2:3001/users/login", values)
       .then(() => {
         dispatch(addUser(values.user))
@@ -50,9 +53,10 @@ const LogIn: FC<Props> = ({ navigation }: Props) => {
       .catch((e) => {
         setLogInStatus(e.response.data.message || "algo salio mal..")
       })
+      .finally(() => setLoader(false))
   }
 
-  return (
+  return ( 
     <Formik
       initialValues={{
         user: "",
@@ -61,30 +65,33 @@ const LogIn: FC<Props> = ({ navigation }: Props) => {
       onSubmit={(values) => handleLogIn(values)}
     >
       {({ handleChange, handleSubmit, values }) => (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <View style={styles.container}>
-            <InputLogInAndSignUp
-              dataType={values.user}
-              placeholder="usuario"
-              icon="user"
-              setDataType={handleChange("user")}
-            />
-            <InputLogInAndSignUp
-              dataType={values.password}
-              placeholder="contraseña"
-              icon="lock"
-              secureTextEntry
-              setDataType={handleChange("password")}
-            />
-            {logInStatus ? <ErrorText text={logInStatus} /> : null}
-            <ButtonOne text="iniciar sesión" handleTap={handleSubmit} />
-            <Action
-              text="crear nueva cuenta"
-              icon="adduser"
-              handleTap={() => navigation.navigate("SignUp")}
-            />
-          </View>
-        </TouchableWithoutFeedback>
+        <>
+          {loader && <Loader />}
+          <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={styles.container}>
+              <InputLogInAndSignUp
+                dataType={values.user}
+                placeholder="usuario"
+                icon="user"
+                setDataType={handleChange("user")}
+              />
+              <InputLogInAndSignUp
+                dataType={values.password}
+                placeholder="contraseña"
+                icon="lock"
+                secureTextEntry
+                setDataType={handleChange("password")}
+              />
+              {logInStatus ? <ErrorText text={logInStatus} /> : null}
+              <ButtonOne text="iniciar sesión" handleTap={handleSubmit} />
+              <Action
+                text="crear nueva cuenta"
+                icon="adduser"
+                handleTap={() => navigation.navigate("SignUp")}
+              />
+            </View>
+          </TouchableWithoutFeedback>
+        </>
       )}
     </Formik>
   )

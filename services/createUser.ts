@@ -13,10 +13,12 @@ interface NewUser {
 
 export const createUser = (
   newUser: NewUser,
+  dispatch: Dispatch<Action>,
   setUserExists: (bool: boolean) => void,
   setError: (str: string) => void,
-  dispatch: Dispatch<Action>
+  setLoader: (bol: boolean) => void
 ): void => {
+  setLoader(true)
   // verify that the user doesn't exist.
   Axios.get(`http://10.0.2.2:3001/users/${newUser.user}`)
     // if i find it, the user already exist and i notify the user.
@@ -38,5 +40,7 @@ export const createUser = (
             setError("")
           }, 5000)
         })
+        .finally(() => setLoader(false))
     })
+    .finally(() => setLoader(false))
 }
