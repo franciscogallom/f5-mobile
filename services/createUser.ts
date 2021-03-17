@@ -1,7 +1,6 @@
 import Axios from "axios"
 import { Dispatch } from "react"
-import { addUser } from "../redux/actions"
-import { Action } from "../redux/actions"
+import { addUser, Action } from "../redux/actions"
 
 interface NewUser {
   user: string

@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux"
 
 import { colors } from "../assets/colors"
 import { addUser } from "../redux/actions"
+import { handleLogIn } from '../services/handleLogIn'
 
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
@@ -20,7 +21,7 @@ import ErrorText from "../components/ErrorText"
 import Action from "../components/Action"
 import Loader from "../components/Loader"
 
-interface User {
+export interface User {
   user: string
   password: string
 }
@@ -44,25 +45,13 @@ const LogIn: FC<Props> = ({ navigation }: Props) => {
   const [loader, setLoader] = useState(false)
   const dispatch = useDispatch()
 
-  const handleLogIn = (values: User) => {
-    setLoader(true)
-    Axios.post("http://10.0.2.2:3001/users/login", values)
-      .then(() => {
-        dispatch(addUser(values.user))
-      })
-      .catch((e) => {
-        setLogInStatus(e.response.data.message || "algo salio mal..")
-      })
-      .finally(() => setLoader(false))
-  }
-
   return ( 
     <Formik
       initialValues={{
         user: "",
         password: "",
       }}
-      onSubmit={(values) => handleLogIn(values)}
+      onSubmit={(values) => handleLogIn(values, dispatch, setLoader, setLogInStatus)}
     >
       {({ handleChange, handleSubmit, values }) => (
         <>
