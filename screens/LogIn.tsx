@@ -8,11 +8,9 @@ import {
 } from "react-native"
 
 import { Formik } from "formik"
-import Axios from "axios"
 import { useDispatch } from "react-redux"
 
 import { colors } from "../assets/colors"
-import { addUser } from "../redux/actions"
 import { handleLogIn } from '../services/handleLogIn'
 
 import ButtonOne from "../components/ButtonOne"
@@ -20,11 +18,6 @@ import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
 import ErrorText from "../components/ErrorText"
 import Action from "../components/Action"
 import Loader from "../components/Loader"
-
-export interface User {
-  user: string
-  password: string
-}
 
 type RootStackParamList = {
   LogIn: undefined

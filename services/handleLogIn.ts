@@ -1,7 +1,11 @@
 import Axios from "axios"
-import { User } from '../screens/LogIn'
 import { Dispatch } from "react"
 import { addUser, Action } from "../redux/actions"
+
+interface User {
+  user: string
+  password: string
+}
 
 export const handleLogIn = (values: User, dispatch: Dispatch<Action>, setLoader: (bool: boolean) => void, setLogInStatus: (text : string) => void): void => {
     setLoader(true)
