@@ -9,11 +9,8 @@ const Search: FC = () => {
             <AntDesign name="search1" size={24} color="#949494" />
             <TextInput
                 style={styles.textInput}
-                // value={dataType}
                 placeholder='Buscar.'
                 placeholderTextColor="#949494"
-                // onChangeText={setDataType}
-                // onBlur={onBlur}
             />
         </View>
     )
@@ -26,6 +23,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: 'rgba(70, 70, 70, 0.75)',
         padding: 10,
+        marginVertical: 20,
         borderRadius: 10,
     },
     textInput: {
