@@ -19,7 +19,7 @@ import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
 import ErrorText from "../components/ErrorText"
 import GoBack from "../components/Action"
-import Loader from '../components/Loader'
+import Loader from "../components/Loader"
 
 type RootStackParamList = {
   LogIn: undefined
@@ -52,7 +52,9 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
         phone: "",
       }}
       validationSchema={userSchema}
-      onSubmit={(values) => createUser(values, dispatch, setUserExists, setError, setLoader)}
+      onSubmit={(values) =>
+        createUser(values, dispatch, setUserExists, setError, setLoader)
+      }
     >
       {({
         handleChange,
@@ -93,6 +95,7 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
                 icon="mail"
                 setDataType={handleChange("email")}
                 onBlur={values.email ? handleBlur("email") : undefined}
+                keyboardType="email-address"
               />
               {touched.email && <ErrorText text={`${errors.email}`} />}
               <InputLogInAndSignUp
@@ -105,6 +108,7 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
                     ? handleBlur("emailVerification")
                     : undefined
                 }
+                keyboardType="email-address"
               />
               {touched.emailVerification && (
                 <ErrorText text={`${errors.emailVerification}`} />
@@ -115,6 +119,7 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
                 icon="mobile1"
                 setDataType={handleChange("phone")}
                 onBlur={values.phone ? handleBlur("phone") : undefined}
+                keyboardType="numeric"
               />
               {touched.phone && <ErrorText text={`${errors.phone}`} />}
               {error !== "" && !userExists && <ErrorText text={`${error}`} />}

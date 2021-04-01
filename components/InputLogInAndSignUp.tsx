@@ -10,6 +10,7 @@ interface Props {
   icon: "user" | "mail" | "lock" | "sync" | "mobile1"
   setDataType: (dataType: string) => void
   onBlur?: ((e: unknown) => void) | undefined
+  keyboardType?: "numeric" | "email-address"
 }
 const InputLogInAndSignUp: FC<Props> = ({
   dataType,
@@ -18,6 +19,7 @@ const InputLogInAndSignUp: FC<Props> = ({
   icon,
   setDataType,
   onBlur,
+  keyboardType,
 }: Props) => {
   return (
     <View style={styles.input}>
@@ -30,6 +32,7 @@ const InputLogInAndSignUp: FC<Props> = ({
         onChangeText={setDataType}
         secureTextEntry={secureTextEntry}
         onBlur={onBlur}
+        keyboardType={keyboardType}
       />
     </View>
   )
