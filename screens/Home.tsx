@@ -1,14 +1,31 @@
-import React, { FC, useState, useEffect } from "react"
+import React, { FC, useState, useCallback } from "react"
 import { Text, StyleSheet, ScrollView } from "react-native"
 import { useSelector } from "react-redux"
-import axios from "axios"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { useFocusEffect } from "@react-navigation/native"
 
 import { colors } from "../assets/colors"
 import { UserState } from "../redux/userReducer"
+import { getFields } from "../services/getFields"
 
 import Search from "../components/Search"
 import Carousel from "../components/Carousel"
+import Loader from "../components/Loader"
 
+type RootStackParamList = {
+  Home: undefined
+  FieldDetails: undefined
+  NotFound: undefined
+}
+
+export type LogInScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Home"
+>
+
+type Props = {
+  navigation: LogInScreenNavigationProp
+}
 export interface Field {
   image: string
   location: string
@@ -19,24 +36,24 @@ export interface Field {
 
 const PADDING_VERTICAL = 10
 
-const Home: FC = () => {
+const Home: FC<Props> = ({ navigation }: Props) => {
   const [fields, setFields] = useState([])
+  const [loader, setLoader] = useState(false)
 
-  const getFields = () => {
-    axios.get("http://10.0.2.2:3001/fields").then((response) => {
-      setFields(response.data)
-    })
-  }
-
-  useEffect(() => {
-    getFields()
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      const unsubscribe = getFields(setLoader, setFields, navigation)
+      return () => unsubscribe
+    }, [])
+  )
 
   const user = useSelector<UserState, UserState["username"]>(
     (state) => state.username
   )
 
-  return (
+  return loader ? (
+    <Loader />
+  ) : (
     <ScrollView style={styles.container}>
       <Text style={styles.greeting}>Hola {user}! Hoy se juega? ⚽</Text>
       <Search />
