@@ -2,6 +2,8 @@ import Axios from "axios"
 import { Dispatch } from "react"
 import { addUser, Action } from "../redux/actions"
 
+import { storeData } from "../services/storeData"
+
 interface NewUser {
   user: string
   password: string
@@ -32,6 +34,7 @@ export const createUser = (
       Axios.post("http://10.0.2.2:3001/users/create", newUser)
         .then(() => {
           dispatch(addUser(newUser.user))
+          storeData(newUser.user)
         })
         .catch(() => {
           setError("algo salió mal..")

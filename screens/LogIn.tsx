@@ -11,7 +11,7 @@ import { Formik } from "formik"
 import { useDispatch } from "react-redux"
 
 import { colors } from "../assets/colors"
-import { handleLogIn } from '../services/handleLogIn'
+import { handleLogIn } from "../services/handleLogIn"
 
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
@@ -38,13 +38,15 @@ const LogIn: FC<Props> = ({ navigation }: Props) => {
   const [loader, setLoader] = useState(false)
   const dispatch = useDispatch()
 
-  return ( 
+  return (
     <Formik
       initialValues={{
         user: "",
         password: "",
       }}
-      onSubmit={(values) => handleLogIn(values, dispatch, setLoader, setLogInStatus)}
+      onSubmit={(values) =>
+        handleLogIn(values, dispatch, setLoader, setLogInStatus)
+      }
     >
       {({ handleChange, handleSubmit, values }) => (
         <>
