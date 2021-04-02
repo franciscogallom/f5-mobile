@@ -10,6 +10,7 @@ import LogIn from "../screens/LogIn"
 import SignUp from "../screens/SignUp"
 import Home from "../screens/Home"
 import FieldDetails from "../screens/FieldDetails"
+import NotFound from "../screens/NotFound"
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -25,6 +26,7 @@ const AppNavigator: FC = () => {
           <>
             <Screen name="Home" component={Home} />
             <Screen name="FieldDetails" component={FieldDetails} />
+            <Screen name="NotFound" component={NotFound} />
           </>
         ) : (
           <>
