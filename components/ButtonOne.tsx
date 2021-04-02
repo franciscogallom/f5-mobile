@@ -6,12 +6,17 @@ import { colors } from "../assets/colors"
 interface Props {
   text: string
   handleTap: () => void
+  textColor?: string
 }
 
-const ButtonOne: FC<Props> = ({ text, handleTap }: Props) => {
+const ButtonOne: FC<Props> = ({ text, handleTap, textColor }: Props) => {
   return (
     <TouchableOpacity style={styles.button} onPress={handleTap}>
-      <Text style={styles.buttonText}>{text}</Text>
+      <Text
+        style={[styles.buttonText, { color: textColor || colors.secondary }]}
+      >
+        {text}
+      </Text>
     </TouchableOpacity>
   )
 }
@@ -28,7 +33,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontFamily: "poppins-extrabold-italic",
-    color: colors.secondary,
     textAlign: "center",
     textTransform: "uppercase",
   },
