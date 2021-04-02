@@ -3,22 +3,17 @@ import { View, ImageBackground, Text, StyleSheet } from "react-native"
 import { StackNavigationProp } from "@react-navigation/stack"
 
 import { colors } from "../assets/colors"
+import { RootStackParamList } from "../screens/Home"
 
 import ButtonOne from "../components/ButtonOne"
 
-type RootStackParamList = {
-  Home: undefined
-  FieldDetails: undefined
-  NotFound: undefined
-}
-
-type LogInScreenNavigationProp = StackNavigationProp<
+type NotFoundScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "NotFound"
 >
 
 type Props = {
-  navigation: LogInScreenNavigationProp
+  navigation: NotFoundScreenNavigationProp
 }
 
 const NotFound: FC<Props> = ({ navigation }: Props) => (

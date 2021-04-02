@@ -12,19 +12,19 @@ import Search from "../components/Search"
 import Carousel from "../components/Carousel"
 import Loader from "../components/Loader"
 
-type RootStackParamList = {
+export type RootStackParamList = {
   Home: undefined
-  FieldDetails: undefined
+  FieldDetails: Field
   NotFound: undefined
 }
 
-export type LogInScreenNavigationProp = StackNavigationProp<
+export type HomeScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "Home"
 >
 
 type Props = {
-  navigation: LogInScreenNavigationProp
+  navigation: HomeScreenNavigationProp
 }
 export interface Field {
   image: string
@@ -58,7 +58,7 @@ const Home: FC<Props> = ({ navigation }: Props) => {
       <Text style={styles.greeting}>Hola {user}! Hoy se juega? ⚽</Text>
       <Search />
       <Text style={styles.text}>Nuestras mejores canchas ⭐.</Text>
-      <Carousel data={fields} />
+      <Carousel data={fields} navigation={navigation} />
     </ScrollView>
   )
 }
