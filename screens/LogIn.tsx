@@ -19,7 +19,7 @@ import ErrorText from "../components/ErrorText"
 import Action from "../components/Action"
 import Loader from "../components/Loader"
 
-type RootStackParamList = {
+export type RootStackParamList = {
   LogIn: undefined
   SignUp: undefined
 }

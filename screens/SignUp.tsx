@@ -15,16 +15,13 @@ import { colors } from "../assets/colors"
 import { userSchema } from "../schemas/user"
 import { createUser } from "../services/createUser"
 
+import { RootStackParamList } from "../screens/LogIn"
+
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
 import ErrorText from "../components/ErrorText"
 import GoBack from "../components/Action"
 import Loader from "../components/Loader"
-
-type RootStackParamList = {
-  LogIn: undefined
-  SignUp: undefined
-}
 
 type SignUpScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
