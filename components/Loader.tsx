@@ -6,9 +6,8 @@ import { colors } from "../assets/colors"
 const Loader: FC = () => {
   return (
     <Modal transparent={true}>
-      {/* <View style={}></View> */}
       <View style={styles.container}>
-        <ActivityIndicator color={colors.tertiary} size='large' />
+        <ActivityIndicator color={colors.tertiary} size="large" />
       </View>
     </Modal>
   )
@@ -16,14 +15,11 @@ const Loader: FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-      backgroundColor: 'rgba(0, 0, 0, 0.75)',
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
+    backgroundColor: "rgba(0, 0, 0, 0.75)",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  text: {
-      color: colors.quaternary,
-  }
 })
 
 export default Loader
