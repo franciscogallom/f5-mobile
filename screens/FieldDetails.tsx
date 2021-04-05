@@ -4,6 +4,7 @@ import { RouteProp } from "@react-navigation/native"
 import { AntDesign } from "@expo/vector-icons"
 import { SharedElement } from "react-navigation-shared-element"
 import * as Animatable from "react-native-animatable"
+import * as Linking from "expo-linking"
 
 import { colors } from "../assets/colors"
 import { height, width } from "../assets/dimensions"
@@ -97,6 +98,9 @@ const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
             duration={DURATION}
             delay={DURATION + 900}
             style={styles.details}
+            onPress={() => {
+              Linking.openURL(`tel:${field.phone}`)
+            }}
           >
             📞 {field.phone}.
           </Animatable.Text>
