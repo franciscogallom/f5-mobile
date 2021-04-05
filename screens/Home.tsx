@@ -11,6 +11,7 @@ import { height } from "../assets/dimensions"
 import Search from "../components/Search"
 import Carousel from "../components/Carousel"
 import Loader from "../components/Loader"
+import Footer from "../components/Footer"
 
 export type RootStackParamList = {
   Home: undefined
@@ -60,6 +61,7 @@ const Home: FC<Props> = ({ navigation }: Props) => {
       <Search />
       <Text style={styles.text}>nuestras mejores canchas 💯.</Text>
       <Carousel data={fields} navigation={navigation} />
+      <Footer />
     </ScrollView>
   )
 }
