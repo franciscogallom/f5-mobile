@@ -1,7 +1,6 @@
 import React, { FC } from "react"
 import { Text, View, StyleSheet, Animated } from "react-native"
 
-import { EvilIcons } from "@expo/vector-icons"
 import { colors } from "../assets/colors"
 
 import { Field } from "../screens/Home"
@@ -26,18 +25,11 @@ const OverflowItems: FC<Props> = ({ data, scrollXAnimated }: Props) => {
           return (
             <View key={index} style={styles.itemContainer}>
               <Text style={styles.title} numberOfLines={1}>
-                {item.name}
+                {item.name}.
               </Text>
               <View style={styles.itemContainerRow}>
-                <Text style={styles.location}>
-                  <EvilIcons
-                    name="location"
-                    size={16}
-                    color={colors.secondary}
-                  />
-                  {item.location}
-                </Text>
-                <Text style={styles.price}>${item.price}</Text>
+                <Text style={styles.location}>📍 {item.location}.</Text>
+                <Text style={styles.price}>💲{item.price}.</Text>
               </View>
             </View>
           )
@@ -59,7 +51,7 @@ const styles = StyleSheet.create({
   location: {
     fontSize: 16,
     color: colors.secondary,
-    fontFamily: "poppins-bold-italic",
+    fontFamily: "poppins-extrabold",
   },
   price: {
     fontSize: 18,

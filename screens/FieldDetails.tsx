@@ -7,10 +7,10 @@ import * as Animatable from "react-native-animatable"
 
 import { colors } from "../assets/colors"
 import { height, width } from "../assets/dimensions"
+import { images } from "../components/Carousel"
 
 import { HomeScreenNavigationProp } from "../screens/Home"
 import { RootStackParamList } from "../screens/Home"
-import { images } from "../components/Carousel"
 
 type FieldDetailsScreenRouteProp = RouteProp<RootStackParamList, "FieldDetails">
 

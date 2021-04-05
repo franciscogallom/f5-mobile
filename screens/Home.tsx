@@ -6,6 +6,7 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import { colors } from "../assets/colors"
 import { UserState } from "../redux/userReducer"
 import { getFields } from "../services/getFields"
+import { height } from "../assets/dimensions"
 
 import Search from "../components/Search"
 import Carousel from "../components/Carousel"
@@ -51,9 +52,10 @@ const Home: FC<Props> = ({ navigation }: Props) => {
     <Loader />
   ) : (
     <ScrollView style={styles.container}>
-      <Text style={styles.greeting}>Hola {user}! Hoy se juega? ⚽</Text>
+      <Text style={styles.user}>{user} ⚽</Text>
+      <Text style={styles.greeting}>Hey 👋! Hoy se juega?</Text>
       <Search />
-      <Text style={styles.text}>Nuestras mejores canchas ⭐.</Text>
+      <Text style={styles.text}>nuestras mejores canchas 💯.</Text>
       <Carousel data={fields} navigation={navigation} />
     </ScrollView>
   )
@@ -64,6 +66,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.primary,
     padding: 15,
+  },
+  user: {
+    color: colors.secondary,
+    fontFamily: "poppins-bold-italic",
+    marginTop: height * 0.05,
   },
   greeting: {
     color: colors.secondary,
