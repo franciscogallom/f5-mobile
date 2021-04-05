@@ -27,6 +27,7 @@ export type HomeScreenNavigationProp = StackNavigationProp<
 type Props = {
   navigation: HomeScreenNavigationProp
 }
+
 export interface Field {
   name: string
   location: string
@@ -42,7 +43,7 @@ const PADDING_VERTICAL = 10
 
 const Home: FC<Props> = ({ navigation }: Props) => {
   const [fields, setFields] = useState([])
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(true)
 
   useEffect(() => {
     getFields(setLoader, setFields, navigation)
@@ -57,7 +58,7 @@ const Home: FC<Props> = ({ navigation }: Props) => {
   ) : (
     <ScrollView style={styles.container}>
       <Text style={styles.user}>{user} ⚽</Text>
-      <Text style={styles.greeting}>Hey 👋! Hoy se juega?</Text>
+      <Text style={styles.greeting}>hey 👋! se juega?</Text>
       <Search />
       <Text style={styles.text}>nuestras mejores canchas 💯.</Text>
       <Carousel data={fields} navigation={navigation} />
