@@ -1,7 +1,6 @@
 import React, { FC } from "react"
 import { NavigationContainer } from "@react-navigation/native"
-import { createStackNavigator } from "@react-navigation/stack"
-
+import { createSharedElementStackNavigator } from "react-navigation-shared-element"
 import { useSelector } from "react-redux"
 
 import { UserState } from "../redux/userReducer"
@@ -12,7 +11,7 @@ import Home from "../screens/Home"
 import FieldDetails from "../screens/FieldDetails"
 import NotFound from "../screens/NotFound"
 
-const { Navigator, Screen } = createStackNavigator()
+const { Navigator, Screen } = createSharedElementStackNavigator()
 
 const AppNavigator: FC = () => {
   const user = useSelector<UserState, UserState["username"]>(
@@ -25,7 +24,25 @@ const AppNavigator: FC = () => {
         {user ? (
           <>
             <Screen name="Home" component={Home} />
-            <Screen name="FieldDetails" component={FieldDetails} />
+            <Screen
+              name="FieldDetails"
+              component={FieldDetails}
+              options={() => ({
+                gestureEnabled: false,
+                transitionSpec: {
+                  open: { animation: "timing", config: { duration: 1000 } },
+                  close: { animation: "timing", config: { duration: 1000 } },
+                },
+                cardStyleInterpolator: ({ current: { progress } }) => {
+                  return {
+                    cardStyle: {
+                      opacity: progress,
+                    },
+                  }
+                },
+              })}
+              sharedElementsConfig={() => ["details"]}
+            />
             <Screen name="NotFound" component={NotFound} />
           </>
         ) : (

@@ -6,7 +6,6 @@ import {
   FlatList,
   Image,
   Animated,
-  Dimensions,
   ImageSourcePropType,
 } from "react-native"
 import {
@@ -15,10 +14,13 @@ import {
   State,
   TouchableOpacity,
 } from "react-native-gesture-handler"
+import { SharedElement } from "react-navigation-shared-element"
+
+import { colors } from "../assets/colors"
+import { height, width } from "../assets/dimensions"
 
 import OverflowItems from "./OverflowItems"
 import { Field } from "../screens/Home"
-
 import { HomeScreenNavigationProp } from "../screens/Home"
 
 interface Props {
@@ -30,8 +32,6 @@ type Img = {
   [key: number]: ImageSourcePropType
 }
 
-const { width, height } = Dimensions.get("screen")
-const HEIGHT = height * 0.75
 const ITEM_WIDTH = width * 0.7
 const ITEM_HEIGHT = ITEM_WIDTH * 1.7
 const VISIBLE_ITEMS = 3
@@ -85,7 +85,7 @@ const Carousel: FC<Props> = ({ data, navigation }: Props) => {
           <OverflowItems data={data} scrollXAnimated={scrollXAnimated} />
           <FlatList
             data={data}
-            keyExtractor={(_, index) => String(index)}
+            keyExtractor={(item) => String(item.id)}
             horizontal
             inverted
             scrollEnabled={false}
@@ -128,7 +128,7 @@ const Carousel: FC<Props> = ({ data, navigation }: Props) => {
                   }}
                 >
                   <TouchableOpacity
-                    activeOpacity={0.9}
+                    activeOpacity={0.95}
                     onPress={() => {
                       navigation.navigate("FieldDetails", data[index])
                     }}
@@ -140,6 +140,19 @@ const Carousel: FC<Props> = ({ data, navigation }: Props) => {
               )
             }}
           />
+          <SharedElement
+            id="details"
+            style={[
+              StyleSheet.absoluteFillObject,
+              {
+                transform: [{ translateY: height }],
+              },
+            ]}
+          >
+            <View
+              style={[StyleSheet.absoluteFillObject, styles.detailsContainer]}
+            />
+          </SharedElement>
         </SafeAreaView>
       </FlingGestureHandler>
     </FlingGestureHandler>
@@ -148,7 +161,7 @@ const Carousel: FC<Props> = ({ data, navigation }: Props) => {
 
 const styles = StyleSheet.create({
   carouselContainer: {
-    height: HEIGHT,
+    height: height * 0.75,
   },
   flatList: {
     flex: 1,
@@ -158,6 +171,9 @@ const styles = StyleSheet.create({
     width: ITEM_WIDTH,
     height: ITEM_HEIGHT,
     borderRadius: 10,
+  },
+  detailsContainer: {
+    backgroundColor: "rgba(25, 20, 20, 0.75)",
   },
 })
 
