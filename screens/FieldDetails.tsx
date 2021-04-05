@@ -30,7 +30,7 @@ const fadeInBottom = {
   },
 }
 
-const DURATION = 1000
+const DURATION = 800
 const MARGIN_VERTICAL = 5
 
 const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
@@ -43,7 +43,7 @@ const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
         name="close"
         size={28}
         style={styles.close}
-        color={colors.quaternary}
+        color={colors.secondary}
         onPress={() => {
           navigation.goBack()
         }}
@@ -58,29 +58,47 @@ const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
         ]}
       >
         <View style={[StyleSheet.absoluteFillObject, styles.detailsContainer]}>
-          <Animatable.Text
-            animation={fadeInBottom}
-            duration={DURATION}
-            delay={DURATION}
-            style={styles.name}
-          >
-            {field.name}.
-          </Animatable.Text>
+          <View style={styles.ratingAndNameContainer}>
+            <Animatable.Text
+              animation={fadeInBottom}
+              duration={DURATION}
+              delay={DURATION}
+              style={styles.name}
+            >
+              {field.name}.
+            </Animatable.Text>
+            <Animatable.Text
+              animation={fadeInBottom}
+              duration={DURATION + 900}
+              delay={DURATION * 2}
+              style={[styles.details, styles.rating]}
+            >
+              ⭐ {(field.sumOfRatings / field.numberOfRatings).toFixed(2)}
+            </Animatable.Text>
+          </View>
           <Animatable.Text
             animation={fadeInBottom}
             duration={DURATION}
             delay={DURATION + 300}
-            style={styles.location}
+            style={styles.details}
           >
             📍 {field.location}.
           </Animatable.Text>
           <Animatable.Text
             animation={fadeInBottom}
-            duration={DURATION + 600}
-            delay={DURATION}
-            style={styles.price}
+            duration={DURATION}
+            delay={DURATION + 600}
+            style={styles.details}
           >
             💲{field.price}.
+          </Animatable.Text>
+          <Animatable.Text
+            animation={fadeInBottom}
+            duration={DURATION}
+            delay={DURATION + 900}
+            style={styles.details}
+          >
+            📞 {field.phone}.
           </Animatable.Text>
         </View>
       </SharedElement>
@@ -110,24 +128,28 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 20,
   },
+  ratingAndNameContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginVertical: MARGIN_VERTICAL,
+  },
   name: {
     color: colors.secondary,
     fontFamily: "poppins-extrabold-italic",
     fontSize: 24,
     textTransform: "uppercase",
-    marginVertical: MARGIN_VERTICAL,
   },
-  location: {
+  details: {
     color: colors.secondary,
     fontFamily: "poppins-extrabold",
     fontSize: 15,
     marginVertical: MARGIN_VERTICAL,
   },
-  price: {
-    color: colors.secondary,
+  rating: {
+    color: "#FFDF00",
     fontFamily: "poppins-extrabold",
-    fontSize: 15,
-    marginVertical: MARGIN_VERTICAL,
+    fontSize: 18,
   },
 })
 

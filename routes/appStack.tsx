@@ -31,7 +31,7 @@ const AppNavigator: FC = () => {
                 gestureEnabled: false,
                 transitionSpec: {
                   open: { animation: "timing", config: { duration: 1000 } },
-                  close: { animation: "timing", config: { duration: 1000 } },
+                  close: { animation: "timing", config: { duration: 750 } },
                 },
                 cardStyleInterpolator: ({ current: { progress } }) => {
                   return {

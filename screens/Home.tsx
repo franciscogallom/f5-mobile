@@ -27,11 +27,14 @@ type Props = {
   navigation: HomeScreenNavigationProp
 }
 export interface Field {
-  image: string
-  location: string
   name: string
+  location: string
   price: string
+  image: string
   id: number
+  numberOfRatings: number
+  sumOfRatings: number
+  phone: string
 }
 
 const PADDING_VERTICAL = 10
