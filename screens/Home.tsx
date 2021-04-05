@@ -1,8 +1,7 @@
-import React, { FC, useState, useCallback } from "react"
+import React, { FC, useState, useEffect } from "react"
 import { Text, StyleSheet, ScrollView } from "react-native"
 import { useSelector } from "react-redux"
 import { StackNavigationProp } from "@react-navigation/stack"
-import { useFocusEffect } from "@react-navigation/native"
 
 import { colors } from "../assets/colors"
 import { UserState } from "../redux/userReducer"
@@ -40,12 +39,9 @@ const Home: FC<Props> = ({ navigation }: Props) => {
   const [fields, setFields] = useState([])
   const [loader, setLoader] = useState(false)
 
-  useFocusEffect(
-    useCallback(() => {
-      const unsubscribe = getFields(setLoader, setFields, navigation)
-      return () => unsubscribe
-    }, [])
-  )
+  useEffect(() => {
+    getFields(setLoader, setFields, navigation)
+  }, [])
 
   const user = useSelector<UserState, UserState["username"]>(
     (state) => state.username
