@@ -10,6 +10,7 @@ import SignUp from "../screens/SignUp"
 import Home from "../screens/Home"
 import FieldDetails from "../screens/FieldDetails"
 import NotFound from "../screens/NotFound"
+import FieldList from "../screens/FieldList"
 
 const { Navigator, Screen } = createSharedElementStackNavigator()
 
@@ -41,8 +42,11 @@ const AppNavigator: FC = () => {
                   }
                 },
               })}
-              sharedElementsConfig={() => ["details"]}
+              sharedElementsConfig={() => {
+                return [{ id: "details" }]
+              }}
             />
+            <Screen name="FieldList" component={FieldList} />
             <Screen name="NotFound" component={NotFound} />
           </>
         ) : (
