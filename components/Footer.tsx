@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   container: {
     borderTopColor: "#7c7c7c",
     borderTopWidth: 1,
-    marginBottom: 20,
+    marginVertical: 20,
     paddingVertical: 25,
     flexDirection: "row",
     alignItems: "center",
