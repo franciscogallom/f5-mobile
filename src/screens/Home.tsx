@@ -3,10 +3,10 @@ import { Text, StyleSheet, ScrollView } from "react-native"
 import { useSelector } from "react-redux"
 import { StackNavigationProp } from "@react-navigation/stack"
 
-import { colors } from "../assets/colors"
+import { colors } from "../../assets/colors"
 import { UserState } from "../redux/userReducer"
 import { getFields } from "../services/getFields"
-import { height } from "../assets/dimensions"
+import { height } from "../../assets/dimensions"
 
 import Search from "../components/Search"
 import Carousel from "../components/Carousel"

@@ -1,8 +1,8 @@
 import React, { FC } from "react"
 import { View, Text, StyleSheet } from "react-native"
 
-import { colors } from "../assets/colors"
-import { height } from "../assets/dimensions"
+import { colors } from "../../assets/colors"
+import { height } from "../../assets/dimensions"
 
 const RentPlayRepeat: FC = () => {
   return (

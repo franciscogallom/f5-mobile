@@ -6,12 +6,12 @@ import { SharedElement } from "react-navigation-shared-element"
 import * as Animatable from "react-native-animatable"
 import * as Linking from "expo-linking"
 
-import { colors } from "../assets/colors"
-import { height, width } from "../assets/dimensions"
+import { colors } from "../../assets/colors"
+import { height, width } from "../../assets/dimensions"
 import { images } from "../components/Carousel"
 
-import { HomeScreenNavigationProp } from "../screens/Home"
-import { RootStackParamList } from "../screens/Home"
+import { HomeScreenNavigationProp } from "./Home"
+import { RootStackParamList } from "./Home"
 
 type FieldDetailsScreenRouteProp = RouteProp<RootStackParamList, "FieldDetails">
 

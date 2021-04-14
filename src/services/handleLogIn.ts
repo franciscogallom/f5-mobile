@@ -2,7 +2,7 @@ import Axios from "axios"
 import { Dispatch } from "react"
 import { addUser, Action } from "../redux/actions"
 
-import { storeData } from "../services/storeData"
+import { storeData } from "./storeData"
 
 interface User {
   user: string

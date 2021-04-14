@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { TouchableOpacity, Text, StyleSheet } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 
-import { colors } from "../assets/colors"
+import { colors } from "../../assets/colors"
 
 interface Props {
   text: string

@@ -2,8 +2,8 @@ import React, { FC } from "react"
 import * as Linking from "expo-linking"
 import { Text, StyleSheet, View, Image } from "react-native"
 
-import { colors } from "../assets/colors"
-import { height } from "../assets/dimensions"
+import { colors } from "../../assets/colors"
+import { height } from "../../assets/dimensions"
 
 const Footer: FC = () => {
   return (

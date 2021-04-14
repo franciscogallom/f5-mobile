@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { Text, StyleSheet } from "react-native"
 
-import { colors } from "../assets/colors"
+import { colors } from "../../assets/colors"
 
 interface Props {
   text: string

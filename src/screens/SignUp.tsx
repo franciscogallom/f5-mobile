@@ -10,12 +10,12 @@ import {
 import { Formik } from "formik"
 import { useDispatch } from "react-redux"
 
-import { colors } from "../assets/colors"
+import { colors } from "../../assets/colors"
 
 import { userSchema } from "../schemas/user"
 import { createUser } from "../services/createUser"
 
-import { RootStackParamList } from "../screens/LogIn"
+import { RootStackParamList } from "./LogIn"
 
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
