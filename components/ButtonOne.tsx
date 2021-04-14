@@ -1,5 +1,6 @@
 import React, { FC } from "react"
 import { TouchableOpacity, Text, StyleSheet } from "react-native"
+import { LinearGradient } from "expo-linear-gradient"
 
 import { colors } from "../assets/colors"
 
@@ -12,11 +13,17 @@ interface Props {
 const ButtonOne: FC<Props> = ({ text, handleTap, textColor }: Props) => {
   return (
     <TouchableOpacity style={styles.button} onPress={handleTap}>
-      <Text
-        style={[styles.buttonText, { color: textColor || colors.secondary }]}
+      <LinearGradient
+        colors={[colors.tertiary, colors.quaternary]}
+        start={[0, 2]}
+        end={[1, 0]}
       >
-        {text}
-      </Text>
+        <Text
+          style={[styles.buttonText, { color: textColor || colors.secondary }]}
+        >
+          {text}
+        </Text>
+      </LinearGradient>
     </TouchableOpacity>
   )
 }
@@ -26,15 +33,16 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     margin: 20,
     width: "50%",
-    padding: 10,
-    borderWidth: 2,
-    borderColor: colors.tertiary,
+    overflow: "hidden",
     borderRadius: 5,
   },
   buttonText: {
     fontFamily: "poppins-extrabold-italic",
     textAlign: "center",
     textTransform: "uppercase",
+    padding: 10,
+    margin: 3,
+    backgroundColor: colors.primary,
   },
 })
 
