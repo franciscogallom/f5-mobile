@@ -2,9 +2,9 @@ import React, { FC, useState } from "react"
 import AppLoading from "expo-app-loading"
 import * as Font from "expo-font"
 
-import AppNavigator from "./src/routes/appStack"
+import AppNavigator from "./routes/appStack"
 import { Provider } from "react-redux"
-import { store } from "./src/redux/store"
+import { store } from "./redux/store"
 
 const getFonts = () =>
   Font.loadAsync({

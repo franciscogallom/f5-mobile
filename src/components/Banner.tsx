@@ -1,8 +1,8 @@
 import React, { FC } from "react"
 import { ImageBackground, Text, StyleSheet } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
-import { colors } from "../../assets/colors"
-import { height } from "../../assets/dimensions"
+import { colors } from "../assets/colors"
+import { height } from "../assets/dimensions"
 
 interface Props {
   text: string

@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { Text, View, StyleSheet, Animated } from "react-native"
 
-import { colors } from "../../assets/colors"
+import { colors } from "../assets/colors"
 
 import { Field } from "../screens/Home"
 

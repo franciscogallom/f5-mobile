@@ -5,8 +5,8 @@ import { SharedElement } from "react-navigation-shared-element"
 
 import { getFields } from "../services/getFields"
 import { RootStackParamList, Field } from "./Home"
-import { height } from "../../assets/dimensions"
-import { colors } from "../../assets/colors"
+import { height } from "../assets/dimensions"
+import { colors } from "../assets/colors"
 
 import Loader from "../components/Loader"
 import FieldCard from "../components/FieldCard"

@@ -16,7 +16,7 @@ import {
 } from "react-native-gesture-handler"
 import { SharedElement } from "react-navigation-shared-element"
 
-import { height, width } from "../../assets/dimensions"
+import { height, width } from "../assets/dimensions"
 
 import OverflowItems from "./OverflowItems"
 import { Field } from "../screens/Home"

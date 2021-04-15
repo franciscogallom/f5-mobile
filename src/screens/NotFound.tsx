@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { View, ImageBackground, Text, StyleSheet } from "react-native"
 import { StackNavigationProp } from "@react-navigation/stack"
 
-import { colors } from "../../assets/colors"
+import { colors } from "../assets/colors"
 import { RootStackParamList } from "./Home"
 
 import ButtonOne from "../components/ButtonOne"

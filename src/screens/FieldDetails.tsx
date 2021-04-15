@@ -6,8 +6,8 @@ import { SharedElement } from "react-navigation-shared-element"
 import * as Animatable from "react-native-animatable"
 import * as Linking from "expo-linking"
 
-import { colors } from "../../assets/colors"
-import { height, width } from "../../assets/dimensions"
+import { colors } from "../assets/colors"
+import { height, width } from "../assets/dimensions"
 import { images } from "../components/Carousel"
 
 import { HomeScreenNavigationProp } from "./Home"

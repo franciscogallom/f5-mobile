@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { View, TextInput, StyleSheet } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
-import { colors } from "../../assets/colors"
+import { colors } from "../assets/colors"
 
 const Search: FC = () => {
   return (

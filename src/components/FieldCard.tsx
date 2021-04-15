@@ -2,8 +2,8 @@ import React, { FC } from "react"
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native"
 
 import { images } from "./Carousel"
-import { height } from "../../assets/dimensions"
-import { colors } from "../../assets/colors"
+import { height } from "../assets/dimensions"
+import { colors } from "../assets/colors"
 import { Field } from "../screens/Home"
 
 interface Props {

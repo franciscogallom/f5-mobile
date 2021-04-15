@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { View, Modal, ActivityIndicator, StyleSheet } from "react-native"
 
-import { colors } from "../../assets/colors"
+import { colors } from "../assets/colors"
 
 const Loader: FC = () => {
   return (

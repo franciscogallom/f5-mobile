@@ -10,7 +10,7 @@ import {
 import { Formik } from "formik"
 import { useDispatch } from "react-redux"
 
-import { colors } from "../../assets/colors"
+import { colors } from "../assets/colors"
 import { handleLogIn } from "../services/handleLogIn"
 
 import ButtonOne from "../components/ButtonOne"
