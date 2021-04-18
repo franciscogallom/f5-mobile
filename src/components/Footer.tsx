@@ -24,8 +24,9 @@ const Footer: FC = () => {
 const styles = StyleSheet.create({
   container: {
     borderTopColor: "#7c7c7c",
-    borderTopWidth: 1,
-    marginVertical: 20,
+    borderTopWidth: 0.75,
+    marginTop: 75,
+    marginBottom: 25,
     paddingVertical: 25,
     flexDirection: "row",
     alignItems: "center",

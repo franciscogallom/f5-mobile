@@ -35,7 +35,7 @@ const FieldList: FC<Props> = ({ navigation }: Props) => {
       <FlatList
         data={fields}
         keyExtractor={(item) => String(item.id)}
-        contentContainerStyle={{ padding: 10, marginVertical: height * 0.05 }}
+        contentContainerStyle={styles.contentContainerStyle}
         renderItem={({ item }) => {
           return (
             <FieldCard
@@ -62,5 +62,12 @@ const FieldList: FC<Props> = ({ navigation }: Props) => {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  contentContainerStyle: {
+    paddingHorizontal: 10,
+    paddingVertical: height * 0.05,
+  },
+})
 
 export default FieldList
