@@ -19,7 +19,13 @@ const ButtonOne: FC<Props> = ({ text, handleTap, textColor }: Props) => {
         end={[1, 0]}
       >
         <Text
-          style={[styles.buttonText, { color: textColor || colors.secondary }]}
+          style={[
+            styles.buttonText,
+            {
+              color: textColor || colors.secondary,
+              backgroundColor: textColor ? "white" : colors.primary,
+            },
+          ]}
         >
           {text}
         </Text>
@@ -42,7 +48,6 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     padding: 10,
     margin: 3,
-    backgroundColor: colors.primary,
   },
 })
 
