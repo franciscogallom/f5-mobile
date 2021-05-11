@@ -14,6 +14,8 @@ import { colors } from "../assets/colors"
 
 import { userSchema } from "../schemas/user"
 import { createUser } from "../services/createUser"
+import { addUser } from "../redux/actions"
+import { storeData } from "../services/storeData"
 
 import { RootStackParamList } from "./LogIn"
 
@@ -50,7 +52,26 @@ const SignUp: FC<Props> = ({ navigation }: Props) => {
       }}
       validationSchema={userSchema}
       onSubmit={(values) =>
-        createUser(values, dispatch, setUserExists, setError, setLoader)
+        createUser(values)
+          .then((response) => {
+            setLoader(true)
+            dispatch(addUser(response))
+            storeData(response)
+          })
+          .catch((e: string) => {
+            if (e === "userAlreadyExists") {
+              setUserExists(true)
+              setTimeout(() => {
+                setUserExists(false)
+              }, 4000)
+            } else {
+              setError("algo salió mal..")
+              setTimeout(() => {
+                setError("")
+              }, 4000)
+            }
+          })
+          .finally(() => setLoader(false))
       }
     >
       {({

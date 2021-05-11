@@ -49,7 +49,10 @@ const Home: FC<Props> = ({ navigation }: Props) => {
   const [loader, setLoader] = useState(true)
 
   useEffect(() => {
-    getFields(setLoader, setFields, navigation)
+    getFields()
+      .then((fields) => setFields(fields))
+      .catch(() => navigation.navigate("NotFound"))
+      .finally(() => setLoader(false))
   }, [])
 
   const user = useSelector<UserState, UserState["username"]>(

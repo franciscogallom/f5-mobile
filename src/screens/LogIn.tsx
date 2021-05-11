@@ -12,6 +12,8 @@ import { useDispatch } from "react-redux"
 
 import { colors } from "../assets/colors"
 import { handleLogIn } from "../services/handleLogIn"
+import { addUser } from "../redux/actions"
+import { storeData } from "../services/storeData"
 
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
@@ -45,7 +47,16 @@ const LogIn: FC<Props> = ({ navigation }: Props) => {
         password: "",
       }}
       onSubmit={(values) =>
-        handleLogIn(values, dispatch, setLoader, setLogInStatus)
+        handleLogIn(values)
+          .then(() => {
+            setLoader(true)
+            dispatch(addUser(values.user))
+            storeData(values.user)
+          })
+          .catch((e) => {
+            setLogInStatus(e.response.data.message || "algo salio mal..")
+          })
+          .finally(() => setLoader(false))
       }
     >
       {({ handleChange, handleSubmit, values }) => (

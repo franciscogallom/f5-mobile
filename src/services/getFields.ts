@@ -1,21 +1,9 @@
 import axios from "axios"
-import { HomeScreenNavigationProp } from "../screens/Home"
-import { FieldListScreenNavigationProp } from "../screens/FieldList"
+import { Field } from "../screens/Home"
 
-export const getFields = (
-  setLoader: (bool: boolean) => void,
-  setFields: (res: []) => void,
-  navigation: HomeScreenNavigationProp | FieldListScreenNavigationProp
-): void => {
-  axios
-    .get("http://10.0.2.2:3001/fields")
-    .then((response) => {
-      setFields(response.data)
-    })
-    .catch(() => {
-      navigation.navigate("NotFound")
-    })
-    .finally(() => {
-      setLoader(false)
-    })
+export const getFields = (): Promise<Field[]> => {
+  return axios.get("http://10.0.2.2:3001/fields").then((response) => {
+    const { data } = response
+    return data
+  })
 }
