@@ -32,6 +32,7 @@ type Props = {
 }
 
 export interface Field {
+  user: string
   name: string
   location: string
   price: string
