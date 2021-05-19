@@ -25,7 +25,10 @@ const FieldList: FC<Props> = ({ navigation }: Props) => {
   const [fields, setFields] = useState<Field[]>([])
 
   useEffect(() => {
-    getFields(setLoader, setFields, navigation)
+    getFields()
+      .then((fields) => setFields(fields))
+      .catch(() => navigation.navigate("NotFound"))
+      .finally(() => setLoader(false))
   }, [])
 
   return loader ? (

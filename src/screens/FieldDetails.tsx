@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react"
-import { View, StyleSheet, Image, Text } from "react-native"
+import { View, StyleSheet, Image } from "react-native"
 import { RouteProp } from "@react-navigation/native"
 import { AntDesign } from "@expo/vector-icons"
 import { SharedElement } from "react-navigation-shared-element"
@@ -11,6 +11,8 @@ import { height, width } from "../assets/dimensions"
 import { images } from "../components/Carousel"
 import { getBookings } from "../services/getBookings"
 
+import Bookings from "../components/Bookings"
+
 import { HomeScreenNavigationProp } from "./Home"
 import { RootStackParamList } from "./Home"
 
@@ -21,7 +23,7 @@ interface Props {
   route: FieldDetailsScreenRouteProp
 }
 
-const fadeInBottom = {
+export const fadeInBottom = {
   0: {
     opacity: 0,
     translateY: 100,
@@ -32,7 +34,7 @@ const fadeInBottom = {
   },
 }
 
-const DURATION = 800
+export const DURATION = 800
 const MARGIN_VERTICAL = 5
 
 const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
@@ -47,7 +49,6 @@ const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
         setStartsAt(res.startsAt)
       })
       .catch(() => navigation.navigate("NotFound"))
-    // Add Finally.
   }, [])
 
   return (
@@ -117,31 +118,27 @@ const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
           >
             📞 {field.phone}.
           </Animatable.Text>
+          <Animatable.Text
+            animation={fadeInBottom}
+            duration={DURATION}
+            delay={DURATION + 1200}
+            style={[styles.details, { fontSize: 18 }]}
+          >
+            👇 DISPONIBILIDAD.
+          </Animatable.Text>
           {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             Object.values(bookings).map((key: any, index) => {
-              const numberOfField = `cancha ${index + 1}`
+              const numberOfField = `CANCHA ${index + 1}`
               const result = Object.values(key).map((hour) => hour)
               return (
-                <View key={index}>
-                  <Text style={{ color: colors.secondary }}>
-                    {numberOfField}
-                  </Text>
-                  {result.map((status, index) => {
-                    return (
-                      <Text
-                        key={index}
-                        style={{
-                          color: status ? colors.tertiary : colors.quaternary,
-                        }}
-                      >
-                        {`${startsAt + index}hs. ${
-                          status ? "libre" : "reservada"
-                        }`}
-                      </Text>
-                    )
-                  })}
-                </View>
+                <Bookings
+                  key={index}
+                  index={index}
+                  numberOfField={numberOfField}
+                  startsAt={startsAt}
+                  result={result}
+                />
               )
             })
           }
@@ -169,7 +166,7 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     backgroundColor: "rgba(25, 20, 20, 0.75)",
-    transform: [{ translateY: -height * 0.7 }],
+    transform: [{ translateY: -height * 0.8 }],
     padding: 15,
     borderRadius: 20,
   },
