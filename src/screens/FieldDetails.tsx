@@ -1,5 +1,5 @@
-import React, { FC } from "react"
-import { View, StyleSheet, Image } from "react-native"
+import React, { FC, useEffect, useState } from "react"
+import { View, StyleSheet, Image, Text } from "react-native"
 import { RouteProp } from "@react-navigation/native"
 import { AntDesign } from "@expo/vector-icons"
 import { SharedElement } from "react-navigation-shared-element"
@@ -9,6 +9,7 @@ import * as Linking from "expo-linking"
 import { colors } from "../assets/colors"
 import { height, width } from "../assets/dimensions"
 import { images } from "../components/Carousel"
+import { getBookings } from "../services/getBookings"
 
 import { HomeScreenNavigationProp } from "./Home"
 import { RootStackParamList } from "./Home"
@@ -36,6 +37,18 @@ const MARGIN_VERTICAL = 5
 
 const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
   const field = route.params
+  const [bookings, setBookings] = useState({})
+  const [startsAt, setStartsAt] = useState(0)
+
+  useEffect(() => {
+    getBookings(route.params.user)
+      .then((res) => {
+        setBookings(res.bookings)
+        setStartsAt(res.startsAt)
+      })
+      .catch(() => navigation.navigate("NotFound"))
+    // Add Finally.
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -104,6 +117,34 @@ const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
           >
             📞 {field.phone}.
           </Animatable.Text>
+          {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            Object.values(bookings).map((key: any, index) => {
+              const numberOfField = `cancha ${index + 1}`
+              const result = Object.values(key).map((hour) => hour)
+              return (
+                <View key={index}>
+                  <Text style={{ color: colors.secondary }}>
+                    {numberOfField}
+                  </Text>
+                  {result.map((status, index) => {
+                    return (
+                      <Text
+                        key={index}
+                        style={{
+                          color: status ? colors.tertiary : colors.quaternary,
+                        }}
+                      >
+                        {`${startsAt + index}hs. ${
+                          status ? "libre" : "reservada"
+                        }`}
+                      </Text>
+                    )
+                  })}
+                </View>
+              )
+            })
+          }
         </View>
       </SharedElement>
     </View>
@@ -128,7 +169,7 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     backgroundColor: "rgba(25, 20, 20, 0.75)",
-    transform: [{ translateY: -height * 0.4 }],
+    transform: [{ translateY: -height * 0.7 }],
     padding: 15,
     borderRadius: 20,
   },
