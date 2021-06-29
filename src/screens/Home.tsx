@@ -15,11 +15,20 @@ import Footer from "../components/Footer"
 import Banner from "../components/Banner"
 import RentPlayRepeat from "../components/RentPlayRepeat"
 
+interface CheckoutProps {
+  name: string
+  location: string
+  price: string
+  numberOfField: string
+  hour: string
+}
+
 export type RootStackParamList = {
   Home: undefined
   FieldDetails: Field
   FieldList: undefined
   NotFound: undefined
+  Checkout: CheckoutProps
 }
 
 export type HomeScreenNavigationProp = StackNavigationProp<

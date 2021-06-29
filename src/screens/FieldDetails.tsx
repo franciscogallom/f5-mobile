@@ -11,7 +11,7 @@ import { height, width } from "../assets/dimensions"
 import { images } from "../components/Carousel"
 import { getBookings } from "../services/getBookings"
 
-import Bookings from "../components/Bookings"
+import Bookings, { fadeInBottom, DURATION } from "../components/Bookings"
 
 import { HomeScreenNavigationProp } from "./Home"
 import { RootStackParamList } from "./Home"
@@ -23,18 +23,6 @@ interface Props {
   route: FieldDetailsScreenRouteProp
 }
 
-export const fadeInBottom = {
-  0: {
-    opacity: 0,
-    translateY: 100,
-  },
-  1: {
-    opacity: 1,
-    translateY: 0,
-  },
-}
-
-export const DURATION = 800
 const MARGIN_VERTICAL = 5
 
 const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
@@ -129,8 +117,9 @@ const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
           {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             Object.values(bookings).map((key: any, index) => {
-              const numberOfField = `CANCHA ${index + 1}`
+              const numberOfField = `cancha ${index + 1}`
               const result = Object.values(key).map((hour) => hour)
+              const { name, price, location } = field
               return (
                 <Bookings
                   key={index}
@@ -138,6 +127,15 @@ const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
                   numberOfField={numberOfField}
                   startsAt={startsAt}
                   result={result}
+                  navigate={(index: number) =>
+                    navigation.navigate("Checkout", {
+                      name,
+                      price,
+                      location,
+                      numberOfField,
+                      hour: `${startsAt + index}`,
+                    })
+                  }
                 />
               )
             })
@@ -165,7 +163,7 @@ const styles = StyleSheet.create({
     width: width,
   },
   detailsContainer: {
-    backgroundColor: "rgba(25, 20, 20, 0.75)",
+    backgroundColor: "rgba(25, 20, 20, 0.87)",
     transform: [{ translateY: -height * 0.8 }],
     padding: 15,
     borderRadius: 20,

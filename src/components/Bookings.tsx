@@ -5,13 +5,26 @@ import * as Animatable from "react-native-animatable"
 
 import { colors } from "../assets/colors"
 import { width } from "../assets/dimensions"
-import { fadeInBottom, DURATION } from "../screens/FieldDetails"
+
+export const fadeInBottom = {
+  0: {
+    opacity: 0,
+    translateY: 100,
+  },
+  1: {
+    opacity: 1,
+    translateY: 0,
+  },
+}
+
+export const DURATION = 800
 
 interface Props {
   index: number
   numberOfField: string
   startsAt: number
   result: unknown[]
+  navigate: (index: number) => void
 }
 
 const Bookings: FC<Props> = ({
@@ -19,6 +32,7 @@ const Bookings: FC<Props> = ({
   numberOfField,
   startsAt,
   result,
+  navigate,
 }: Props) => {
   return (
     <Animatable.View
@@ -36,15 +50,7 @@ const Bookings: FC<Props> = ({
               style={{ width: width * 0.23 }}
               key={index}
               activeOpacity={0.5}
-              onPress={() =>
-                alert(
-                  status
-                    ? `reserva a las ${startsAt + index}:00 en ${numberOfField}`
-                    : `${numberOfField} esta reservada a las ${
-                        startsAt + index
-                      }:00`
-                )
-              }
+              onPress={() => status && navigate(index)}
             >
               <Text
                 style={[
@@ -70,6 +76,7 @@ const styles = StyleSheet.create({
     color: colors.secondary,
     fontSize: 25,
     fontFamily: "poppins-extrabold-italic",
+    textTransform: "uppercase",
   },
   booking: {
     flexDirection: "row",
