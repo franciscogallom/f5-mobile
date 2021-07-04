@@ -29,10 +29,12 @@ const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
   const field = route.params
   const [bookings, setBookings] = useState({})
   const [startsAt, setStartsAt] = useState(0)
+  const [id, setId] = useState("")
 
   useEffect(() => {
     getBookings(route.params.user)
       .then((res) => {
+        setId(res._id)
         setBookings(res.bookings)
         setStartsAt(res.startsAt)
       })
@@ -129,6 +131,7 @@ const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
                   result={result}
                   navigate={(index: number) =>
                     navigation.navigate("Checkout", {
+                      id,
                       name,
                       price,
                       location,

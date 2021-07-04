@@ -16,6 +16,7 @@ import Banner from "../components/Banner"
 import RentPlayRepeat from "../components/RentPlayRepeat"
 
 interface CheckoutProps {
+  id: string
   name: string
   location: string
   price: string

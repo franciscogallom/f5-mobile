@@ -4,6 +4,7 @@ import { RouteProp } from "@react-navigation/native"
 
 import { colors } from "../assets/colors"
 import { RootStackParamList } from "./Home"
+import { updateBookings } from "../services/updateBookings"
 
 type CheckoutScreenRouteProp = RouteProp<RootStackParamList, "Checkout">
 
@@ -12,7 +13,7 @@ type Props = {
 }
 
 const Checkout: FC<Props> = ({ route }: Props) => {
-  const { name, price, location, numberOfField, hour } = route.params
+  const { id, name, price, location, numberOfField, hour } = route.params
 
   return (
     <View style={styles.container}>
@@ -26,7 +27,7 @@ const Checkout: FC<Props> = ({ route }: Props) => {
       <Text style={styles.text}>${price}.</Text>
       {/* Will be replaced by swipe button */}
       <Button
-        onPress={() => alert("Confirmado!")}
+        onPress={() => updateBookings(id, numberOfField, hour)}
         title="CONFIRMAR"
         color="#000000a2"
       />
