@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react"
-import { View, Text, StyleSheet, Button } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
 import { RouteProp } from "@react-navigation/native"
 
 import { colors } from "../assets/colors"
@@ -8,6 +8,7 @@ import { updateBookings } from "../services/updateBookings"
 import { HomeScreenNavigationProp } from "./Home"
 
 import Loader from "../components/Loader"
+import SwipeButton from "../components/SwipeButton"
 
 type CheckoutScreenRouteProp = RouteProp<RootStackParamList, "Checkout">
 
@@ -21,7 +22,7 @@ const Checkout: FC<Props> = ({ navigation, route }: Props) => {
   const [message, setMessage] = useState("")
   const [loading, setLoading] = useState(false)
 
-  function handlePress() {
+  function handleSwipe() {
     setLoading(true)
     updateBookings(id, numberOfField, hour)
       .then(() =>
@@ -58,9 +59,8 @@ const Checkout: FC<Props> = ({ navigation, route }: Props) => {
           🕑 {hour}:00hs, {numberOfField}.
         </Text>
         <Text style={styles.textCard}>💲{price}.</Text>
-        {/* Will be replaced by swipe button */}
       </View>
-      <Button onPress={handlePress} title="CONFIRMAR" color="#000000a2" />
+      <SwipeButton handleSwipe={handleSwipe} />
     </View>
   )
 }
@@ -68,30 +68,29 @@ const Checkout: FC<Props> = ({ navigation, route }: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
     backgroundColor: colors.tertiary,
     padding: 15,
   },
   checkout: {
     fontFamily: "poppins-extrabold-italic",
-    fontSize: 50,
-    letterSpacing: 5,
+    fontSize: 60,
     textAlign: "center",
-    marginBottom: 75,
   },
   card: {
     backgroundColor: "rgba(25, 20, 20, 0.75)",
     borderRadius: 10,
-    padding: 20,
-    marginBottom: 10,
+    paddingVertical: 25,
+    paddingHorizontal: 35,
   },
   textCard: {
     fontFamily: "poppins-extrabold",
     textAlign: "left",
-    fontSize: 20,
+    fontSize: 22,
     color: colors.secondary,
-    margin: 4,
+    margin: 5,
+    letterSpacing: 0.8,
   },
   message: {
     fontFamily: "poppins-extrabold",
