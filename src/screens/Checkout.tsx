@@ -24,17 +24,21 @@ const Checkout: FC<Props> = ({ navigation, route }: Props) => {
   function handlePress() {
     setLoading(true)
     updateBookings(id, numberOfField, hour)
-      .then(() => setMessage("Genial! En 5 segundos te redigiremos al Home."))
+      .then(() =>
+        setMessage(
+          "Genial 😃, tu reserva ya esta agendada! En instantes te redigiremos al Home."
+        )
+      )
       .catch(() =>
         setMessage(
-          "Algo salió mal, o quizas alguien reservo justo antes que vos! Vuelve a intentarlo."
+          "Algo salió mal 😟, o quizas alguien reservo justo antes que vos! Vuelve a intentarlo en un instante."
         )
       )
       .finally(() => {
         setLoading(false)
         setTimeout(() => {
           navigation.navigate("Home")
-        }, 5000)
+        }, 4000)
       })
   }
 
@@ -42,19 +46,20 @@ const Checkout: FC<Props> = ({ navigation, route }: Props) => {
     <Loader />
   ) : message ? (
     <View style={styles.container}>
-      <Text>{message}</Text>
+      <Text style={styles.message}>{message}</Text>
     </View>
   ) : (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        último paso! revisa que todo este bien antes de reservar tu cancha ⚠️.
-      </Text>
-      <Text style={styles.text}>
-        {name}, {numberOfField}, a las {hour}:00hs.
-      </Text>
-      <Text style={styles.text}>{location}.</Text>
-      <Text style={styles.text}>${price}.</Text>
-      {/* Will be replaced by swipe button */}
+      <Text style={styles.checkout}>CHECKOUT</Text>
+      <View style={styles.card}>
+        <Text style={styles.textCard}>⚽ {name}.</Text>
+        <Text style={styles.textCard}>📍 {location}.</Text>
+        <Text style={styles.textCard}>
+          🕑 {hour}:00hs, {numberOfField}.
+        </Text>
+        <Text style={styles.textCard}>💲{price}.</Text>
+        {/* Will be replaced by swipe button */}
+      </View>
       <Button onPress={handlePress} title="CONFIRMAR" color="#000000a2" />
     </View>
   )
@@ -68,16 +73,31 @@ const styles = StyleSheet.create({
     backgroundColor: colors.tertiary,
     padding: 15,
   },
-  title: {
+  checkout: {
     fontFamily: "poppins-extrabold-italic",
-    fontSize: 25,
+    fontSize: 50,
+    letterSpacing: 5,
     textAlign: "center",
     marginBottom: 75,
   },
-  text: {
+  card: {
+    backgroundColor: "rgba(25, 20, 20, 0.75)",
+    borderRadius: 10,
+    padding: 20,
+    marginBottom: 10,
+  },
+  textCard: {
+    fontFamily: "poppins-extrabold",
+    textAlign: "left",
+    fontSize: 20,
+    color: colors.secondary,
+    margin: 4,
+  },
+  message: {
     fontFamily: "poppins-extrabold",
     textAlign: "center",
     fontSize: 20,
+    color: colors.primary,
   },
 })
 
