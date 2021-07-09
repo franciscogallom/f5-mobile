@@ -8,7 +8,7 @@ import * as Linking from "expo-linking"
 
 import { colors } from "../assets/colors"
 import { height, width } from "../assets/dimensions"
-import { images } from "../components/Carousel"
+import { images } from "../assets/images"
 import { getBookings } from "../services/getBookings"
 
 import Bookings, { fadeInBottom, DURATION } from "../components/Bookings"
