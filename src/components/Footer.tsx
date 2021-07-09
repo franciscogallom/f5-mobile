@@ -8,7 +8,10 @@ import { height } from "../assets/dimensions"
 const Footer: FC = () => {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require("../assets/icon.png/")} />
+      <Image
+        style={styles.image}
+        source={require("../assets/icon-transparent.png/")}
+      />
       <Text
         style={styles.text}
         onPress={() =>
