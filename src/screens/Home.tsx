@@ -5,7 +5,7 @@ import { StackNavigationProp } from "@react-navigation/stack"
 
 import { colors } from "../assets/colors"
 import { UserState } from "../redux/userReducer"
-import { getFields } from "../services/getFields"
+import { getFieldsWithLimit } from "../services/getFieldsWithLimit"
 import { height } from "../assets/dimensions"
 
 import Search from "../components/Search"
@@ -60,7 +60,7 @@ const Home: FC<Props> = ({ navigation }: Props) => {
   const [loader, setLoader] = useState(true)
 
   useEffect(() => {
-    getFields()
+    getFieldsWithLimit(5)
       .then((fields) => setFields(fields))
       .catch(() => navigation.navigate("NotFound"))
       .finally(() => setLoader(false))
