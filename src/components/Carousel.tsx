@@ -6,7 +6,6 @@ import {
   FlatList,
   Image,
   Animated,
-  ImageSourcePropType,
 } from "react-native"
 import {
   Directions,
@@ -17,6 +16,7 @@ import {
 import { SharedElement } from "react-navigation-shared-element"
 
 import { height, width } from "../assets/dimensions"
+import { images } from "../assets/images"
 
 import OverflowItems from "./OverflowItems"
 import { Field } from "../screens/Home"
@@ -27,21 +27,9 @@ interface Props {
   navigation: HomeScreenNavigationProp
 }
 
-type Img = {
-  [key: number]: ImageSourcePropType
-}
-
 const ITEM_WIDTH = width * 0.7
 const ITEM_HEIGHT = ITEM_WIDTH * 1.7
 const VISIBLE_ITEMS = 3
-
-export const images: Img = {
-  1: require("../assets/images/fields/labombonera.jpg"),
-  2: require("../assets/images/fields/elmonumental.jpg"),
-  3: require("../assets/images/fields/oldtrafford.jpg"),
-  4: require("../assets/images/fields/bernabeu.jpg"),
-  5: require("../assets/images/fields/wembley.jpg"),
-}
 
 const Carousel: FC<Props> = ({ data, navigation }: Props) => {
   const scrollXIndex = useRef(new Animated.Value(0)).current

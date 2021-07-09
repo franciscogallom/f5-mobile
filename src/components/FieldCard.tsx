@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native"
 
-import { images } from "./Carousel"
+import { images } from "../assets/images"
 import { height } from "../assets/dimensions"
 import { colors } from "../assets/colors"
 import { Field } from "../screens/Home"
