@@ -3,14 +3,9 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 
 import { colors } from "../assets/colors"
+import { ActionProps } from "../interfaces/props"
 
-interface Props {
-  text: string
-  icon: "back" | "adduser"
-  handleTap: () => void
-}
-
-const GoBack: FC<Props> = ({ text, handleTap, icon }: Props) => {
+const GoBack: FC<ActionProps> = ({ text, handleTap, icon }: ActionProps) => {
   return (
     <TouchableOpacity style={styles.container} onPress={() => handleTap()}>
       <AntDesign name={icon} size={24} color={colors.tertiary} />

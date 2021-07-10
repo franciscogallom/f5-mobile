@@ -1,22 +1,14 @@
 import React, { FC } from "react"
 import { View, ImageBackground, Text, StyleSheet } from "react-native"
-import { StackNavigationProp } from "@react-navigation/stack"
 
 import { colors } from "../assets/colors"
-import { RootStackParamList } from "./Home"
+import { NotFoundScreenNavigationProp } from "../interfaces/props"
 
 import ButtonOne from "../components/ButtonOne"
 
-type NotFoundScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "NotFound"
->
-
-type Props = {
-  navigation: NotFoundScreenNavigationProp
-}
-
-const NotFound: FC<Props> = ({ navigation }: Props) => (
+const NotFound: FC<NotFoundScreenNavigationProp> = ({
+  navigation,
+}: NotFoundScreenNavigationProp) => (
   <View style={styles.container}>
     <ImageBackground
       source={require("../assets/images/404.jpg")}

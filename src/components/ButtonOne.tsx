@@ -3,14 +3,13 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 
 import { colors } from "../assets/colors"
+import { ButtonOneProps } from "../interfaces/props"
 
-interface Props {
-  text: string
-  handleTap: () => void
-  textColor?: string
-}
-
-const ButtonOne: FC<Props> = ({ text, handleTap, textColor }: Props) => {
+const ButtonOne: FC<ButtonOneProps> = ({
+  text,
+  handleTap,
+  textColor,
+}: ButtonOneProps) => {
   return (
     <TouchableOpacity style={styles.button} onPress={handleTap}>
       <LinearGradient

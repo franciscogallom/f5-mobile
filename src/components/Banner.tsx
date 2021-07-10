@@ -1,15 +1,12 @@
 import React, { FC } from "react"
 import { ImageBackground, Text, StyleSheet } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
+
 import { colors } from "../assets/colors"
 import { height } from "../assets/dimensions"
+import { BannerProps } from "../interfaces/props"
 
-interface Props {
-  text: string
-  handleTap: () => void
-}
-
-const Banner: FC<Props> = ({ text, handleTap }: Props) => {
+const Banner: FC<BannerProps> = ({ text, handleTap }: BannerProps) => {
   return (
     <TouchableOpacity style={styles.container} onPress={handleTap}>
       <ImageBackground

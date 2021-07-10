@@ -17,21 +17,15 @@ import { SharedElement } from "react-navigation-shared-element"
 
 import { height, width } from "../assets/dimensions"
 import { images } from "../assets/images"
+import { CarouselProps } from "../interfaces/props"
 
 import OverflowItems from "./OverflowItems"
-import { Field } from "../screens/Home"
-import { HomeScreenNavigationProp } from "../screens/Home"
-
-interface Props {
-  data: Field[]
-  navigation: HomeScreenNavigationProp
-}
 
 const ITEM_WIDTH = width * 0.7
 const ITEM_HEIGHT = ITEM_WIDTH * 1.7
 const VISIBLE_ITEMS = 3
 
-const Carousel: FC<Props> = ({ data, navigation }: Props) => {
+const Carousel: FC<CarouselProps> = ({ data, navigation }: CarouselProps) => {
   const scrollXIndex = useRef(new Animated.Value(0)).current
   const scrollXAnimated = useRef(new Animated.Value(0)).current
 

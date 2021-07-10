@@ -4,14 +4,12 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native"
 import { images } from "../assets/images"
 import { height } from "../assets/dimensions"
 import { colors } from "../assets/colors"
-import { Field } from "../screens/Home"
+import { FieldCardProps } from "../interfaces/props"
 
-interface Props {
-  field: Field
-  handleNavigation: () => void
-}
-
-const FieldCard: FC<Props> = ({ field, handleNavigation }: Props) => {
+const FieldCard: FC<FieldCardProps> = ({
+  field,
+  handleNavigation,
+}: FieldCardProps) => {
   return (
     <TouchableOpacity activeOpacity={0.9} onPress={handleNavigation}>
       <View style={styles.card}>

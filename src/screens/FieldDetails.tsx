@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react"
 import { View, StyleSheet, Image } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
-import { RouteProp } from "@react-navigation/native"
 import { AntDesign } from "@expo/vector-icons"
 import { SharedElement } from "react-navigation-shared-element"
 import * as Animatable from "react-native-animatable"
@@ -11,22 +10,16 @@ import { colors } from "../assets/colors"
 import { height, width } from "../assets/dimensions"
 import { images } from "../assets/images"
 import { getBookings } from "../services/getBookings"
+import { FieldDetailsProps } from "../interfaces/props"
 
 import Bookings, { fadeInBottom, DURATION } from "../components/Bookings"
 
-import { HomeScreenNavigationProp } from "./Home"
-import { RootStackParamList } from "./Home"
-
-type FieldDetailsScreenRouteProp = RouteProp<RootStackParamList, "FieldDetails">
-
-interface Props {
-  navigation: HomeScreenNavigationProp
-  route: FieldDetailsScreenRouteProp
-}
-
 const MARGIN_VERTICAL = 5
 
-const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
+const FieldDetails: FC<FieldDetailsProps> = ({
+  navigation,
+  route,
+}: FieldDetailsProps) => {
   const field = route.params
   const [bookings, setBookings] = useState({})
   const [startsAt, setStartsAt] = useState(0)

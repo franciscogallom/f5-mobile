@@ -3,16 +3,9 @@ import { TextInput, View, StyleSheet } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 
 import { colors } from "../assets/colors"
-interface Props {
-  dataType: string
-  placeholder: string
-  secureTextEntry?: boolean
-  icon: "user" | "mail" | "lock" | "sync" | "mobile1"
-  setDataType: (dataType: string) => void
-  onBlur?: ((e: unknown) => void) | undefined
-  keyboardType?: "numeric" | "email-address"
-}
-const InputLogInAndSignUp: FC<Props> = ({
+import { InputLogInAndSignUpProps } from "../interfaces/props"
+
+const InputLogInAndSignUp: FC<InputLogInAndSignUpProps> = ({
   dataType,
   placeholder,
   secureTextEntry,
@@ -20,7 +13,7 @@ const InputLogInAndSignUp: FC<Props> = ({
   setDataType,
   onBlur,
   keyboardType,
-}: Props) => {
+}: InputLogInAndSignUpProps) => {
   return (
     <View style={styles.input}>
       <AntDesign style={styles.icon} name={icon} size={24} color="white" />

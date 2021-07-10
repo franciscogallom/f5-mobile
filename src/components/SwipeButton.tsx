@@ -4,14 +4,13 @@ import SwipeBtn from "rn-swipe-button"
 
 import { colors } from "../assets/colors"
 import { width } from "../assets/dimensions"
-
-type Props = {
-  handleSwipe: () => void
-}
+import { SwipeButtonProps } from "../interfaces/props"
 
 const swipeColor = "#A5FFD6"
 
-const SwipeButton: FC<Props> = ({ handleSwipe }: Props) => {
+const SwipeButton: FC<SwipeButtonProps> = ({
+  handleSwipe,
+}: SwipeButtonProps) => {
   return (
     <SafeAreaView>
       <SwipeBtn

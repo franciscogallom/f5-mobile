@@ -1,5 +1,4 @@
 import React, { FC, useState } from "react"
-import { StackNavigationProp } from "@react-navigation/stack"
 import {
   View,
   StyleSheet,
@@ -17,24 +16,16 @@ import { createUser } from "../services/createUser"
 import { addUser } from "../redux/actions"
 import { storeData } from "../services/storeData"
 
-import { RootStackParamList } from "./LogIn"
-
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
 import ErrorText from "../components/ErrorText"
 import GoBack from "../components/Action"
 import Loader from "../components/Loader"
+import { SignUpScreenNavigationProp } from "../interfaces/props"
 
-type SignUpScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "SignUp"
->
-
-type Props = {
-  navigation: SignUpScreenNavigationProp
-}
-
-const SignUp: FC<Props> = ({ navigation }: Props) => {
+const SignUp: FC<SignUpScreenNavigationProp> = ({
+  navigation,
+}: SignUpScreenNavigationProp) => {
   const [error, setError] = useState("")
   const [loader, setLoader] = useState(false)
   const [userExists, setUserExists] = useState(false)

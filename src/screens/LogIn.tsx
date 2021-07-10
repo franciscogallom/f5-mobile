@@ -1,5 +1,4 @@
 import React, { FC, useState } from "react"
-import { StackNavigationProp } from "@react-navigation/stack"
 import {
   View,
   TouchableWithoutFeedback,
@@ -14,6 +13,7 @@ import { colors } from "../assets/colors"
 import { handleLogIn } from "../services/handleLogIn"
 import { addUser } from "../redux/actions"
 import { storeData } from "../services/storeData"
+import { LogInScreenNavigationProp } from "../interfaces/props"
 
 import ButtonOne from "../components/ButtonOne"
 import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
@@ -21,21 +21,9 @@ import ErrorText from "../components/ErrorText"
 import Action from "../components/Action"
 import Loader from "../components/Loader"
 
-export type RootStackParamList = {
-  LogIn: undefined
-  SignUp: undefined
-}
-
-type LogInScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "LogIn"
->
-
-type Props = {
-  navigation: LogInScreenNavigationProp
-}
-
-const LogIn: FC<Props> = ({ navigation }: Props) => {
+const LogIn: FC<LogInScreenNavigationProp> = ({
+  navigation,
+}: LogInScreenNavigationProp) => {
   const [logInStatus, setLogInStatus] = useState("")
   const [loader, setLoader] = useState(false)
   const dispatch = useDispatch()

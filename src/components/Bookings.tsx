@@ -5,6 +5,7 @@ import * as Animatable from "react-native-animatable"
 
 import { colors } from "../assets/colors"
 import { width } from "../assets/dimensions"
+import { BookingsProps } from "../interfaces/props"
 
 export const fadeInBottom = {
   0: {
@@ -19,21 +20,13 @@ export const fadeInBottom = {
 
 export const DURATION = 800
 
-interface Props {
-  index: number
-  numberOfField: string
-  startsAt: number
-  result: unknown[]
-  navigate: (index: number) => void
-}
-
-const Bookings: FC<Props> = ({
+const Bookings: FC<BookingsProps> = ({
   index,
   numberOfField,
   startsAt,
   result,
   navigate,
-}: Props) => {
+}: BookingsProps) => {
   return (
     <Animatable.View
       animation={fadeInBottom}

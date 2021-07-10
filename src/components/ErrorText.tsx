@@ -2,12 +2,9 @@ import React, { FC } from "react"
 import { Text, StyleSheet } from "react-native"
 
 import { colors } from "../assets/colors"
+import { ErrorTextProps } from "../interfaces/props"
 
-interface Props {
-  text: string
-}
-
-const ErrorText: FC<Props> = ({ text }: Props) => {
+const ErrorText: FC<ErrorTextProps> = ({ text }: ErrorTextProps) => {
   return text && text !== "undefined" ? (
     <Text style={styles.text}>{`${text}.`}</Text>
   ) : null

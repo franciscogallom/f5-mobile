@@ -3,16 +3,14 @@ import { Text, View, StyleSheet, Animated } from "react-native"
 
 import { colors } from "../assets/colors"
 
-import { Field } from "../screens/Home"
-
-interface Props {
-  data: Field[]
-  scrollXAnimated: Animated.Value
-}
+import { OverflowItemsProps } from "../interfaces/props"
 
 const OVERFLOW_HEIGHT = 100
 
-const OverflowItems: FC<Props> = ({ data, scrollXAnimated }: Props) => {
+const OverflowItems: FC<OverflowItemsProps> = ({
+  data,
+  scrollXAnimated,
+}: OverflowItemsProps) => {
   const inputRange = [-1, 0, 1]
   const translateY = scrollXAnimated.interpolate({
     inputRange,

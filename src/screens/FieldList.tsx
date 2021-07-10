@@ -1,26 +1,19 @@
 import React, { FC, useEffect, useState } from "react"
 import { FlatList, View, StyleSheet } from "react-native"
-import { StackNavigationProp } from "@react-navigation/stack"
 import { SharedElement } from "react-navigation-shared-element"
 
 import { getFields } from "../services/getFields"
-import { RootStackParamList, Field } from "./Home"
 import { height } from "../assets/dimensions"
 import { colors } from "../assets/colors"
+import { Field } from "../interfaces/interfaces"
+import { FieldListScreenNavigationProp } from "../interfaces/props"
 
 import Loader from "../components/Loader"
 import FieldCard from "../components/FieldCard"
 
-export type FieldListScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "FieldList"
->
-
-type Props = {
-  navigation: FieldListScreenNavigationProp
-}
-
-const FieldList: FC<Props> = ({ navigation }: Props) => {
+const FieldList: FC<FieldListScreenNavigationProp> = ({
+  navigation,
+}: FieldListScreenNavigationProp) => {
   const [loader, setLoader] = useState(true)
   const [fields, setFields] = useState<Field[]>([])
 

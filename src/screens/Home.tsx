@@ -1,12 +1,13 @@
 import React, { FC, useState, useEffect } from "react"
 import { Text, StyleSheet, ScrollView } from "react-native"
 import { useSelector } from "react-redux"
-import { StackNavigationProp } from "@react-navigation/stack"
 
 import { colors } from "../assets/colors"
 import { UserState } from "../redux/userReducer"
 import { getFieldsWithLimit } from "../services/getFieldsWithLimit"
 import { height } from "../assets/dimensions"
+import { Field } from "../interfaces/interfaces"
+import { HomeScreenNavigationProp } from "../interfaces/props"
 
 import Search from "../components/Search"
 import Carousel from "../components/Carousel"
@@ -15,47 +16,11 @@ import Footer from "../components/Footer"
 import Banner from "../components/Banner"
 import RentPlayRepeat from "../components/RentPlayRepeat"
 
-interface CheckoutProps {
-  id: string
-  name: string
-  location: string
-  price: string
-  numberOfField: string
-  hour: string
-}
-
-export type RootStackParamList = {
-  Home: undefined
-  FieldDetails: Field
-  FieldList: undefined
-  NotFound: undefined
-  Checkout: CheckoutProps
-}
-
-export type HomeScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "Home"
->
-
-type Props = {
-  navigation: HomeScreenNavigationProp
-}
-
-export interface Field {
-  user: string
-  name: string
-  location: string
-  price: string
-  image: string
-  id: number
-  numberOfRatings: number
-  sumOfRatings: number
-  phone: string
-}
-
 const PADDING_VERTICAL = 10
 
-const Home: FC<Props> = ({ navigation }: Props) => {
+const Home: FC<HomeScreenNavigationProp> = ({
+  navigation,
+}: HomeScreenNavigationProp) => {
   const [fields, setFields] = useState<Field[]>([])
   const [loader, setLoader] = useState(true)
 

@@ -1,23 +1,14 @@
 import React, { FC, useState } from "react"
 import { View, Text, StyleSheet } from "react-native"
-import { RouteProp } from "@react-navigation/native"
 
 import { colors } from "../assets/colors"
-import { RootStackParamList } from "./Home"
 import { updateBookings } from "../services/updateBookings"
-import { HomeScreenNavigationProp } from "./Home"
+import { CheckoutProps } from "../interfaces/props"
 
 import Loader from "../components/Loader"
 import SwipeButton from "../components/SwipeButton"
 
-type CheckoutScreenRouteProp = RouteProp<RootStackParamList, "Checkout">
-
-type Props = {
-  navigation: HomeScreenNavigationProp
-  route: CheckoutScreenRouteProp
-}
-
-const Checkout: FC<Props> = ({ navigation, route }: Props) => {
+const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
   const { id, name, price, location, numberOfField, hour } = route.params
   const [message, setMessage] = useState("")
   const [loading, setLoading] = useState(false)
