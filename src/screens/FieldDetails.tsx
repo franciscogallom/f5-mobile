@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react"
 import { View, StyleSheet, Image } from "react-native"
+import { ScrollView } from "react-native-gesture-handler"
 import { RouteProp } from "@react-navigation/native"
 import { AntDesign } from "@expo/vector-icons"
 import { SharedElement } from "react-navigation-shared-element"
@@ -116,33 +117,35 @@ const FieldDetails: FC<Props> = ({ navigation, route }: Props) => {
           >
             👇 DISPONIBILIDAD.
           </Animatable.Text>
-          {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            Object.values(bookings).map((key: any, index) => {
-              const numberOfField = `cancha ${index + 1}`
-              const result = Object.values(key).map((hour) => hour)
-              const { name, price, location } = field
-              return (
-                <Bookings
-                  key={index}
-                  index={index}
-                  numberOfField={numberOfField}
-                  startsAt={startsAt}
-                  result={result}
-                  navigate={(index: number) =>
-                    navigation.navigate("Checkout", {
-                      id,
-                      name,
-                      price,
-                      location,
-                      numberOfField,
-                      hour: `${startsAt + index}`,
-                    })
-                  }
-                />
-              )
-            })
-          }
+          <ScrollView style={{ marginBottom: height * 0.2 }}>
+            {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              Object.values(bookings).map((key: any, index) => {
+                const numberOfField = `cancha ${index + 1}`
+                const result = Object.values(key).map((hour) => hour)
+                const { name, price, location } = field
+                return (
+                  <Bookings
+                    key={index}
+                    index={index}
+                    numberOfField={numberOfField}
+                    startsAt={startsAt}
+                    result={result}
+                    navigate={(index: number) =>
+                      navigation.navigate("Checkout", {
+                        id,
+                        name,
+                        price,
+                        location,
+                        numberOfField,
+                        hour: `${startsAt + index}`,
+                      })
+                    }
+                  />
+                )
+              })
+            }
+          </ScrollView>
         </View>
       </SharedElement>
     </View>
