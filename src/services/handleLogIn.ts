@@ -7,7 +7,7 @@ interface User {
 
 export const handleLogIn = (values: User): Promise<User> => {
   return axios
-    .post("http://10.0.2.2:3001/users/login", values)
+    .post(`${process.env.REACT_NATIVE_BASE_URL}/users/login`, values)
     .then((response) => {
       const { data } = response
       return data

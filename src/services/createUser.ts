@@ -16,7 +16,7 @@ export const createUser = async (newUser: NewUser): Promise<string> => {
     return Promise.reject("userAlreadyExists")
   } else {
     return axios
-      .post("http://10.0.2.2:3001/users/create", newUser)
+      .post(`${process.env.REACT_NATIVE_BASE_URL}/users/create`, newUser)
       .then(() => newUser.user)
   }
 }
