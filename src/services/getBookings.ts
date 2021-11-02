@@ -1,4 +1,5 @@
 import axios from "axios"
+import { BASE_URL } from '../BASE_URL'
 
 interface Bookings {
   _id: string
@@ -13,7 +14,7 @@ interface Bookings {
 
 export const getBookings = (fieldUsername: string): Promise<Bookings> => {
   return axios
-    .get(`http://10.0.2.2:3001/bookings/${fieldUsername}`)
+    .get(`${BASE_URL}/bookings/${fieldUsername}`)
     .then((response) => {
       return response.data
     })

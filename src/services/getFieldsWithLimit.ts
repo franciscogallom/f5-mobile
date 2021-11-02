@@ -1,8 +1,9 @@
 import axios from "axios"
-import { Field } from "../screens/Home"
+import { Field } from "../interfaces/interfaces"
+import { BASE_URL } from '../BASE_URL'
 
 export const getFieldsWithLimit = (limit: number): Promise<Field[]> => {
-  return axios.get(`http://10.0.2.2:3001/fields/${limit}`).then((response) => {
+  return axios.get(`${BASE_URL}/fields/${limit}`).then((response) => {
     const { data } = response
     return data
   })

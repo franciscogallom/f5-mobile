@@ -1,8 +1,9 @@
 import axios from "axios"
-import { Field } from "../screens/Home"
+import { Field } from "../interfaces/interfaces"
+import { BASE_URL } from '../BASE_URL'
 
 export const getFields = (): Promise<Field[]> => {
-  return axios.get("http://10.0.2.2:3001/fields").then((response) => {
+  return axios.get(`${BASE_URL}/fields`).then((response) => {
     const { data } = response
     return data
   })

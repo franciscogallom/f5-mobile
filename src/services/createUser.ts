@@ -1,5 +1,7 @@
 import axios from "axios"
 import { userExist } from "./userExist"
+import { BASE_URL } from '../BASE_URL'
+
 interface NewUser {
   user: string
   password: string
@@ -14,7 +16,7 @@ export const createUser = async (newUser: NewUser): Promise<string> => {
     return Promise.reject("userAlreadyExists")
   } else {
     return axios
-      .post(`https://f5backend.herokuapp.com/users/create`, newUser)
+      .post(`${BASE_URL}/users/create`, newUser)
       .then(() => newUser.user)
   }
 }

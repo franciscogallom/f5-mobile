@@ -1,4 +1,5 @@
 import axios from "axios"
+import { BASE_URL } from '../BASE_URL'
 
 interface User {
   user: string
@@ -7,7 +8,7 @@ interface User {
 
 export const handleLogIn = (values: User): Promise<User> => {
   return axios
-    .post(`https://f5backend.herokuapp.com/users/login`, values)
+    .post(`${BASE_URL}/users/login`, values)
     .then((response) => {
       const { data } = response
       return data
