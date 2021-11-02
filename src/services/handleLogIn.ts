@@ -7,7 +7,7 @@ interface User {
 
 export const handleLogIn = (values: User): Promise<User> => {
   return axios
-    .post(`${process.env.REACT_NATIVE_BASE_URL}/users/login`, values)
+    .post(`https://f5backend.herokuapp.com/users/login`, values)
     .then((response) => {
       const { data } = response
       return data
