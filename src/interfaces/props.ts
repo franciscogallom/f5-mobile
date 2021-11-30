@@ -14,6 +14,7 @@ export interface ActionProps {
   text: string
   icon: "back" | "adduser"
   handleTap: () => void
+  secondary?: boolean
 }
 
 export interface BannerProps {

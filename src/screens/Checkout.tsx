@@ -6,6 +6,7 @@ import { updateBookings } from "../services/updateBookings"
 import { CheckoutProps } from "../interfaces/props"
 
 import Loader from "../components/Loader"
+import GoBack from "../components/Action"
 import SwipeButton from "../components/SwipeButton"
 
 const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
@@ -52,6 +53,12 @@ const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
         <Text style={styles.textCard}>💲{price}.</Text>
       </View>
       <SwipeButton handleSwipe={handleSwipe} />
+      <GoBack
+        icon="back"
+        text="volver atrás"
+        handleTap={() => navigation.goBack()}
+        secondary
+      />
     </View>
   )
 }
