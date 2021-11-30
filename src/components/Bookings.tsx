@@ -6,6 +6,7 @@ import * as Animatable from "react-native-animatable"
 import { colors } from "../assets/colors"
 import { width } from "../assets/dimensions"
 import { BookingsProps } from "../interfaces/props"
+import { SharedElement } from "react-navigation-shared-element"
 
 export const fadeInBottom = {
   0: {
@@ -37,6 +38,26 @@ const Bookings: FC<BookingsProps> = ({
     >
       <Text style={styles.numberOfField}>{numberOfField}</Text>
       <View key={index} style={styles.booking}>
+        {/* Not visible in this component */}
+        <SharedElement
+          style={[
+            StyleSheet.absoluteFillObject,
+            {
+              opacity: 0,
+            },
+          ]}
+          id="booking"
+        >
+          <TouchableOpacity activeOpacity={0.5}>
+            <Text
+              style={{
+                backgroundColor: colors.tertiary,
+                borderRadius: 4,
+              }}
+            ></Text>
+          </TouchableOpacity>
+        </SharedElement>
+
         {result.map((status, index) => {
           return (
             <TouchableOpacity

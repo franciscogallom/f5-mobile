@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react"
 import { View, Text, StyleSheet } from "react-native"
+import { SharedElement } from "react-navigation-shared-element"
 
 import { colors } from "../assets/colors"
 import { updateBookings } from "../services/updateBookings"
@@ -42,24 +43,26 @@ const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
       <Text style={styles.message}>{message}</Text>
     </View>
   ) : (
-    <View style={styles.container}>
-      <Text style={styles.checkout}>CHECKOUT</Text>
-      <View style={styles.card}>
-        <Text style={styles.textCard}>⚽ {name}.</Text>
-        <Text style={styles.textCard}>📍 {location}.</Text>
-        <Text style={styles.textCard}>
-          🕑 {hour}:00hs, {numberOfField}.
-        </Text>
-        <Text style={styles.textCard}>💲{price}.</Text>
+    <SharedElement style={[StyleSheet.absoluteFillObject]} id="booking">
+      <View style={styles.container}>
+        <Text style={styles.checkout}>CHECKOUT</Text>
+        <View style={styles.card}>
+          <Text style={styles.textCard}>⚽ {name}.</Text>
+          <Text style={styles.textCard}>📍 {location}.</Text>
+          <Text style={styles.textCard}>
+            🕑 {hour}:00hs, {numberOfField}.
+          </Text>
+          <Text style={styles.textCard}>💲{price}.</Text>
+        </View>
+        <SwipeButton handleSwipe={handleSwipe} />
+        <GoBack
+          icon="back"
+          text="volver atrás"
+          handleTap={() => navigation.goBack()}
+          secondary
+        />
       </View>
-      <SwipeButton handleSwipe={handleSwipe} />
-      <GoBack
-        icon="back"
-        text="volver atrás"
-        handleTap={() => navigation.goBack()}
-        secondary
-      />
-    </View>
+    </SharedElement>
   )
 }
 

@@ -49,7 +49,27 @@ const AppNavigator: FC = () => {
             />
             <Screen name="FieldList" component={FieldList} />
             <Screen name="NotFound" component={NotFound} />
-            <Screen name="Checkout" component={Checkout}/>
+            <Screen
+              name="Checkout"
+              component={Checkout}
+              options={() => ({
+                gestureEnabled: false,
+                transitionSpec: {
+                  open: { animation: "timing", config: { duration: 500 } },
+                  close: { animation: "timing", config: { duration: 150 } },
+                },
+                cardStyleInterpolator: ({ current: { progress } }) => {
+                  return {
+                    cardStyle: {
+                      opacity: progress,
+                    },
+                  }
+                },
+              })}
+              sharedElementsConfig={() => {
+                return [{ id: "booking" }]
+              }}
+            />
           </>
         ) : (
           <>
