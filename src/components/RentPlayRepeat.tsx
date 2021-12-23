@@ -24,7 +24,7 @@ const RentPlayRepeat: FC = () => {
 
 const styles = StyleSheet.create({
   rentPlayRepeat: {
-    height: height * 0.4,
+    height: height * 0.5,
     justifyContent: "center",
   },
   rprText: {

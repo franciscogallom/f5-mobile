@@ -21,7 +21,7 @@ import { CarouselProps } from "../interfaces/props"
 
 import OverflowItems from "./OverflowItems"
 
-const ITEM_WIDTH = width * 0.7
+const ITEM_WIDTH = width * 0.8
 const ITEM_HEIGHT = ITEM_WIDTH * 1.7
 const VISIBLE_ITEMS = 3
 
@@ -142,7 +142,7 @@ const Carousel: FC<CarouselProps> = ({ data, navigation }: CarouselProps) => {
 
 const styles = StyleSheet.create({
   carouselContainer: {
-    height: height * 0.75,
+    height: height * 0.8,
   },
   flatList: {
     flex: 1,
