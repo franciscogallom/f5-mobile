@@ -24,7 +24,7 @@ export interface Checkout {
 export type RootStackParamList = {
   Home: undefined
   FieldDetails: Field
-  FieldList: undefined
+  FieldList: { search: string }
   NotFound: undefined
   Checkout: Checkout
 }

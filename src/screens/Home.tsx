@@ -23,6 +23,7 @@ const Home: FC<HomeScreenNavigationProp> = ({
 }: HomeScreenNavigationProp) => {
   const [fields, setFields] = useState<Field[]>([])
   const [loader, setLoader] = useState(true)
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     getFieldsWithLimit(5)
@@ -41,13 +42,20 @@ const Home: FC<HomeScreenNavigationProp> = ({
     <ScrollView style={styles.container}>
       <Text style={styles.user}>{user} ⚽</Text>
       <Text style={styles.greeting}>hey 👋! se juega?</Text>
-      <Search />
+      <Search
+        setSearch={setSearch}
+        handleSearch={() =>
+          search.length > 0
+            ? navigation.navigate("FieldList", { search })
+            : undefined
+        }
+      />
       <Text style={styles.betterFields}>nuestras mejores canchas 💯.</Text>
       <Carousel data={fields} navigation={navigation} />
       <RentPlayRepeat />
       <Banner
         text="ver todas las canchas 🚀"
-        handleTap={() => navigation.navigate("FieldList")}
+        handleTap={() => navigation.navigate("FieldList", { search: "" })}
       />
       <Footer />
     </ScrollView>

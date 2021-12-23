@@ -9,6 +9,7 @@ import {
   HomeScreenNavigation,
 } from "./interfaces"
 import { RouteProp } from "@react-navigation/native"
+import { Dispatch, SetStateAction } from "react"
 
 export interface ActionProps {
   text: string
@@ -34,6 +35,12 @@ export interface ButtonOneProps {
   text: string
   handleTap: () => void
   textColor?: string
+}
+
+export interface SearchProps {
+  setSearch: Dispatch<SetStateAction<string>>
+  handleSearch: () => void
+  value?: string
 }
 
 export interface SwipeButtonProps {
@@ -89,6 +96,7 @@ export interface LogInScreenNavigationProp {
 
 export interface FieldListScreenNavigationProp {
   navigation: FieldListScreenNavigation
+  route: RouteProp<RootStackParamList, "FieldList">
 }
 
 export interface NotFoundScreenNavigationProp {
