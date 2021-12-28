@@ -13,6 +13,7 @@ const Search: FC<SearchProps> = ({
     <View style={styles.container}>
       <TextInput
         onChangeText={setSearch}
+        onSubmitEditing={handleSearch}
         style={styles.textInput}
         placeholder="Buscar."
         placeholderTextColor="#949494"
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
   textInput: {
     color: colors.secondary,
     fontSize: 20,
+    width: "85%",
   },
 })
 
