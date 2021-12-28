@@ -15,7 +15,7 @@ const Loader: FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "rgba(0, 0, 0, 0.75)",
+    backgroundColor: colors.primary,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
