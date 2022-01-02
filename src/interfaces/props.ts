@@ -52,6 +52,18 @@ export interface CheckoutProps {
   route: RouteProp<RootStackParamList, "Checkout">
 }
 
+export interface MyGameData {
+  name: string
+  location: string
+  price: string
+  hour: string
+  numberOfField: string
+}
+
+export interface MyGameProps {
+  data: MyGameData
+}
+
 export interface CarouselProps {
   data: Field[]
   navigation: HomeScreenNavigation

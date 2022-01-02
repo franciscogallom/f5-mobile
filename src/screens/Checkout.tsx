@@ -5,6 +5,8 @@ import { SharedElement } from "react-navigation-shared-element"
 import { colors } from "../assets/colors"
 import { updateBookings } from "../services/updateBookings"
 import { CheckoutProps } from "../interfaces/props"
+import { useSelector } from "react-redux"
+import { UserState } from "../redux/userReducer"
 
 import Loader from "../components/Loader"
 import GoBack from "../components/Action"
@@ -15,9 +17,13 @@ const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
   const [message, setMessage] = useState("")
   const [loading, setLoading] = useState(false)
 
+  const user = useSelector<UserState, UserState["username"]>(
+    (state) => state.username
+  )
+
   function handleSwipe() {
     setLoading(true)
-    updateBookings(id, numberOfField, hour)
+    updateBookings(id, numberOfField, hour, user)
       .then(() =>
         setMessage(
           "Genial 😃, tu reserva ya esta agendada! En instantes te redigiremos al Home."

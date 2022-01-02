@@ -7,7 +7,7 @@ import { UserState } from "../redux/userReducer"
 import { getFieldsWithLimit } from "../services/getFieldsWithLimit"
 import { height } from "../assets/dimensions"
 import { Field } from "../interfaces/interfaces"
-import { HomeScreenNavigationProp } from "../interfaces/props"
+import { HomeScreenNavigationProp, MyGameData } from "../interfaces/props"
 
 import Search from "../components/Search"
 import Carousel from "../components/Carousel"
@@ -15,6 +15,8 @@ import Loader from "../components/Loader"
 import Footer from "../components/Footer"
 import Banner from "../components/Banner"
 import RentPlayRepeat from "../components/RentPlayRepeat"
+import MyGame from "../components/MyGame"
+import { getBookingForUserForToday } from "../services/getBookingForUserForToday"
 
 const PADDING_VERTICAL = 10
 
@@ -24,24 +26,33 @@ const Home: FC<HomeScreenNavigationProp> = ({
   const [fields, setFields] = useState<Field[]>([])
   const [loader, setLoader] = useState(true)
   const [search, setSearch] = useState("")
+  const [myGame, setMyGame] = useState<MyGameData>()
+
+  const user = useSelector<UserState, UserState["username"]>(
+    (state) => state.username
+  )
 
   useEffect(() => {
+    getBookingForUserForToday(user)
+      .then((res) => res.length > 0 && setMyGame(res[0]))
+      .catch(() => navigation.navigate("NotFound"))
+
     getFieldsWithLimit(5)
       .then((fields) => setFields(fields))
       .catch(() => navigation.navigate("NotFound"))
       .finally(() => setLoader(false))
   }, [])
 
-  const user = useSelector<UserState, UserState["username"]>(
-    (state) => state.username
-  )
-
   return loader ? (
     <Loader />
   ) : (
     <ScrollView style={styles.container}>
       <Text style={styles.user}>{user} ⚽</Text>
-      <Text style={styles.greeting}>hey 👋! se juega?</Text>
+      {myGame ? (
+        <MyGame data={myGame} />
+      ) : (
+        <Text style={styles.greeting}>hey 👋! se juega?</Text>
+      )}
       <Search
         setSearch={setSearch}
         handleSearch={() =>
