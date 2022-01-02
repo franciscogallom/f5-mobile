@@ -1,16 +1,19 @@
 import React, { FC, useEffect, useState } from "react"
-import { View, StyleSheet, Image } from "react-native"
+import { View, StyleSheet, Image, Text } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
 import { AntDesign } from "@expo/vector-icons"
 import { SharedElement } from "react-navigation-shared-element"
 import * as Animatable from "react-native-animatable"
 import * as Linking from "expo-linking"
+import { useSelector } from "react-redux"
+import { UserState } from "../redux/userReducer"
 
 import { colors } from "../assets/colors"
 import { height, width } from "../assets/dimensions"
 import { images } from "../assets/images"
 import { getBookings } from "../services/getBookings"
 import { FieldDetailsProps } from "../interfaces/props"
+import { getBookingForUserForToday } from "../services/getBookingForUserForToday"
 
 import Bookings, { fadeInBottom, DURATION } from "../components/Bookings"
 
@@ -24,8 +27,17 @@ const FieldDetails: FC<FieldDetailsProps> = ({
   const [bookings, setBookings] = useState({})
   const [startsAt, setStartsAt] = useState(0)
   const [id, setId] = useState("")
+  const [hasBooking, setHasBooking] = useState(false)
+
+  const user = useSelector<UserState, UserState["username"]>(
+    (state) => state.username
+  )
 
   useEffect(() => {
+    getBookingForUserForToday(user)
+      .then((res) => res.length > 0 && setHasBooking(true))
+      .catch(() => navigation.navigate("NotFound"))
+
     getBookings(route.params.user)
       .then((res) => {
         setId(res._id)
@@ -108,7 +120,11 @@ const FieldDetails: FC<FieldDetailsProps> = ({
             delay={DURATION + 1200}
             style={[styles.details, { fontSize: 18 }]}
           >
-            👇 DISPONIBILIDAD.
+            👇 DISPONIBILIDAD{" "}
+            {hasBooking && (
+              <Text style={{ fontSize: 14 }}>(no podés reservar)</Text>
+            )}
+            .
           </Animatable.Text>
           <ScrollView style={{ marginBottom: height * 0.2 }}>
             {
@@ -124,6 +140,7 @@ const FieldDetails: FC<FieldDetailsProps> = ({
                     numberOfField={numberOfField}
                     startsAt={startsAt}
                     result={result}
+                    hasBooking={hasBooking}
                     navigate={(index: number) =>
                       navigation.navigate("Checkout", {
                         id,

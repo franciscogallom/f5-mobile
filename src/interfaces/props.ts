@@ -28,6 +28,7 @@ export interface BookingsProps {
   numberOfField: string
   startsAt: number
   result: unknown[]
+  hasBooking: boolean
   navigate: (index: number) => void
 }
 

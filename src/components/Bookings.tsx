@@ -27,6 +27,7 @@ const Bookings: FC<BookingsProps> = ({
   startsAt,
   result,
   navigate,
+  hasBooking,
 }: BookingsProps) => {
   return (
     <Animatable.View
@@ -64,7 +65,8 @@ const Bookings: FC<BookingsProps> = ({
               style={{ width: width * 0.23 }}
               key={index}
               activeOpacity={0.5}
-              onPress={() => status && navigate(index)}
+              // If the shift is free and the user does not have a booking, navigate
+              onPress={() => status && !hasBooking && navigate(index)}
             >
               <Text
                 style={[
