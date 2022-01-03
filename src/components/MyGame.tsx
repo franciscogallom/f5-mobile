@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react"
+import React, { useState, FC, useEffect } from "react"
 import { Text, View, StyleSheet } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { colors } from "../assets/colors"
@@ -11,6 +11,32 @@ const Home: FC<MyGameProps> = ({ data, navigation }: MyGameProps) => {
     data
 
   const [modalVisible, setModalVisible] = useState(false)
+  const [canCancel, setCanCancel] = useState<boolean>(true)
+  const [message, setMessage] = useState("Hoy se juega!")
+
+  useEffect(() => {
+    const date = new Date()
+
+    const currentHour = date.getHours()
+    const lessThanAnHourLeft = Number(hour) - currentHour === 1
+
+    const currentMinutes = date.getMinutes()
+    const lessThan30Minutes = currentMinutes > 30
+
+    const itIsPlaying = Number(hour) === currentHour
+    const wasPlayed = Number(hour) < currentHour
+
+    if (lessThanAnHourLeft && lessThan30Minutes) {
+      setCanCancel(false)
+      setMessage("Faltan menos de 30 minutos!")
+    } else if (itIsPlaying) {
+      setCanCancel(false)
+      setMessage("Se esta jugando!")
+    } else if (wasPlayed) {
+      setCanCancel(false)
+      setMessage("¿Como estuvo el partido?")
+    }
+  }, [])
 
   const handleYes = () => {
     cancelBooking(bookingId, numberOfField, hour, fieldUser)
@@ -20,7 +46,7 @@ const Home: FC<MyGameProps> = ({ data, navigation }: MyGameProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hoy se juega!</Text>
+      <Text style={styles.text}>{message}</Text>
 
       <Text style={styles.textCard}>⚽ {name}.</Text>
       <Text style={styles.textCard}>📍 {location}.</Text>
@@ -28,12 +54,16 @@ const Home: FC<MyGameProps> = ({ data, navigation }: MyGameProps) => {
         🕑 {hour}:00hs, {numberOfField}.
       </Text>
       <Text style={styles.textCard}>💲{price}.</Text>
-      <TouchableOpacity
-        style={styles.cancelContainer}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.cancelText}>❌ CANCELAR.</Text>
-      </TouchableOpacity>
+
+      {canCancel && (
+        <TouchableOpacity
+          style={styles.cancelContainer}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.cancelText}>❌ CANCELAR.</Text>
+        </TouchableOpacity>
+      )}
+
       {modalVisible && (
         <YesNoModal
           visible={modalVisible}
@@ -58,7 +88,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "poppins-extrabold",
-    fontSize: 25,
+    fontSize: 20,
   },
   textCard: {
     fontFamily: "poppins-extrabold",
