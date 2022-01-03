@@ -19,12 +19,18 @@ import Bookings, { fadeInBottom, DURATION } from "../components/Bookings"
 
 const MARGIN_VERTICAL = 5
 
+interface BookingsData {
+  [fieldSchedule: string]: {
+    [hour: string]: boolean
+  }
+}
+
 const FieldDetails: FC<FieldDetailsProps> = ({
   navigation,
   route,
 }: FieldDetailsProps) => {
   const field = route.params
-  const [bookings, setBookings] = useState({})
+  const [bookings, setBookings] = useState<BookingsData>()
   const [startsAt, setStartsAt] = useState(0)
   const [id, setId] = useState("")
   const [hasBooking, setHasBooking] = useState(false)
@@ -127,34 +133,36 @@ const FieldDetails: FC<FieldDetailsProps> = ({
             .
           </Animatable.Text>
           <ScrollView style={{ marginBottom: height * 0.2 }}>
-            {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              Object.values(bookings).map((key: any, index) => {
-                const numberOfField = `cancha ${index + 1}`
-                const result = Object.values(key).map((hour) => hour)
-                const { name, price, location } = field
-                return (
-                  <Bookings
-                    key={index}
-                    index={index}
-                    numberOfField={numberOfField}
-                    startsAt={startsAt}
-                    result={result}
-                    hasBooking={hasBooking}
-                    navigate={(index: number) =>
-                      navigation.navigate("Checkout", {
-                        id,
-                        name,
-                        price,
-                        location,
-                        numberOfField,
-                        hour: `${startsAt + index}`,
-                      })
-                    }
-                  />
-                )
-              })
-            }
+            {bookings &&
+              Object.values(bookings).map(
+                (fields: { [key: string]: boolean }, index: number) => {
+                  const numberOfField = `cancha ${index + 1}`
+                  const fieldHours = Object.values(fields).map(
+                    (hour: boolean) => hour
+                  )
+                  const { name, price, location } = field
+                  return (
+                    <Bookings
+                      key={index}
+                      index={index}
+                      numberOfField={numberOfField}
+                      startsAt={startsAt}
+                      fieldHours={fieldHours}
+                      hasBooking={hasBooking}
+                      navigate={(index: number) =>
+                        navigation.navigate("Checkout", {
+                          id,
+                          name,
+                          price,
+                          location,
+                          numberOfField,
+                          hour: `${startsAt + index}`,
+                        })
+                      }
+                    />
+                  )
+                }
+              )}
           </ScrollView>
         </View>
       </SharedElement>

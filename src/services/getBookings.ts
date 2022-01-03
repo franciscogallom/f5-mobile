@@ -5,8 +5,8 @@ interface Bookings {
   _id: string
   fieldUsername: string
   bookings: {
-    fields: {
-      key: boolean
+    [fieldSchedule: string]: {
+      [hour: string]: boolean
     }
   }
   startsAt: number

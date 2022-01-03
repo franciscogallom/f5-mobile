@@ -25,10 +25,30 @@ const Bookings: FC<BookingsProps> = ({
   index,
   numberOfField,
   startsAt,
-  result,
+  fieldHours,
   navigate,
   hasBooking,
 }: BookingsProps) => {
+  const handleTap = (status: boolean, hour: number) => {
+    if (status) {
+      if (!hasBooking) {
+        const currentTime = new Date().getHours()
+        const hourPassed = currentTime >= hour
+        if (!hourPassed) {
+          navigate(index)
+        } else {
+          console.log(
+            `No podes alquilar a las ${hour}, porque son las ${currentTime}.)`
+          )
+        }
+      } else {
+        console.log("Ya tienes reserva!")
+      }
+    } else {
+      console.log("Ya esta alquilada!")
+    }
+  }
+
   return (
     <Animatable.View
       animation={fadeInBottom}
@@ -59,14 +79,14 @@ const Bookings: FC<BookingsProps> = ({
           </TouchableOpacity>
         </SharedElement>
 
-        {result.map((status, index) => {
+        {fieldHours.map((status: boolean, index: number) => {
+          const hour = startsAt + index
           return (
             <TouchableOpacity
               style={{ width: width * 0.23 }}
               key={index}
               activeOpacity={0.5}
-              // If the shift is free and the user does not have a booking, navigate
-              onPress={() => status && !hasBooking && navigate(index)}
+              onPress={() => handleTap(status, hour)}
             >
               <Text
                 style={[
@@ -78,7 +98,7 @@ const Bookings: FC<BookingsProps> = ({
                     opacity: status ? 1 : 0.4,
                   },
                 ]}
-              >{`${startsAt + index}:00`}</Text>
+              >{`${hour}:00`}</Text>
             </TouchableOpacity>
           )
         })}
