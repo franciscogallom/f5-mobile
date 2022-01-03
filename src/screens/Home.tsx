@@ -49,7 +49,7 @@ const Home: FC<HomeScreenNavigationProp> = ({
     <ScrollView style={styles.container}>
       <Text style={styles.user}>{user} ⚽</Text>
       {myGame ? (
-        <MyGame data={myGame} />
+        <MyGame data={myGame} navigation={navigation} />
       ) : (
         <Text style={styles.greeting}>hey 👋! se juega?</Text>
       )}

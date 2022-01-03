@@ -54,6 +54,8 @@ export interface CheckoutProps {
 }
 
 export interface MyGameData {
+  fieldUser: string
+  bookingId: number
   name: string
   location: string
   price: string
@@ -63,6 +65,14 @@ export interface MyGameData {
 
 export interface MyGameProps {
   data: MyGameData
+  navigation: HomeScreenNavigation
+}
+
+export interface YesNoModalProps {
+  visible: boolean
+  text: string
+  setVisible: (value: boolean) => void
+  handleYes: () => void
 }
 
 export interface CarouselProps {
