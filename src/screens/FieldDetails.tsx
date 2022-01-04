@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react"
-import { View, StyleSheet, Image, Text } from "react-native"
+import { View, StyleSheet, Image } from "react-native"
 import { ScrollView } from "react-native-gesture-handler"
 import { AntDesign } from "@expo/vector-icons"
 import { SharedElement } from "react-navigation-shared-element"
@@ -126,11 +126,7 @@ const FieldDetails: FC<FieldDetailsProps> = ({
             delay={DURATION + 1200}
             style={[styles.details, { fontSize: 18 }]}
           >
-            👇 DISPONIBILIDAD{" "}
-            {hasBooking && (
-              <Text style={{ fontSize: 14 }}>(no podés reservar)</Text>
-            )}
-            .
+            👇 DISPONIBILIDAD.
           </Animatable.Text>
           <ScrollView style={{ marginBottom: height * 0.2 }}>
             {bookings &&

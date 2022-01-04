@@ -1,11 +1,12 @@
 import React, { FC, useState } from "react"
 import AppLoading from "expo-app-loading"
 import * as Font from "expo-font"
+import Toast from "react-native-toast-message"
 
+import { toastConfig } from "./src/config/toastConfig"
 import AppNavigator from "./src/routes/appStack"
 import { Provider } from "react-redux"
 import { store } from "./src/redux/store"
-
 const getFonts = () =>
   Font.loadAsync({
     "poppins-regular": require("./src/assets/fonts/Poppins-Regular.ttf"),
@@ -20,6 +21,7 @@ const App: FC = () => {
   return fontsLoaded ? (
     <Provider store={store}>
       <AppNavigator />
+      <Toast config={toastConfig} />
     </Provider>
   ) : (
     <AppLoading

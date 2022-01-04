@@ -4,6 +4,8 @@ import { TouchableOpacity } from "react-native-gesture-handler"
 import { colors } from "../assets/colors"
 import { MyGameProps } from "../interfaces/props"
 import { cancelBooking } from "../services/cancelBooking"
+import Toast from "react-native-toast-message"
+
 import YesNoModal from "./YesNoModal"
 
 const Home: FC<MyGameProps> = ({ data, navigation }: MyGameProps) => {
@@ -46,6 +48,12 @@ const Home: FC<MyGameProps> = ({ data, navigation }: MyGameProps) => {
 
   const handleYes = () => {
     cancelBooking(bookingId, numberOfField, hour, fieldUser)
+      .then(() =>
+        Toast.show({
+          text1: "Operación exitosa!",
+          text2: "Turno cancelado satisfactoriamente.",
+        })
+      )
       .catch(() => navigation.navigate("NotFound"))
       .finally(() => setModalVisible(false))
   }

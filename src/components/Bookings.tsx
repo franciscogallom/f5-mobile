@@ -2,6 +2,7 @@ import React, { FC } from "react"
 import { View, Text, StyleSheet } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import * as Animatable from "react-native-animatable"
+import Toast from "react-native-toast-message"
 
 import { colors } from "../assets/colors"
 import { width } from "../assets/dimensions"
@@ -37,15 +38,23 @@ const Bookings: FC<BookingsProps> = ({
         if (!hourPassed) {
           navigate(index)
         } else {
-          console.log(
-            `No podes alquilar a las ${hour}, porque son las ${currentTime}.)`
-          )
+          Toast.show({
+            text1: `Ya son las ${currentTime}hs.`,
+            text2: `Volve a intentar con otro horario.`,
+          })
         }
       } else {
-        console.log("Ya tienes reserva!")
+        Toast.show({
+          text1: "Ya tenes una reserva.",
+          text2: "No podes volver a reservar otro turno.",
+        })
       }
     } else {
-      console.log("Ya esta alquilada!")
+      Toast.show({
+        type: "error",
+        text1: "Ya está alquilada.",
+        text2: "Elegí otro horario o busca otra cancha.",
+      })
     }
   }
 
