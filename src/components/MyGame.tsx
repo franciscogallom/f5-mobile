@@ -13,6 +13,7 @@ const Home: FC<MyGameProps> = ({ data, navigation }: MyGameProps) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [canCancel, setCanCancel] = useState<boolean>(true)
   const [message, setMessage] = useState("Hoy se juega!")
+  const [showdData, setShowData] = useState(true)
 
   useEffect(() => {
     const date = new Date()
@@ -26,15 +27,20 @@ const Home: FC<MyGameProps> = ({ data, navigation }: MyGameProps) => {
     const itIsPlaying = Number(hour) === currentHour
     const wasPlayed = Number(hour) < currentHour
 
+    if ((lessThanAnHourLeft && lessThan30Minutes) || itIsPlaying || wasPlayed) {
+      setCanCancel(false)
+    }
+
+    if (itIsPlaying || wasPlayed) {
+      setShowData(false)
+    }
+
     if (lessThanAnHourLeft && lessThan30Minutes) {
-      setCanCancel(false)
-      setMessage("Faltan menos de 30 minutos!")
+      setMessage("Esta por comenzar.")
     } else if (itIsPlaying) {
-      setCanCancel(false)
-      setMessage("Se esta jugando!")
+      setMessage(`Se está jugando en ${name}!`)
     } else if (wasPlayed) {
-      setCanCancel(false)
-      setMessage("¿Como estuvo el partido?")
+      setMessage(`¿Como estuvo el partido de hoy en ${name}?`)
     }
   }, [])
 
@@ -48,12 +54,16 @@ const Home: FC<MyGameProps> = ({ data, navigation }: MyGameProps) => {
     <View style={styles.container}>
       <Text style={styles.text}>{message}</Text>
 
-      <Text style={styles.textCard}>⚽ {name}.</Text>
-      <Text style={styles.textCard}>📍 {location}.</Text>
-      <Text style={styles.textCard}>
-        🕑 {hour}:00hs, {numberOfField}.
-      </Text>
-      <Text style={styles.textCard}>💲{price}.</Text>
+      {showdData && (
+        <View>
+          <Text style={styles.textCard}>⚽ {name}.</Text>
+          <Text style={styles.textCard}>📍 {location}.</Text>
+          <Text style={styles.textCard}>
+            🕑 {hour}:00hs, {numberOfField}.
+          </Text>
+          <Text style={styles.textCard}>💲{price}.</Text>
+        </View>
+      )}
 
       {canCancel && (
         <TouchableOpacity
