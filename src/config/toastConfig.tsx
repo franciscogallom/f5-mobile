@@ -2,10 +2,12 @@ import React from "react"
 import { BaseToast, ErrorToast } from "react-native-toast-message"
 import { ToastProps } from "react-native-toast-message"
 import { colors } from "../assets/colors"
+import { height } from "../assets/dimensions"
 
 const toastStyle = {
   backgroundColor: "#000000ce",
   width: "90%",
+  marginTop: height * 0.01,
 }
 
 const text1Style = {
