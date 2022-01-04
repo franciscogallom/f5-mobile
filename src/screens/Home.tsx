@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from "react"
 import { Text, StyleSheet, ScrollView } from "react-native"
 import { useSelector } from "react-redux"
+import { useIsFocused } from "@react-navigation/native"
 
 import { colors } from "../assets/colors"
 import { UserState } from "../redux/userReducer"
@@ -32,11 +33,17 @@ const Home: FC<HomeScreenNavigationProp> = ({
     (state) => state.username
   )
 
-  useEffect(() => {
-    getBookingForUserForToday(user)
-      .then((res) => res.length > 0 && setMyGame(res[0]))
-      .catch(() => navigation.navigate("NotFound"))
+  const isFocused = useIsFocused()
 
+  useEffect(() => {
+    if (isFocused) {
+      getBookingForUserForToday(user)
+        .then((res) => res.length > 0 && setMyGame(res[0]))
+        .catch(() => navigation.navigate("NotFound"))
+    }
+  }, [isFocused])
+
+  useEffect(() => {
     getFieldsWithLimit(5)
       .then((fields) => setFields(fields))
       .catch(() => navigation.navigate("NotFound"))

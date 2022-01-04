@@ -7,6 +7,7 @@ import * as Animatable from "react-native-animatable"
 import * as Linking from "expo-linking"
 import { useSelector } from "react-redux"
 import { UserState } from "../redux/userReducer"
+import { useIsFocused } from "@react-navigation/native"
 
 import { colors } from "../assets/colors"
 import { height, width } from "../assets/dimensions"
@@ -39,11 +40,17 @@ const FieldDetails: FC<FieldDetailsProps> = ({
     (state) => state.username
   )
 
-  useEffect(() => {
-    getBookingForUserForToday(user)
-      .then((res) => res.length > 0 && setHasBooking(true))
-      .catch(() => navigation.navigate("NotFound"))
+  const isFocused = useIsFocused()
 
+  useEffect(() => {
+    if (isFocused) {
+      getBookingForUserForToday(user)
+        .then((res) => res.length > 0 && setHasBooking(true))
+        .catch(() => navigation.navigate("NotFound"))
+    }
+  }, [isFocused])
+
+  useEffect(() => {
     getBookings(route.params.user)
       .then((res) => {
         setId(res._id)
