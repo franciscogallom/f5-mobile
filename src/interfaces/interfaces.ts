@@ -1,5 +1,25 @@
 import { StackNavigationProp } from "@react-navigation/stack"
 
+export interface NewUser {
+  user: string
+  password: string
+  email: string
+  emailVerification: string
+  phone: string
+}
+
+export interface CreateUserResponse {
+  thereIsExistingData: boolean
+  validationMessage: string
+  result: {
+    user: string
+    email: string
+    phone: string
+    password: string
+    created: string
+  } | null
+}
+
 export interface Field {
   user: string
   name: string

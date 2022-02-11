@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native"
 import { SharedElement } from "react-navigation-shared-element"
 
 import { colors } from "../assets/colors"
-import { updateBookings } from "../services/updateBookings"
+import { reserve } from "../services/reserve"
 import { CheckoutProps } from "../interfaces/props"
 import { useSelector } from "react-redux"
 import { UserState } from "../redux/userReducer"
@@ -23,17 +23,18 @@ const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
 
   function handleSwipe() {
     setLoading(true)
-    updateBookings(id, numberOfField, hour, user)
+    reserve(id, numberOfField, hour, user)
       .then(() =>
         setMessage(
           "Genial 😃, tu reserva ya esta agendada! En instantes te redigiremos al Home."
         )
       )
-      .catch(() =>
+      .catch((e) => {
+        console.log(e)
         setMessage(
           "Algo salió mal 😟, o quizas alguien reservo justo antes que vos! Vuelve a intentarlo en un instante."
         )
-      )
+      })
       .finally(() => {
         setLoading(false)
         setTimeout(() => {

@@ -12,7 +12,7 @@ import { useIsFocused } from "@react-navigation/native"
 import { colors } from "../assets/colors"
 import { height, width } from "../assets/dimensions"
 import { images } from "../assets/images"
-import { getBookings } from "../services/getBookings"
+import { getBookingsByFieldUsername } from "../services/getBookingsByFieldUsername"
 import { FieldDetailsProps } from "../interfaces/props"
 import { getBookingForUserForToday } from "../services/getBookingForUserForToday"
 
@@ -51,7 +51,7 @@ const FieldDetails: FC<FieldDetailsProps> = ({
   }, [isFocused])
 
   useEffect(() => {
-    getBookings(route.params.user)
+    getBookingsByFieldUsername(route.params.user)
       .then((res) => {
         setId(res._id)
         setBookings(res.bookings)
@@ -152,14 +152,14 @@ const FieldDetails: FC<FieldDetailsProps> = ({
                       startsAt={startsAt}
                       fieldHours={fieldHours}
                       hasBooking={hasBooking}
-                      navigate={(index: number) =>
+                      navigate={(hour: string) =>
                         navigation.navigate("Checkout", {
                           id,
                           name,
                           price,
                           location,
                           numberOfField,
-                          hour: `${startsAt + index}`,
+                          hour,
                         })
                       }
                     />

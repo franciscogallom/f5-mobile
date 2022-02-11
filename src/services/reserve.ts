@@ -1,16 +1,15 @@
 import axios, { AxiosPromise } from "axios"
 import { BASE_URL } from "../BASE_URL"
 
-export const updateBookings = (
+export const reserve = (
   id: string,
-  numberOfField: string,
+  field: string,
   hour: string,
   user: string
-): AxiosPromise => {
-  return axios.put(`${BASE_URL}/bookings/update`, {
+): AxiosPromise =>
+  axios.post(`${BASE_URL}/bookings/reserve`, {
     id,
-    numberOfField,
+    field,
     hour,
     user,
   })
-}

@@ -3,14 +3,14 @@ import { BASE_URL } from "../BASE_URL"
 
 export const cancelBooking = (
   bookingId: number,
-  numberOfField: string,
+  field: string,
   hour: string,
   fieldUser: string
 ): Promise<string> => {
   return axios
     .put(`${BASE_URL}/bookings/cancel`, {
       bookingId,
-      numberOfField,
+      field,
       hour,
       fieldUser,
     })

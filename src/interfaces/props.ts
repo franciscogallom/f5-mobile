@@ -29,7 +29,7 @@ export interface BookingsProps {
   startsAt: number
   fieldHours: boolean[]
   hasBooking: boolean
-  navigate: (index: number) => void
+  navigate: (hour: string) => void
 }
 
 export interface ButtonOneProps {
@@ -60,7 +60,7 @@ export interface MyGameData {
   location: string
   price: string
   hour: string
-  numberOfField: string
+  field: string
 }
 
 export interface MyGameProps {

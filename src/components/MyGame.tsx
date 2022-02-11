@@ -9,8 +9,7 @@ import Toast from "react-native-toast-message"
 import YesNoModal from "./YesNoModal"
 
 const Home: FC<MyGameProps> = ({ data, navigation }: MyGameProps) => {
-  const { fieldUser, bookingId, name, location, hour, numberOfField, price } =
-    data
+  const { fieldUser, bookingId, name, location, hour, field, price } = data
 
   const [modalVisible, setModalVisible] = useState(false)
   const [canCancel, setCanCancel] = useState<boolean>(true)
@@ -47,11 +46,11 @@ const Home: FC<MyGameProps> = ({ data, navigation }: MyGameProps) => {
   }, [])
 
   const handleYes = () => {
-    cancelBooking(bookingId, numberOfField, hour, fieldUser)
-      .then(() =>
+    cancelBooking(bookingId, field, hour, fieldUser)
+      .then((response) =>
         Toast.show({
           text1: "Operación exitosa!",
-          text2: "Turno cancelado satisfactoriamente.",
+          text2: response,
         })
       )
       .catch(() => navigation.navigate("NotFound"))
@@ -67,7 +66,7 @@ const Home: FC<MyGameProps> = ({ data, navigation }: MyGameProps) => {
           <Text style={styles.textCard}>⚽ {name}.</Text>
           <Text style={styles.textCard}>📍 {location}.</Text>
           <Text style={styles.textCard}>
-            🕑 {hour}:00hs, {numberOfField}.
+            🕑 {hour}:00hs, {field}.
           </Text>
           <Text style={styles.textCard}>💲{price}.</Text>
         </View>

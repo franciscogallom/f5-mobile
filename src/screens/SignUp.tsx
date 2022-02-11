@@ -22,15 +22,44 @@ import ErrorText from "../components/ErrorText"
 import GoBack from "../components/Action"
 import Loader from "../components/Loader"
 import { SignUpScreenNavigationProp } from "../interfaces/props"
+import { NewUser } from "../interfaces/interfaces"
+
+const TIMEOUT = 5000
 
 const SignUp: FC<SignUpScreenNavigationProp> = ({
   navigation,
 }: SignUpScreenNavigationProp) => {
   const [error, setError] = useState("")
   const [loader, setLoader] = useState(false)
-  const [userExists, setUserExists] = useState(false)
+  const [existingData, setexistingData] = useState("")
 
   const dispatch = useDispatch()
+
+  const handleSignUp = (values: NewUser) => {
+    createUser(values)
+      .then(({ thereIsExistingData, result, validationMessage }) => {
+        setLoader(true)
+        if (thereIsExistingData) {
+          setexistingData(validationMessage)
+          setTimeout(() => {
+            setexistingData("")
+          }, TIMEOUT)
+        } else {
+          if (result) {
+            dispatch(addUser(result.user))
+            storeData(result.user)
+          }
+        }
+      })
+      .catch((e) => {
+        console.log(e)
+        setError("algo salio mal..")
+        setTimeout(() => {
+          setError("")
+        }, TIMEOUT)
+      })
+      .finally(() => setLoader(false))
+  }
 
   return (
     <Formik
@@ -42,28 +71,7 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
         phone: "",
       }}
       validationSchema={userSchema}
-      onSubmit={(values) =>
-        createUser(values)
-          .then((response) => {
-            setLoader(true)
-            dispatch(addUser(response))
-            storeData(response)
-          })
-          .catch((e: string) => {
-            if (e === "userAlreadyExists") {
-              setUserExists(true)
-              setTimeout(() => {
-                setUserExists(false)
-              }, 4000)
-            } else {
-              setError("algo salió mal..")
-              setTimeout(() => {
-                setError("")
-              }, 4000)
-            }
-          })
-          .finally(() => setLoader(false))
-      }
+      onSubmit={(values) => handleSignUp(values)}
     >
       {({
         handleChange,
@@ -84,11 +92,7 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
                 setDataType={handleChange("user")}
                 onBlur={values.user ? handleBlur("user") : undefined}
               />
-              {userExists ? (
-                <ErrorText text="el usuario ya existe" />
-              ) : (
-                touched.user && <ErrorText text={`${errors.user}`} />
-              )}
+              {touched.user && <ErrorText text={`${errors.user}`} />}
               <InputLogInAndSignUp
                 dataType={values.password}
                 placeholder="contraseña"
@@ -131,7 +135,8 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
                 keyboardType="numeric"
               />
               {touched.phone && <ErrorText text={`${errors.phone}`} />}
-              {error !== "" && !userExists && <ErrorText text={`${error}`} />}
+              {error !== "" && !existingData && <ErrorText text={`${error}`} />}
+              {existingData.length > 0 && <ErrorText text={existingData} />}
               <ButtonOne text="crear cuenta" handleTap={handleSubmit} />
               <GoBack
                 icon="back"

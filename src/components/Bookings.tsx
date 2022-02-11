@@ -36,7 +36,7 @@ const Bookings: FC<BookingsProps> = ({
         const currentTime = new Date().getHours()
         const hourPassed = currentTime >= hour
         if (!hourPassed) {
-          navigate(index)
+          navigate(`${hour}`)
         } else {
           Toast.show({
             text1: `Ya son las ${currentTime}hs.`,

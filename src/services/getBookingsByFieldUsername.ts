@@ -12,8 +12,9 @@ interface Bookings {
   startsAt: number
 }
 
-export const getBookings = (fieldUsername: string): Promise<Bookings> => {
-  return axios.get(`${BASE_URL}/bookings/${fieldUsername}`).then((response) => {
+export const getBookingsByFieldUsername = (
+  fieldUsername: string
+): Promise<Bookings> =>
+  axios.get(`${BASE_URL}/bookings/${fieldUsername}`).then((response) => {
     return response.data
   })
-}
