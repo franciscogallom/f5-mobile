@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { useIsFocused } from "@react-navigation/native"
 import Toast from "react-native-toast-message"
+import { Shadow } from "react-native-shadow-2"
 
 import { colors } from "../assets/colors"
 import { MyGameData, MyGameProps } from "../interfaces/props"
@@ -10,6 +11,8 @@ import { cancelBooking } from "../services/cancelBooking"
 import { getBookingForUserForToday } from "../services/getBookingForUserForToday"
 
 import YesNoModal from "./YesNoModal"
+
+const FONT_SIZE = 24
 
 const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
   const [modalVisible, setModalVisible] = useState(false)
@@ -59,7 +62,7 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
       } else if (itIsPlaying) {
         setMessage(`Se está jugando en ${name}!`)
       } else if (wasPlayed) {
-        setMessage(`¿Como estuvo el partido de hoy en ${name}?`)
+        setMessage(`¿Cómo estuvo el partido de hoy en ${name}?`)
       }
     }
   }, [])
@@ -80,38 +83,49 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
   }
 
   return data ? (
-    <View style={styles.container}>
-      <Text style={styles.text}>{message}</Text>
+    <Shadow
+      distance={1}
+      startColor={colors.quaternaryDark}
+      offset={[6, 6]}
+      viewStyle={{ width: "98%" }}
+      containerViewStyle={{ marginVertical: 20 }}
+    >
+      <View style={styles.container}>
+        <Text style={styles.text}>{message}</Text>
 
-      {showdData && (
-        <View>
-          <Text style={styles.textCard}>⚽ {data.name}.</Text>
-          <Text style={styles.textCard}>📍 {data.location}.</Text>
-          <Text style={styles.textCard}>
-            🕑 {data.hour}:00hs, {data.field}.
-          </Text>
-          <Text style={styles.textCard}>💲{data.price}.</Text>
-        </View>
-      )}
+        {showdData && (
+          <View>
+            <Text style={[styles.textCard, { fontSize: FONT_SIZE - 2 }]}>
+              ⚽ {data.name}.
+            </Text>
+            <Text style={[styles.textCard, { fontSize: FONT_SIZE - 4 }]}>
+              📍 {data.location}.
+            </Text>
+            <Text style={[styles.textCard, { fontSize: FONT_SIZE - 6 }]}>
+              🕑 {data.hour}:00hs, {data.field}.
+            </Text>
+          </View>
+        )}
 
-      {canCancel && (
-        <TouchableOpacity
-          style={styles.cancelContainer}
-          onPress={() => setModalVisible(true)}
-        >
-          <Text style={styles.cancelText}>❌ CANCELAR.</Text>
-        </TouchableOpacity>
-      )}
+        {canCancel && (
+          <TouchableOpacity
+            style={styles.cancelContainer}
+            onPress={() => setModalVisible(true)}
+          >
+            <Text style={styles.cancelText}>❌ CANCELAR.</Text>
+          </TouchableOpacity>
+        )}
 
-      {modalVisible && (
-        <YesNoModal
-          visible={modalVisible}
-          setVisible={(value: boolean) => setModalVisible(value)}
-          text="¿Estás seguro que quieres cancelar?"
-          handleYes={handleYes}
-        />
-      )}
-    </View>
+        {modalVisible && (
+          <YesNoModal
+            visible={modalVisible}
+            setVisible={(value: boolean) => setModalVisible(value)}
+            text="¿Estás seguro que quieres cancelar?"
+            handleYes={handleYes}
+          />
+        )}
+      </View>
+    </Shadow>
   ) : (
     <Text style={styles.greeting}>hey 👋! se juega?</Text>
   )
@@ -122,16 +136,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.tertiary,
     width: "100%",
     borderRadius: 10,
-    marginVertical: 20,
     padding: 10,
   },
   text: {
-    fontFamily: "poppins-extrabold",
-    fontSize: 20,
+    color: colors.primary,
+    fontFamily: "poppins-extrabold-italic",
+    textTransform: "uppercase",
+    fontSize: FONT_SIZE,
   },
   textCard: {
     fontFamily: "poppins-extrabold",
-    fontSize: 18,
   },
   cancelContainer: {
     marginTop: 20,
@@ -139,7 +153,7 @@ const styles = StyleSheet.create({
   },
   cancelText: {
     fontFamily: "poppins-extrabold",
-    fontSize: 18,
+    fontSize: FONT_SIZE - 6,
   },
   greeting: {
     color: colors.secondary,
