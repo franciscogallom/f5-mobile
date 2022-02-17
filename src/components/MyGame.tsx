@@ -28,8 +28,6 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
     }
   }, [isFocused])
 
-  // const { fieldUser, bookingId, name, location, hour, field, price } = data
-
   useEffect(() => {
     if (data) {
       const { hour, name } = data
