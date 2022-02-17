@@ -8,27 +8,32 @@ import { ButtonOneProps } from "../interfaces/props"
 const ButtonOne: FC<ButtonOneProps> = ({
   text,
   handleTap,
-  textColor,
+  secondary,
+  tertiary,
 }: ButtonOneProps) => {
   return (
     <TouchableOpacity style={styles.button} onPress={handleTap}>
-      <LinearGradient
-        colors={[colors.tertiary, colors.quaternary]}
-        start={[0, 2]}
-        end={[1, 0]}
-      >
-        <Text
-          style={[
-            styles.buttonText,
-            {
-              color: textColor || colors.secondary,
-              backgroundColor: textColor ? "white" : colors.primary,
-            },
-          ]}
+      {tertiary ? (
+        <Text style={styles.tertiaryButton}>{text}</Text>
+      ) : (
+        <LinearGradient
+          colors={[colors.tertiary, colors.quaternary]}
+          start={[0, 2]}
+          end={[1, 0]}
         >
-          {text}
-        </Text>
-      </LinearGradient>
+          <Text
+            style={[
+              styles.buttonText,
+              {
+                color: secondary ? colors.primary : colors.secondary,
+                backgroundColor: secondary ? "transparent" : colors.primary,
+              },
+            ]}
+          >
+            {text}
+          </Text>
+        </LinearGradient>
+      )}
     </TouchableOpacity>
   )
 }
@@ -47,6 +52,13 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     padding: 10,
     margin: 3,
+  },
+  tertiaryButton: {
+    textAlign: "center",
+    textTransform: "uppercase",
+    fontFamily: "poppins-extrabold-italic",
+    color: colors.primary,
+    borderBottomWidth: 2,
   },
 })
 

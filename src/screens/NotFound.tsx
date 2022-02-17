@@ -16,9 +16,9 @@ const NotFound: FC<NotFoundScreenNavigationProp> = ({
     >
       <Text style={styles.text}>Algo salió mal 😕...</Text>
       <ButtonOne
-        text="volver a la home"
+        text="volver al home"
         handleTap={() => navigation.navigate("Home")}
-        textColor={colors.primary}
+        tertiary
       />
     </ImageBackground>
   </View>

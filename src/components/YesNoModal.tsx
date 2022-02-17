@@ -24,7 +24,7 @@ const YesNoModal: FC<YesNoModalProps> = ({
           <View style={styles.modalView}>
             <Text style={styles.modalText}>{text}</Text>
             <View style={styles.btnContainer}>
-              <ButtonOne text="Si" handleTap={handleYes} />
+              <ButtonOne text="Sí" handleTap={handleYes} secondary />
               <ButtonOne text="No" handleTap={() => setVisible(false)} />
             </View>
           </View>

@@ -35,7 +35,8 @@ export interface BookingsProps {
 export interface ButtonOneProps {
   text: string
   handleTap: () => void
-  textColor?: string
+  secondary?: boolean
+  tertiary?: boolean
 }
 
 export interface SearchProps {
