@@ -1,6 +1,8 @@
 import React, { FC } from "react"
 import { Modal, StyleSheet, Text, View } from "react-native"
 import { BlurView } from "expo-blur"
+import { Shadow } from "react-native-shadow-2"
+
 import { YesNoModalProps } from "../interfaces/props"
 import { colors } from "../assets/colors"
 import ButtonOne from "./ButtonOne"
@@ -21,13 +23,19 @@ const YesNoModal: FC<YesNoModalProps> = ({
         onRequestClose={() => setVisible(false)}
       >
         <BlurView intensity={100} tint="dark" style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>{text}</Text>
-            <View style={styles.btnContainer}>
-              <ButtonOne text="Sí" handleTap={handleYes} secondary />
-              <ButtonOne text="No" handleTap={() => setVisible(false)} />
+          <Shadow
+            distance={7.5}
+            startColor={colors.shadow}
+            viewStyle={styles.shadowView}
+          >
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>{text}</Text>
+              <View style={styles.btnContainer}>
+                <ButtonOne text="Sí" handleTap={handleYes} secondary />
+                <ButtonOne text="No" handleTap={() => setVisible(false)} />
+              </View>
             </View>
-          </View>
+          </Shadow>
         </BlurView>
       </Modal>
     </View>
@@ -40,15 +48,16 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
   },
-  modalView: {
+  shadowView: {
+    width: "70%",
     marginBottom: height * 0.05,
+  },
+  modalView: {
     backgroundColor: colors.primary,
     borderRadius: 20,
-    padding: 35,
+    paddingHorizontal: 40,
+    paddingTop: 30,
     alignItems: "center",
-    width: "90%",
-    borderWidth: 2,
-    borderColor: "#ff77f449",
   },
   btnContainer: {
     display: "flex",
