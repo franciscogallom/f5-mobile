@@ -3,6 +3,7 @@ import { View, TextInput, StyleSheet } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 import { colors } from "../assets/colors"
 import { SearchProps } from "../interfaces/props"
+import { Shadow } from "react-native-shadow-2"
 
 const Search: FC<SearchProps> = ({
   setSearch,
@@ -10,22 +11,31 @@ const Search: FC<SearchProps> = ({
   value,
 }: SearchProps) => {
   return (
-    <View style={styles.container}>
-      <TextInput
-        onChangeText={setSearch}
-        onSubmitEditing={handleSearch}
-        style={styles.textInput}
-        placeholder="Buscar."
-        placeholderTextColor="#949494"
-        value={value}
-      />
-      <AntDesign
-        onPress={handleSearch}
-        name="search1"
-        size={24}
-        color="#949494"
-      />
-    </View>
+    <Shadow
+      distance={5}
+      startColor={colors.shadow}
+      offset={[0, 5]}
+      viewStyle={{ width: "100%" }}
+      containerViewStyle={{ marginVertical: 15 }}
+      radius={25}
+    >
+      <View style={styles.container}>
+        <TextInput
+          onChangeText={setSearch}
+          onSubmitEditing={handleSearch}
+          style={styles.textInput}
+          placeholder="Buscar."
+          placeholderTextColor="#949494"
+          value={value}
+        />
+        <AntDesign
+          onPress={handleSearch}
+          name="search1"
+          size={24}
+          color="#949494"
+        />
+      </View>
+    </Shadow>
   )
 }
 
@@ -34,11 +44,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    width: "100%",
-    backgroundColor: "rgba(70, 70, 70, 0.75)",
+    backgroundColor: "rgba(80, 80, 80, 0.75)",
     paddingVertical: 10,
     paddingHorizontal: 15,
-    marginVertical: 10,
     borderRadius: 10,
   },
   textInput: {
