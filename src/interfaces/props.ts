@@ -64,7 +64,7 @@ export interface MyGameData {
 }
 
 export interface MyGameProps {
-  data: MyGameData
+  user: string
   navigation: HomeScreenNavigation
 }
 

@@ -1,14 +1,13 @@
 import React, { FC, useState, useEffect } from "react"
 import { Text, StyleSheet, ScrollView } from "react-native"
 import { useSelector } from "react-redux"
-import { useIsFocused } from "@react-navigation/native"
 
 import { colors } from "../assets/colors"
 import { UserState } from "../redux/userReducer"
 import { getFieldsWithLimit } from "../services/getFieldsWithLimit"
 import { height } from "../assets/dimensions"
 import { Field } from "../interfaces/interfaces"
-import { HomeScreenNavigationProp, MyGameData } from "../interfaces/props"
+import { HomeScreenNavigationProp } from "../interfaces/props"
 
 import Search from "../components/Search"
 import Carousel from "../components/Carousel"
@@ -17,9 +16,6 @@ import Footer from "../components/Footer"
 import Banner from "../components/Banner"
 import RentPlayRepeat from "../components/RentPlayRepeat"
 import MyGame from "../components/MyGame"
-import { getBookingForUserForToday } from "../services/getBookingForUserForToday"
-
-const PADDING_VERTICAL = 10
 
 const Home: FC<HomeScreenNavigationProp> = ({
   navigation,
@@ -27,21 +23,10 @@ const Home: FC<HomeScreenNavigationProp> = ({
   const [fields, setFields] = useState<Field[]>([])
   const [loader, setLoader] = useState(true)
   const [search, setSearch] = useState("")
-  const [myGame, setMyGame] = useState<MyGameData>()
 
   const user = useSelector<UserState, UserState["username"]>(
     (state) => state.username
   )
-
-  const isFocused = useIsFocused()
-
-  useEffect(() => {
-    if (isFocused) {
-      getBookingForUserForToday(user)
-        .then((res) => res.length > 0 && setMyGame(res[0]))
-        .catch(() => navigation.navigate("NotFound"))
-    }
-  }, [isFocused])
 
   useEffect(() => {
     getFieldsWithLimit(5)
@@ -55,11 +40,7 @@ const Home: FC<HomeScreenNavigationProp> = ({
   ) : (
     <ScrollView style={styles.container}>
       <Text style={styles.user}>{user} ⚽</Text>
-      {myGame ? (
-        <MyGame data={myGame} navigation={navigation} />
-      ) : (
-        <Text style={styles.greeting}>hey 👋! se juega?</Text>
-      )}
+      <MyGame user={user} navigation={navigation} />
       <Search
         setSearch={setSearch}
         handleSearch={() =>
@@ -91,15 +72,9 @@ const styles = StyleSheet.create({
     fontFamily: "poppins-bold-italic",
     marginTop: height * 0.05,
   },
-  greeting: {
-    color: colors.secondary,
-    paddingVertical: PADDING_VERTICAL,
-    fontSize: 30,
-    fontFamily: "poppins-extrabold",
-  },
   betterFields: {
     color: colors.secondary,
-    paddingVertical: PADDING_VERTICAL,
+    paddingVertical: 10,
     fontSize: 20,
     fontFamily: "poppins-bold-italic",
   },
