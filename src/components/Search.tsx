@@ -12,7 +12,7 @@ const Search: FC<SearchProps> = ({
 }: SearchProps) => {
   return (
     <Shadow
-      distance={5}
+      distance={1}
       startColor={colors.shadow}
       offset={[0, 5]}
       viewStyle={{ width: "100%" }}
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "rgba(80, 80, 80, 0.75)",
+    backgroundColor: "rgba(80, 80, 80, 1)",
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 10,

@@ -10,7 +10,7 @@ import { BannerProps } from "../interfaces/props"
 const Banner: FC<BannerProps> = ({ text, handleTap }: BannerProps) => {
   return (
     <Shadow
-      distance={8}
+      distance={5}
       startColor={colors.shadow}
       offset={[0, 5]}
       viewStyle={{ width: "100%" }}
