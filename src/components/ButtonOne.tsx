@@ -1,5 +1,10 @@
 import React, { FC } from "react"
-import { TouchableOpacity, Text, StyleSheet } from "react-native"
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 
 import { colors } from "../assets/colors"
@@ -10,9 +15,17 @@ const ButtonOne: FC<ButtonOneProps> = ({
   handleTap,
   secondary,
   tertiary,
+  withoutMarginHorizontal,
+  loading,
 }: ButtonOneProps) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={handleTap}>
+    <TouchableOpacity
+      style={{
+        ...styles.button,
+        marginHorizontal: withoutMarginHorizontal ? 0 : 20,
+      }}
+      onPress={handleTap}
+    >
       {tertiary ? (
         <Text style={styles.tertiaryButton}>{text}</Text>
       ) : (
@@ -21,17 +34,30 @@ const ButtonOne: FC<ButtonOneProps> = ({
           start={[0, 2]}
           end={[1, 0]}
         >
-          <Text
-            style={[
-              styles.buttonText,
-              {
-                color: secondary ? colors.primary : colors.secondary,
-                backgroundColor: secondary ? "transparent" : colors.primary,
-              },
-            ]}
-          >
-            {text}
-          </Text>
+          {!loading ? (
+            <ActivityIndicator
+              style={[
+                styles.buttonText,
+                {
+                  backgroundColor: secondary ? "transparent" : colors.primary,
+                },
+              ]}
+              color={secondary ? colors.primary : colors.tertiary}
+              size="large"
+            />
+          ) : (
+            <Text
+              style={[
+                styles.buttonText,
+                {
+                  color: secondary ? colors.primary : colors.secondary,
+                  backgroundColor: secondary ? "transparent" : colors.primary,
+                },
+              ]}
+            >
+              {text}
+            </Text>
+          )}
         </LinearGradient>
       )}
     </TouchableOpacity>
@@ -41,7 +67,7 @@ const ButtonOne: FC<ButtonOneProps> = ({
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "transparent",
-    margin: 20,
+    marginVertical: 20,
     width: "50%",
     overflow: "hidden",
     borderRadius: 5,
