@@ -1,13 +1,12 @@
 import React, { FC, useState, useEffect } from "react"
 import { Text, StyleSheet, ScrollView } from "react-native"
-import { useSelector } from "react-redux"
 
 import { colors } from "../assets/colors"
-import { UserState } from "../redux/userReducer"
 import { getFieldsWithLimit } from "../services/getFieldsWithLimit"
 import { height } from "../assets/dimensions"
 import { Field } from "../interfaces/interfaces"
 import { HomeScreenNavigationProp } from "../interfaces/props"
+import { getUsername } from "../services/getUsername"
 
 import Search from "../components/Search"
 import Carousel from "../components/Carousel"
@@ -24,9 +23,7 @@ const Home: FC<HomeScreenNavigationProp> = ({
   const [loader, setLoader] = useState(true)
   const [search, setSearch] = useState("")
 
-  const user = useSelector<UserState, UserState["username"]>(
-    (state) => state.username
-  )
+  const user = getUsername()
 
   useEffect(() => {
     getFieldsWithLimit(5)
