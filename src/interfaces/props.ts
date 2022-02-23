@@ -37,6 +37,8 @@ export interface ButtonOneProps {
   handleTap: () => void
   secondary?: boolean
   tertiary?: boolean
+  withoutMarginHorizontal?: boolean
+  loading?: boolean
 }
 
 export interface SearchProps {
@@ -95,14 +97,15 @@ export interface ErrorTextProps {
   text: string
 }
 
-export interface InputLogInAndSignUpProps {
-  dataType: string
+export interface InputProps {
+  value: string
   placeholder: string
   secureTextEntry?: boolean
-  icon: "user" | "mail" | "lock" | "sync" | "mobile1"
+  icon: "user" | "mail" | "lock" | "sync" | "mobile1" | "unlock"
   setDataType: (dataType: string) => void
   onBlur?: ((e: unknown) => void) | undefined
   keyboardType?: "numeric" | "email-address"
+  fullWidth?: boolean
 }
 
 export interface FieldDetailsProps {
