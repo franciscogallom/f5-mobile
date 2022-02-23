@@ -5,8 +5,6 @@ import { AntDesign } from "@expo/vector-icons"
 import { SharedElement } from "react-navigation-shared-element"
 import * as Animatable from "react-native-animatable"
 import * as Linking from "expo-linking"
-import { useSelector } from "react-redux"
-import { UserState } from "../redux/userReducer"
 import { useIsFocused } from "@react-navigation/native"
 
 import { colors } from "../assets/colors"
@@ -15,6 +13,7 @@ import { images } from "../assets/images"
 import { getBookingsByFieldUsername } from "../services/getBookingsByFieldUsername"
 import { FieldDetailsProps } from "../interfaces/props"
 import { getBookingForUserForToday } from "../services/getBookingForUserForToday"
+import { getUsername } from "../services/getUsername"
 
 import Bookings, { fadeInBottom, DURATION } from "../components/Bookings"
 
@@ -36,9 +35,7 @@ const FieldDetails: FC<FieldDetailsProps> = ({
   const [id, setId] = useState("")
   const [hasBooking, setHasBooking] = useState(false)
 
-  const user = useSelector<UserState, UserState["username"]>(
-    (state) => state.username
-  )
+  const user = getUsername()
 
   const isFocused = useIsFocused()
 
