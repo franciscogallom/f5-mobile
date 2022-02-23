@@ -3,24 +3,25 @@ import { TextInput, View, StyleSheet } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 
 import { colors } from "../assets/colors"
-import { InputLogInAndSignUpProps } from "../interfaces/props"
+import { InputProps } from "../interfaces/props"
 
-const InputLogInAndSignUp: FC<InputLogInAndSignUpProps> = ({
-  dataType,
+const Input: FC<InputProps> = ({
+  value,
   placeholder,
   secureTextEntry,
   icon,
   setDataType,
   onBlur,
   keyboardType,
-}: InputLogInAndSignUpProps) => {
+  fullWidth,
+}: InputProps) => {
   return (
     <View style={styles.input}>
       <AntDesign style={styles.icon} name={icon} size={24} color="white" />
       <TextInput
-        style={styles.textInput}
-        value={dataType}
-        placeholder={`${placeholder}.`}
+        style={{ ...styles.textInput, width: fullWidth ? "100%" : "40%" }}
+        value={value}
+        placeholder={placeholder}
         placeholderTextColor="#949494"
         onChangeText={setDataType}
         secureTextEntry={secureTextEntry}
@@ -33,7 +34,7 @@ const InputLogInAndSignUp: FC<InputLogInAndSignUpProps> = ({
 
 const styles = StyleSheet.create({
   icon: {
-    marginBottom: 5,
+    marginBottom: 3,
   },
   input: {
     flexDirection: "row",
@@ -44,10 +45,9 @@ const styles = StyleSheet.create({
     color: colors.secondary,
     margin: 5,
     padding: 5,
-    width: "40%",
     backgroundColor: "transparent",
     fontFamily: "poppins-bold-italic",
   },
 })
 
-export default InputLogInAndSignUp
+export default Input
