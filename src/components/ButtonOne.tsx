@@ -34,7 +34,7 @@ const ButtonOne: FC<ButtonOneProps> = ({
           start={[0, 2]}
           end={[1, 0]}
         >
-          {!loading ? (
+          {loading ? (
             <ActivityIndicator
               style={[
                 styles.buttonText,
