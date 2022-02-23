@@ -1,9 +1,6 @@
 import React, { FC } from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { createSharedElementStackNavigator } from "react-navigation-shared-element"
-import { useSelector } from "react-redux"
-
-import { UserState } from "../redux/userReducer"
 
 import LogIn from "../screens/LogIn"
 import SignUp from "../screens/SignUp"
@@ -12,13 +9,12 @@ import FieldDetails from "../screens/FieldDetails"
 import NotFound from "../screens/NotFound"
 import FieldList from "../screens/FieldList"
 import Checkout from "../screens/Checkout"
+import { getUsername } from "../services/getUsername"
 
 const { Navigator, Screen } = createSharedElementStackNavigator()
 
 const AppNavigator: FC = () => {
-  const user = useSelector<UserState, UserState["username"]>(
-    (state) => state.username
-  )
+  const user = getUsername()
 
   return (
     <NavigationContainer>
