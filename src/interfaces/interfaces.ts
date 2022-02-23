@@ -8,6 +8,20 @@ export interface NewUser {
   phone: string
 }
 
+export interface UserData {
+  created: string
+  email: string
+  id: string
+  password: string
+  phone: string
+  user: string
+}
+
+export interface UpdateUserResponse {
+  error: boolean
+  message: string
+}
+
 export interface CreateUserResponse {
   thereIsExistingData: boolean
   validationMessage: string
