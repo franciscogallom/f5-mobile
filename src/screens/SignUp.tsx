@@ -17,7 +17,7 @@ import { addUser } from "../redux/actions"
 import { storeData } from "../services/storeData"
 
 import ButtonOne from "../components/ButtonOne"
-import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
+import Input from "../components/Input"
 import ErrorText from "../components/ErrorText"
 import GoBack from "../components/Action"
 import Loader from "../components/Loader"
@@ -85,35 +85,35 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
           {loader && <Loader />}
           <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
-              <InputLogInAndSignUp
-                dataType={values.user}
-                placeholder="usuario"
+              <Input
+                value={values.user}
+                placeholder="usuario."
                 icon="user"
                 setDataType={handleChange("user")}
                 onBlur={values.user ? handleBlur("user") : undefined}
               />
               {touched.user && <ErrorText text={`${errors.user}`} />}
-              <InputLogInAndSignUp
-                dataType={values.password}
-                placeholder="contraseña"
+              <Input
+                value={values.password}
+                placeholder="contraseña."
                 icon="lock"
                 secureTextEntry
                 setDataType={handleChange("password")}
                 onBlur={values.password ? handleBlur("password") : undefined}
               />
               {touched.password && <ErrorText text={`${errors.password}`} />}
-              <InputLogInAndSignUp
-                dataType={values.email}
-                placeholder="email"
+              <Input
+                value={values.email}
+                placeholder="email."
                 icon="mail"
                 setDataType={handleChange("email")}
                 onBlur={values.email ? handleBlur("email") : undefined}
                 keyboardType="email-address"
               />
               {touched.email && <ErrorText text={`${errors.email}`} />}
-              <InputLogInAndSignUp
-                dataType={values.emailVerification}
-                placeholder="repetir email"
+              <Input
+                value={values.emailVerification}
+                placeholder="repetir email."
                 icon="sync"
                 setDataType={handleChange("emailVerification")}
                 onBlur={
@@ -126,9 +126,9 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
               {touched.emailVerification && (
                 <ErrorText text={`${errors.emailVerification}`} />
               )}
-              <InputLogInAndSignUp
-                dataType={values.phone}
-                placeholder="celular (opcional)"
+              <Input
+                value={values.phone}
+                placeholder="celular (opcional)."
                 icon="mobile1"
                 setDataType={handleChange("phone")}
                 onBlur={values.phone ? handleBlur("phone") : undefined}

@@ -16,7 +16,7 @@ import { storeData } from "../services/storeData"
 import { LogInScreenNavigationProp } from "../interfaces/props"
 
 import ButtonOne from "../components/ButtonOne"
-import InputLogInAndSignUp from "../components/InputLogInAndSignUp"
+import Input from "../components/Input"
 import ErrorText from "../components/ErrorText"
 import Action from "../components/Action"
 import Loader from "../components/Loader"
@@ -52,15 +52,15 @@ const LogIn: FC<LogInScreenNavigationProp> = ({
           {loader && <Loader />}
           <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
-              <InputLogInAndSignUp
-                dataType={values.user}
-                placeholder="usuario"
+              <Input
+                value={values.user}
+                placeholder="usuario."
                 icon="user"
                 setDataType={handleChange("user")}
               />
-              <InputLogInAndSignUp
-                dataType={values.password}
-                placeholder="contraseña"
+              <Input
+                value={values.password}
+                placeholder="contraseña."
                 icon="lock"
                 secureTextEntry
                 setDataType={handleChange("password")}
