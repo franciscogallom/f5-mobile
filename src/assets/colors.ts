@@ -6,4 +6,5 @@ export const colors = {
   quaternary: "#ff77f4",
   quaternaryDark: "#ff2cee",
   shadow: "rgba(50, 50, 50, 0.75)",
+  grey: "#a0a0a0",
 }
