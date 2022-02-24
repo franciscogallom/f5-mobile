@@ -94,7 +94,7 @@ const Bookings: FC<BookingsProps> = ({
             <TouchableOpacity
               style={{
                 ...styles.bookingButton,
-                borderColor: status ? colors.tertiaryDark : "#640d5d84",
+                borderColor: status ? colors.tertiaryDark : "#97168c84",
               }}
               key={index}
               activeOpacity={0.5}
