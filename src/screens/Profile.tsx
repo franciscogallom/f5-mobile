@@ -22,11 +22,13 @@ const Profile: FC<undefined> = () => {
   const [changeEmail, setChangeEmail] = useState(false)
   const [forgotPass, setForgotPass] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [deleteAccount, setDeleteAccount] = useState(false)
   const [reload, setReload] = useState(false)
   const [currentPass, setCurrentPass] = useState("")
   const [newPass, setNewPass] = useState("")
   const [newPhoneNumber, setNewPhoneNumber] = useState("")
   const [newEmail, setNewEmail] = useState("")
+  const [passToDeleteAccount, setPassToDeleteAccount] = useState("")
 
   useEffect(() => {
     getUserData(user)
@@ -63,10 +65,12 @@ const Profile: FC<undefined> = () => {
           setChangePass(false)
           setChangePhone(false)
           setChangeEmail(false)
+          setDeleteAccount(false)
           setNewEmail("")
           setNewPhoneNumber("")
           setNewPass("")
           setCurrentPass("")
+          setPassToDeleteAccount("")
           setReload((prevState) => !prevState)
         }
       })
@@ -140,6 +144,7 @@ const Profile: FC<undefined> = () => {
               setForgotPass(false)
               setChangePhone(false)
               setChangeEmail(false)
+              setDeleteAccount(false)
             }}
             style={styles.changeContainer}
           >
@@ -181,6 +186,7 @@ const Profile: FC<undefined> = () => {
               setChangePass(false)
               setChangePhone(false)
               setChangeEmail(false)
+              setDeleteAccount(false)
             }}
             style={styles.changeContainer}
           >
@@ -233,6 +239,7 @@ const Profile: FC<undefined> = () => {
               setChangePass(false)
               setForgotPass(false)
               setChangeEmail(false)
+              setDeleteAccount(false)
             }}
             style={styles.changeContainer}
           >
@@ -282,10 +289,60 @@ const Profile: FC<undefined> = () => {
               setChangePass(false)
               setForgotPass(false)
               setChangePhone(false)
+              setDeleteAccount(false)
             }}
             style={styles.changeContainer}
           >
             <Text style={styles.title}>Cambiar email.</Text>
+            <AntDesign name="down" size={24} color={colors.grey} />
+          </TouchableOpacity>
+        )}
+      </View>
+
+      {/* Delete account */}
+      {/* TO-DO: add functionality */}
+      <View style={styles.section}>
+        {deleteAccount ? (
+          <>
+            <TouchableOpacity
+              onPress={() => setDeleteAccount(false)}
+              style={styles.changeContainer}
+            >
+              <Text style={{ ...styles.title, color: colors.tertiaryDark }}>
+                Eliminar mi cuenta.
+              </Text>
+              <AntDesign name="up" size={24} color={colors.tertiaryDark} />
+            </TouchableOpacity>
+            <Text style={styles.text}>
+              ¿Estás seguro? Si es así, debes ingresar tu contraseña.
+            </Text>
+            <Input
+              value={passToDeleteAccount}
+              placeholder="contraseña."
+              icon="lock"
+              setValue={(value) => setPassToDeleteAccount(value)}
+              fullWidth
+              secureTextEntry
+            />
+            <ButtonOne
+              text="eliminar"
+              handleTap={() => alert(passToDeleteAccount)}
+              withoutMarginHorizontal
+              loading={loading}
+            />
+          </>
+        ) : (
+          <TouchableOpacity
+            onPress={() => {
+              setDeleteAccount(true)
+              setForgotPass(false)
+              setChangePass(false)
+              setChangePhone(false)
+              setChangeEmail(false)
+            }}
+            style={styles.changeContainer}
+          >
+            <Text style={styles.title}>Eliminar mi cuenta.</Text>
             <AntDesign name="down" size={24} color={colors.grey} />
           </TouchableOpacity>
         )}
