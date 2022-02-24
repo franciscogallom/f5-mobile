@@ -19,13 +19,12 @@ import ButtonOne from "../components/ButtonOne"
 import Input from "../components/Input"
 import ErrorText from "../components/ErrorText"
 import Action from "../components/Action"
-import Loader from "../components/Loader"
 
 const LogIn: FC<LogInScreenNavigationProp> = ({
   navigation,
 }: LogInScreenNavigationProp) => {
   const [logInStatus, setLogInStatus] = useState("")
-  const [loader, setLoader] = useState(false)
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
 
   return (
@@ -34,22 +33,21 @@ const LogIn: FC<LogInScreenNavigationProp> = ({
         user: "",
         password: "",
       }}
-      onSubmit={(values) =>
+      onSubmit={(values) => {
+        setLoading(true)
         handleLogIn(values)
           .then(() => {
-            setLoader(true)
             dispatch(addUser(values.user))
             storeData(values.user)
           })
           .catch((e) => {
             setLogInStatus(e.response.data.message || "algo salio mal..")
           })
-          .finally(() => setLoader(false))
-      }
+          .finally(() => setLoading(false))
+      }}
     >
       {({ handleChange, handleSubmit, values }) => (
         <>
-          {loader && <Loader />}
           <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
               <Input
@@ -66,7 +64,11 @@ const LogIn: FC<LogInScreenNavigationProp> = ({
                 setValue={handleChange("password")}
               />
               {logInStatus ? <ErrorText text={logInStatus} /> : null}
-              <ButtonOne text="iniciar sesión" handleTap={handleSubmit} />
+              <ButtonOne
+                text="iniciar sesión"
+                handleTap={handleSubmit}
+                loading={loading}
+              />
               <Action
                 text="crear nueva cuenta"
                 icon="adduser"

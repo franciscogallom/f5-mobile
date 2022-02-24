@@ -76,6 +76,7 @@ export interface YesNoModalProps {
   text: string
   setVisible: (value: boolean) => void
   handleYes: () => void
+  loading: boolean
 }
 
 export interface CarouselProps {

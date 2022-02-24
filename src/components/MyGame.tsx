@@ -20,6 +20,7 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
   const [message, setMessage] = useState("Hoy se juega!")
   const [showdData, setShowData] = useState(true)
   const [data, setData] = useState<MyGameData>()
+  const [loading, setLoading] = useState(false)
 
   const isFocused = useIsFocused()
 
@@ -69,6 +70,7 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
 
   const handleYes = () => {
     if (data) {
+      setLoading(true)
       cancelBooking(data.bookingId, data.field, data.hour, data.fieldUser)
         .then((response) => {
           Toast.show({
@@ -78,7 +80,10 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
           setData(undefined)
         })
         .catch(() => navigation.navigate("NotFound"))
-        .finally(() => setModalVisible(false))
+        .finally(() => {
+          setModalVisible(false)
+          setLoading(false)
+        })
     }
   }
 
@@ -122,6 +127,7 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
             setVisible={(value: boolean) => setModalVisible(value)}
             text="¿Estás seguro que quieres cancelar?"
             handleYes={handleYes}
+            loading={loading}
           />
         )}
       </View>

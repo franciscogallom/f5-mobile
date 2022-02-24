@@ -13,6 +13,7 @@ const YesNoModal: FC<YesNoModalProps> = ({
   text,
   setVisible,
   handleYes,
+  loading,
 }: YesNoModalProps) => {
   return (
     <View style={styles.centeredView}>
@@ -31,8 +32,12 @@ const YesNoModal: FC<YesNoModalProps> = ({
             <View style={styles.modalView}>
               <Text style={styles.modalText}>{text}</Text>
               <View style={styles.btnContainer}>
-                <ButtonOne text="Sí" handleTap={handleYes} secondary />
-                <ButtonOne text="No" handleTap={() => setVisible(false)} />
+                <ButtonOne text="Sí" handleTap={handleYes} loading={loading} />
+                <ButtonOne
+                  text="No"
+                  handleTap={() => setVisible(false)}
+                  secondary
+                />
               </View>
             </View>
           </Shadow>

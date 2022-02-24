@@ -20,7 +20,6 @@ import ButtonOne from "../components/ButtonOne"
 import Input from "../components/Input"
 import ErrorText from "../components/ErrorText"
 import GoBack from "../components/Action"
-import Loader from "../components/Loader"
 import { SignUpScreenNavigationProp } from "../interfaces/props"
 import { NewUser } from "../interfaces/interfaces"
 
@@ -30,15 +29,15 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
   navigation,
 }: SignUpScreenNavigationProp) => {
   const [error, setError] = useState("")
-  const [loader, setLoader] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [existingData, setexistingData] = useState("")
 
   const dispatch = useDispatch()
 
   const handleSignUp = (values: NewUser) => {
+    setLoading(true)
     createUser(values)
       .then(({ thereIsExistingData, result, validationMessage }) => {
-        setLoader(true)
         if (thereIsExistingData) {
           setexistingData(validationMessage)
           setTimeout(() => {
@@ -58,7 +57,7 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
           setError("")
         }, TIMEOUT)
       })
-      .finally(() => setLoader(false))
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -82,7 +81,6 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
         errors,
       }) => (
         <>
-          {loader && <Loader />}
           <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
               <Input
@@ -137,7 +135,11 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
               {touched.phone && <ErrorText text={`${errors.phone}`} />}
               {error !== "" && !existingData && <ErrorText text={`${error}`} />}
               {existingData.length > 0 && <ErrorText text={existingData} />}
-              <ButtonOne text="crear cuenta" handleTap={handleSubmit} />
+              <ButtonOne
+                text="crear cuenta"
+                handleTap={handleSubmit}
+                loading={loading}
+              />
               <GoBack
                 icon="back"
                 text="volver atrás"
