@@ -34,7 +34,7 @@ export const toastConfig = {
   error: (props: ToastProps): JSX.Element => (
     <ErrorToast
       {...props}
-      style={{ ...toastStyle, borderLeftColor: colors.quaternary }}
+      style={{ ...toastStyle, borderLeftColor: colors.quaternaryDark }}
       text1Style={text1Style}
       text2Style={text2Style}
     />

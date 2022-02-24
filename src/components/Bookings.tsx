@@ -92,7 +92,10 @@ const Bookings: FC<BookingsProps> = ({
           const hour = startsAt + index
           return (
             <TouchableOpacity
-              style={{ width: width * 0.23 }}
+              style={{
+                ...styles.bookingButton,
+                borderColor: status ? colors.tertiaryDark : "#640d5d84",
+              }}
               key={index}
               activeOpacity={0.5}
               onPress={() => handleTap(status, hour)}
@@ -104,7 +107,7 @@ const Bookings: FC<BookingsProps> = ({
                     backgroundColor: status
                       ? colors.tertiary
                       : colors.quaternary,
-                    opacity: status ? 1 : 0.4,
+                    opacity: status ? 1 : 0.5,
                   },
                 ]}
               >{`${hour}:00`}</Text>
@@ -127,10 +130,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
   },
+  bookingButton: {
+    width: width * 0.2,
+    borderColor: colors.tertiaryDark,
+    borderBottomWidth: 4,
+    borderRightWidth: 4,
+    borderRadius: 8,
+    margin: 5,
+  },
   bookingText: {
     color: colors.primary,
     paddingVertical: 10,
-    margin: 5,
     fontFamily: "poppins-extrabold",
     fontSize: 20,
     borderRadius: 5,

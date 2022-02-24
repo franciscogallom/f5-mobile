@@ -91,7 +91,7 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
     <Shadow
       distance={1}
       startColor={colors.quaternaryDark}
-      offset={[6, 6]}
+      offset={[5, 5]}
       viewStyle={{ width: "98%" }}
       containerViewStyle={{ marginVertical: 20 }}
     >
