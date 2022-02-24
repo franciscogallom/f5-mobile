@@ -40,11 +40,11 @@ const Profile: FC<undefined> = () => {
   }, [reload])
 
   const handleUpdate = (
-    dataType: string,
+    attribute: string,
     data: Record<string, unknown>
   ): void => {
     setLoading(true)
-    updateUser(user, dataType, data)
+    updateUser(user, attribute, data)
       .then((res: UpdateUserResponse) => {
         if (res.error) {
           Toast.show({
@@ -112,7 +112,7 @@ const Profile: FC<undefined> = () => {
               value={currentPass}
               placeholder="contraseña actual."
               icon="unlock"
-              setDataType={(value) => setCurrentPass(value)}
+              setValue={(value) => setCurrentPass(value)}
               fullWidth
               secureTextEntry
             />
@@ -120,7 +120,7 @@ const Profile: FC<undefined> = () => {
               value={newPass}
               placeholder="contraseña nueva."
               icon="lock"
-              setDataType={(value) => setNewPass(value)}
+              setValue={(value) => setNewPass(value)}
               fullWidth
               secureTextEntry
             />
@@ -215,7 +215,7 @@ const Profile: FC<undefined> = () => {
                 userData?.phone ? `${userData?.phone}` : "número de celular."
               }`}
               icon="mobile1"
-              setDataType={(value) => setNewPhoneNumber(value)}
+              setValue={(value) => setNewPhoneNumber(value)}
               fullWidth
               keyboardType="numeric"
             />
@@ -263,7 +263,7 @@ const Profile: FC<undefined> = () => {
               value={newEmail}
               placeholder={`${userData?.email}`}
               icon="mail"
-              setDataType={(value) => setNewEmail(value)}
+              setValue={(value) => setNewEmail(value)}
               fullWidth
               keyboardType="email-address"
             />

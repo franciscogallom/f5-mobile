@@ -89,7 +89,7 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
                 value={values.user}
                 placeholder="usuario."
                 icon="user"
-                setDataType={handleChange("user")}
+                setValue={handleChange("user")}
                 onBlur={values.user ? handleBlur("user") : undefined}
               />
               {touched.user && <ErrorText text={`${errors.user}`} />}
@@ -98,7 +98,7 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
                 placeholder="contraseña."
                 icon="lock"
                 secureTextEntry
-                setDataType={handleChange("password")}
+                setValue={handleChange("password")}
                 onBlur={values.password ? handleBlur("password") : undefined}
               />
               {touched.password && <ErrorText text={`${errors.password}`} />}
@@ -106,7 +106,7 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
                 value={values.email}
                 placeholder="email."
                 icon="mail"
-                setDataType={handleChange("email")}
+                setValue={handleChange("email")}
                 onBlur={values.email ? handleBlur("email") : undefined}
                 keyboardType="email-address"
               />
@@ -115,7 +115,7 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
                 value={values.emailVerification}
                 placeholder="repetir email."
                 icon="sync"
-                setDataType={handleChange("emailVerification")}
+                setValue={handleChange("emailVerification")}
                 onBlur={
                   values.emailVerification
                     ? handleBlur("emailVerification")
@@ -130,7 +130,7 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
                 value={values.phone}
                 placeholder="celular (opcional)."
                 icon="mobile1"
-                setDataType={handleChange("phone")}
+                setValue={handleChange("phone")}
                 onBlur={values.phone ? handleBlur("phone") : undefined}
                 keyboardType="numeric"
               />

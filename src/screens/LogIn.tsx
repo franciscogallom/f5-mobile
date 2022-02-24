@@ -56,14 +56,14 @@ const LogIn: FC<LogInScreenNavigationProp> = ({
                 value={values.user}
                 placeholder="usuario."
                 icon="user"
-                setDataType={handleChange("user")}
+                setValue={handleChange("user")}
               />
               <Input
                 value={values.password}
                 placeholder="contraseña."
                 icon="lock"
                 secureTextEntry
-                setDataType={handleChange("password")}
+                setValue={handleChange("password")}
               />
               {logInStatus ? <ErrorText text={logInStatus} /> : null}
               <ButtonOne text="iniciar sesión" handleTap={handleSubmit} />

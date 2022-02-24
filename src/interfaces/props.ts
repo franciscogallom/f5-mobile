@@ -102,7 +102,7 @@ export interface InputProps {
   placeholder: string
   secureTextEntry?: boolean
   icon: "user" | "mail" | "lock" | "sync" | "mobile1" | "unlock"
-  setDataType: (dataType: string) => void
+  setValue: (value: string) => void
   onBlur?: ((e: unknown) => void) | undefined
   keyboardType?: "numeric" | "email-address"
   fullWidth?: boolean

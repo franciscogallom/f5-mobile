@@ -10,7 +10,7 @@ const Input: FC<InputProps> = ({
   placeholder,
   secureTextEntry,
   icon,
-  setDataType,
+  setValue,
   onBlur,
   keyboardType,
   fullWidth,
@@ -23,7 +23,7 @@ const Input: FC<InputProps> = ({
         value={value}
         placeholder={placeholder}
         placeholderTextColor="#949494"
-        onChangeText={setDataType}
+        onChangeText={setValue}
         secureTextEntry={secureTextEntry}
         onBlur={onBlur}
         keyboardType={keyboardType}
