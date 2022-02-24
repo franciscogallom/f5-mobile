@@ -24,7 +24,7 @@ const ButtonOne: FC<ButtonOneProps> = ({
         ...styles.button,
         marginHorizontal: withoutMarginHorizontal ? 0 : 20,
       }}
-      onPress={handleTap}
+      onPress={() => !loading && handleTap()}
     >
       {tertiary ? (
         <Text style={styles.tertiaryButton}>{text}</Text>
@@ -36,14 +36,13 @@ const ButtonOne: FC<ButtonOneProps> = ({
         >
           {loading ? (
             <ActivityIndicator
-              style={[
-                styles.buttonText,
-                {
-                  backgroundColor: secondary ? "transparent" : colors.primary,
-                },
-              ]}
+              style={{
+                padding: 10,
+                margin: 3,
+                backgroundColor: secondary ? "transparent" : colors.primary,
+              }}
               color={secondary ? colors.primary : colors.tertiary}
-              size="large"
+              size={25}
             />
           ) : (
             <Text
