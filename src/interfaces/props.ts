@@ -7,6 +7,7 @@ import {
   FieldListScreenNavigation,
   NotFoundScreenNavigation,
   HomeScreenNavigation,
+  ProfileScreenNavigation,
 } from "./interfaces"
 import { RouteProp } from "@react-navigation/native"
 import { Dispatch, SetStateAction } from "react"
@@ -133,4 +134,8 @@ export interface NotFoundScreenNavigationProp {
 
 export interface HomeScreenNavigationProp {
   navigation: HomeScreenNavigation
+}
+
+export interface ProfileScreenNavigationProp {
+  navigation: ProfileScreenNavigation
 }

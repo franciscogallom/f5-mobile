@@ -13,8 +13,11 @@ import { updateUser } from "../../services/updateUser"
 import { UpdateUserResponse } from "../../interfaces/interfaces"
 import { getUsername } from "../../services/getUsername"
 import { forgotPassword } from "../../services/forgotPassword"
+import { ProfileScreenNavigationProp } from "../../interfaces/props"
 
-const Profile: FC<undefined> = () => {
+const Profile: FC<ProfileScreenNavigationProp> = ({
+  navigation,
+}: ProfileScreenNavigationProp) => {
   const user = getUsername()
 
   const [userData, setUserData] = useState<UserData>()
@@ -37,8 +40,8 @@ const Profile: FC<undefined> = () => {
         setUserData(res)
       })
       .catch((e) => {
-        // Navigate to NotFound
         console.log(e)
+        navigation.navigate("NotFound")
       })
   }, [reload])
 

@@ -68,6 +68,11 @@ type RootStackParamList2 = {
   SignUp: undefined
 }
 
+type RootStackParamList3 = {
+  Profile: undefined
+  NotFound: undefined
+}
+
 export type SignUpScreenNavigation = StackNavigationProp<
   RootStackParamList2,
   "SignUp"
@@ -91,4 +96,9 @@ export type NotFoundScreenNavigation = StackNavigationProp<
 export type HomeScreenNavigation = StackNavigationProp<
   RootStackParamList,
   "Home"
+>
+
+export type ProfileScreenNavigation = StackNavigationProp<
+  RootStackParamList3,
+  "Profile"
 >
