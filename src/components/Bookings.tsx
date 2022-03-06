@@ -133,8 +133,8 @@ const styles = StyleSheet.create({
   bookingButton: {
     width: width * 0.2,
     borderColor: colors.tertiaryDark,
-    borderBottomWidth: 4,
-    borderRightWidth: 4,
+    borderBottomWidth: 3,
+    borderRightWidth: 3,
     borderRadius: 8,
     margin: 5,
   },
