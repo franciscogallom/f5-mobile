@@ -12,6 +12,7 @@ import ButtonOne from "../components/ButtonOne"
 import { updateUser } from "../services/updateUser"
 import { UpdateUserResponse } from "../interfaces/interfaces"
 import { getUsername } from "../services/getUsername"
+import { forgotPassword } from "../services/forgotPassword"
 
 const Profile: FC<undefined> = () => {
   const user = getUsername()
@@ -87,6 +88,30 @@ const Profile: FC<undefined> = () => {
       })
   }
 
+  const handleForgotPassword = () => {
+    setLoading(true)
+    forgotPassword(userData?.email)
+      .then((res) => {
+        Toast.show({
+          position: "bottom",
+          text1: "Operación exitosa!",
+          text2: res,
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+        Toast.show({
+          type: "error",
+          position: "bottom",
+          text1: "Algo salió mal...",
+          text2: "Vuelve a intentarlo en unos instantes.",
+        })
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.userContainer}>
@@ -155,7 +180,6 @@ const Profile: FC<undefined> = () => {
       </View>
 
       {/* Forgot password */}
-      {/* TO-DO: add functionality */}
       <View style={styles.section}>
         {forgotPass ? (
           <>
@@ -174,7 +198,7 @@ const Profile: FC<undefined> = () => {
             </Text>
             <ButtonOne
               text="Enviar"
-              handleTap={() => alert("Forgot")}
+              handleTap={() => handleForgotPassword()}
               withoutMarginHorizontal
               loading={loading}
             />
