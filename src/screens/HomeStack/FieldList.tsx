@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react"
 import { FlatList, View, StyleSheet, Text } from "react-native"
 import { SharedElement } from "react-navigation-shared-element"
 
-import { getFields } from "../../services/getFields"
+import { getFields } from "../../services/fields/getFields"
 import { height } from "../../assets/dimensions"
 import { colors } from "../../assets/colors"
 import { Field } from "../../interfaces/interfaces"

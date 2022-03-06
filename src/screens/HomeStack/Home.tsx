@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from "react"
 import { Text, StyleSheet, ScrollView } from "react-native"
 
 import { colors } from "../../assets/colors"
-import { getFieldsWithLimit } from "../../services/getFieldsWithLimit"
+import { getFieldsWithLimit } from "../../services/fields/getFieldsWithLimit"
 import { height } from "../../assets/dimensions"
 import { Field } from "../../interfaces/interfaces"
 import { HomeScreenNavigationProp } from "../../interfaces/props"

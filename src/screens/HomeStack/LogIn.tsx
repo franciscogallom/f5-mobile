@@ -10,7 +10,7 @@ import { Formik } from "formik"
 import { useDispatch } from "react-redux"
 
 import { colors } from "../../assets/colors"
-import { handleLogIn } from "../../services/handleLogIn"
+import { handleLogIn } from "../../services/users/handleLogIn"
 import { addUser } from "../../redux/actions"
 import { storeData } from "../../services/storeData"
 import { LogInScreenNavigationProp } from "../../interfaces/props"

@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux"
 import { colors } from "../../assets/colors"
 
 import { userSchema } from "../../schemas/user"
-import { createUser } from "../../services/createUser"
+import { createUser } from "../../services/users/createUser"
 import { addUser } from "../../redux/actions"
 import { storeData } from "../../services/storeData"
 

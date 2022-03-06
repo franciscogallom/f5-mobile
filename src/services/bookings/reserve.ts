@@ -1,5 +1,5 @@
 import axios, { AxiosPromise } from "axios"
-import { BASE_URL } from "../BASE_URL"
+import { BASE_URL } from "../../BASE_URL"
 
 export const reserve = (
   id: string,

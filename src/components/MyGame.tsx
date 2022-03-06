@@ -7,8 +7,8 @@ import { Shadow } from "react-native-shadow-2"
 
 import { colors } from "../assets/colors"
 import { MyGameData, MyGameProps } from "../interfaces/props"
-import { cancelBooking } from "../services/cancelBooking"
-import { getBookingForUserForToday } from "../services/getBookingForUserForToday"
+import { cancelBooking } from "../services/bookings/cancelBooking"
+import { getBookingForUserForToday } from "../services/bookings/getBookingForUserForToday"
 
 import YesNoModal from "./YesNoModal"
 

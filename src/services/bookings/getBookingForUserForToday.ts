@@ -1,6 +1,6 @@
 import axios from "axios"
-import { BASE_URL } from "../BASE_URL"
-import { MyGameData } from "../interfaces/props"
+import { BASE_URL } from "../../BASE_URL"
+import { MyGameData } from "../../interfaces/props"
 
 export const getBookingForUserForToday = (
   user: string

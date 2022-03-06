@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native"
 import { SharedElement } from "react-navigation-shared-element"
 
 import { colors } from "../../assets/colors"
-import { reserve } from "../../services/reserve"
+import { reserve } from "../../services/bookings/reserve"
 import { CheckoutProps } from "../../interfaces/props"
 
 import Loader from "../../components/Loader"

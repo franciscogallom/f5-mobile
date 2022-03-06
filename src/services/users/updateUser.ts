@@ -1,6 +1,6 @@
 import axios from "axios"
-import { BASE_URL } from "../BASE_URL"
-import { UpdateUserResponse } from "../interfaces/interfaces"
+import { BASE_URL } from "../../BASE_URL"
+import { UpdateUserResponse } from "../../interfaces/interfaces"
 
 export const updateUser = async (
   user: string,
