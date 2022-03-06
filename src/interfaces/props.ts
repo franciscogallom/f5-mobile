@@ -1,7 +1,7 @@
 import { Animated } from "react-native"
 import {
   Field,
-  RootStackParamList,
+  HomeStackParamList,
   SignUpScreenNavigation,
   LogInScreenNavigation,
   FieldListScreenNavigation,
@@ -54,7 +54,7 @@ export interface SwipeButtonProps {
 
 export interface CheckoutProps {
   navigation: HomeScreenNavigation
-  route: RouteProp<RootStackParamList, "Checkout">
+  route: RouteProp<HomeStackParamList, "Checkout">
 }
 
 export interface MyGameData {
@@ -112,7 +112,7 @@ export interface InputProps {
 
 export interface FieldDetailsProps {
   navigation: HomeScreenNavigation
-  route: RouteProp<RootStackParamList, "FieldDetails">
+  route: RouteProp<HomeStackParamList, "FieldDetails">
 }
 
 export interface SignUpScreenNavigationProp {
@@ -125,7 +125,7 @@ export interface LogInScreenNavigationProp {
 
 export interface FieldListScreenNavigationProp {
   navigation: FieldListScreenNavigation
-  route: RouteProp<RootStackParamList, "FieldList">
+  route: RouteProp<HomeStackParamList, "FieldList">
 }
 
 export interface NotFoundScreenNavigationProp {

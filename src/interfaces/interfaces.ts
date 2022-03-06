@@ -55,7 +55,7 @@ export interface Checkout {
   hour: string
 }
 
-export type RootStackParamList = {
+export type HomeStackParamList = {
   Home: undefined
   FieldDetails: Field
   FieldList: { search: string }
@@ -63,42 +63,42 @@ export type RootStackParamList = {
   Checkout: Checkout
 }
 
-type RootStackParamList2 = {
+type HomeStackParamList2 = {
   LogIn: undefined
   SignUp: undefined
 }
 
-type RootStackParamList3 = {
+type ProfileStackParamList = {
   Profile: undefined
   NotFound: undefined
 }
 
 export type SignUpScreenNavigation = StackNavigationProp<
-  RootStackParamList2,
+  HomeStackParamList2,
   "SignUp"
 >
 
 export type LogInScreenNavigation = StackNavigationProp<
-  RootStackParamList2,
+  HomeStackParamList2,
   "LogIn"
 >
 
 export type FieldListScreenNavigation = StackNavigationProp<
-  RootStackParamList,
+  HomeStackParamList,
   "FieldList"
 >
 
 export type NotFoundScreenNavigation = StackNavigationProp<
-  RootStackParamList,
+  HomeStackParamList,
   "NotFound"
 >
 
 export type HomeScreenNavigation = StackNavigationProp<
-  RootStackParamList,
+  HomeStackParamList,
   "Home"
 >
 
 export type ProfileScreenNavigation = StackNavigationProp<
-  RootStackParamList3,
+  ProfileStackParamList,
   "Profile"
 >
