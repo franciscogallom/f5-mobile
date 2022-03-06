@@ -2,14 +2,14 @@ import React, { FC, useState } from "react"
 import { View, Text, StyleSheet } from "react-native"
 import { SharedElement } from "react-navigation-shared-element"
 
-import { colors } from "../assets/colors"
-import { reserve } from "../services/reserve"
-import { CheckoutProps } from "../interfaces/props"
+import { colors } from "../../assets/colors"
+import { reserve } from "../../services/reserve"
+import { CheckoutProps } from "../../interfaces/props"
 
-import Loader from "../components/Loader"
-import GoBack from "../components/Action"
-import SwipeButton from "../components/SwipeButton"
-import { getUsername } from "../services/getUsername"
+import Loader from "../../components/Loader"
+import GoBack from "../../components/Action"
+import SwipeButton from "../../components/SwipeButton"
+import { getUsername } from "../../services/getUsername"
 
 const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
   const { id, name, price, location, numberOfField, hour } = route.params

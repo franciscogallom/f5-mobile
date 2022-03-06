@@ -1,13 +1,13 @@
 import React, { FC } from "react"
 import { createSharedElementStackNavigator } from "react-navigation-shared-element"
 
-import LogIn from "../screens/LogIn"
-import SignUp from "../screens/SignUp"
-import Home from "../screens/Home"
-import FieldDetails from "../screens/FieldDetails"
+import LogIn from "../screens/HomeStack/LogIn"
+import SignUp from "../screens/HomeStack/SignUp"
+import Home from "../screens/HomeStack/Home"
+import FieldDetails from "../screens/HomeStack/FieldDetails"
 import NotFound from "../screens/NotFound"
-import FieldList from "../screens/FieldList"
-import Checkout from "../screens/Checkout"
+import FieldList from "../screens/HomeStack/FieldList"
+import Checkout from "../screens/HomeStack/Checkout"
 import { getUsername } from "../services/getUsername"
 
 const { Navigator, Screen } = createSharedElementStackNavigator()

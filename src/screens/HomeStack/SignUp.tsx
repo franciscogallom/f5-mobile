@@ -9,19 +9,19 @@ import {
 import { Formik } from "formik"
 import { useDispatch } from "react-redux"
 
-import { colors } from "../assets/colors"
+import { colors } from "../../assets/colors"
 
-import { userSchema } from "../schemas/user"
-import { createUser } from "../services/createUser"
-import { addUser } from "../redux/actions"
-import { storeData } from "../services/storeData"
+import { userSchema } from "../../schemas/user"
+import { createUser } from "../../services/createUser"
+import { addUser } from "../../redux/actions"
+import { storeData } from "../../services/storeData"
 
-import ButtonOne from "../components/ButtonOne"
-import Input from "../components/Input"
-import ErrorText from "../components/ErrorText"
-import GoBack from "../components/Action"
-import { SignUpScreenNavigationProp } from "../interfaces/props"
-import { NewUser } from "../interfaces/interfaces"
+import ButtonOne from "../../components/ButtonOne"
+import Input from "../../components/Input"
+import ErrorText from "../../components/ErrorText"
+import GoBack from "../../components/Action"
+import { SignUpScreenNavigationProp } from "../../interfaces/props"
+import { NewUser } from "../../interfaces/interfaces"
 
 const TIMEOUT = 5000
 

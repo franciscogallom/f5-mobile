@@ -1,20 +1,20 @@
 import React, { FC, useState, useEffect } from "react"
 import { Text, StyleSheet, ScrollView } from "react-native"
 
-import { colors } from "../assets/colors"
-import { getFieldsWithLimit } from "../services/getFieldsWithLimit"
-import { height } from "../assets/dimensions"
-import { Field } from "../interfaces/interfaces"
-import { HomeScreenNavigationProp } from "../interfaces/props"
-import { getUsername } from "../services/getUsername"
+import { colors } from "../../assets/colors"
+import { getFieldsWithLimit } from "../../services/getFieldsWithLimit"
+import { height } from "../../assets/dimensions"
+import { Field } from "../../interfaces/interfaces"
+import { HomeScreenNavigationProp } from "../../interfaces/props"
+import { getUsername } from "../../services/getUsername"
 
-import Search from "../components/Search"
-import Carousel from "../components/Carousel"
-import Loader from "../components/Loader"
-import Footer from "../components/Footer"
-import Banner from "../components/Banner"
-import RentPlayRepeat from "../components/RentPlayRepeat"
-import MyGame from "../components/MyGame"
+import Search from "../../components/Search"
+import Carousel from "../../components/Carousel"
+import Loader from "../../components/Loader"
+import Footer from "../../components/Footer"
+import Banner from "../../components/Banner"
+import RentPlayRepeat from "../../components/RentPlayRepeat"
+import MyGame from "../../components/MyGame"
 
 const Home: FC<HomeScreenNavigationProp> = ({
   navigation,

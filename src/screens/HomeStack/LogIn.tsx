@@ -9,16 +9,16 @@ import {
 import { Formik } from "formik"
 import { useDispatch } from "react-redux"
 
-import { colors } from "../assets/colors"
-import { handleLogIn } from "../services/handleLogIn"
-import { addUser } from "../redux/actions"
-import { storeData } from "../services/storeData"
-import { LogInScreenNavigationProp } from "../interfaces/props"
+import { colors } from "../../assets/colors"
+import { handleLogIn } from "../../services/handleLogIn"
+import { addUser } from "../../redux/actions"
+import { storeData } from "../../services/storeData"
+import { LogInScreenNavigationProp } from "../../interfaces/props"
 
-import ButtonOne from "../components/ButtonOne"
-import Input from "../components/Input"
-import ErrorText from "../components/ErrorText"
-import Action from "../components/Action"
+import ButtonOne from "../../components/ButtonOne"
+import Input from "../../components/Input"
+import ErrorText from "../../components/ErrorText"
+import Action from "../../components/Action"
 
 const LogIn: FC<LogInScreenNavigationProp> = ({
   navigation,

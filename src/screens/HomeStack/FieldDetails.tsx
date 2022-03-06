@@ -7,15 +7,15 @@ import * as Animatable from "react-native-animatable"
 import * as Linking from "expo-linking"
 import { useIsFocused } from "@react-navigation/native"
 
-import { colors } from "../assets/colors"
-import { height, width } from "../assets/dimensions"
-import { images } from "../assets/images"
-import { getBookingsByFieldUsername } from "../services/getBookingsByFieldUsername"
-import { FieldDetailsProps } from "../interfaces/props"
-import { getBookingForUserForToday } from "../services/getBookingForUserForToday"
-import { getUsername } from "../services/getUsername"
+import { colors } from "../../assets/colors"
+import { height, width } from "../../assets/dimensions"
+import { images } from "../../assets/images"
+import { getBookingsByFieldUsername } from "../../services/getBookingsByFieldUsername"
+import { FieldDetailsProps } from "../../interfaces/props"
+import { getBookingForUserForToday } from "../../services/getBookingForUserForToday"
+import { getUsername } from "../../services/getUsername"
 
-import Bookings, { fadeInBottom, DURATION } from "../components/Bookings"
+import Bookings, { fadeInBottom, DURATION } from "../../components/Bookings"
 
 const MARGIN_VERTICAL = 5
 
