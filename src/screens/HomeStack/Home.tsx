@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from "react"
 import { Text, StyleSheet, ScrollView } from "react-native"
+import { AntDesign } from "@expo/vector-icons"
 
 import { colors } from "../../assets/colors"
 import { getFieldsWithLimit } from "../../services/fields/getFieldsWithLimit"
@@ -36,7 +37,12 @@ const Home: FC<HomeScreenNavigationProp> = ({
     <Loader />
   ) : (
     <ScrollView style={styles.container}>
-      <Text style={styles.user}>{user} ⚽</Text>
+      <AntDesign
+        style={styles.buttonMenu}
+        name="menu-fold"
+        size={24}
+        color={colors.grey}
+      />
       <MyGame user={user} navigation={navigation} />
       <Search
         setSearch={setSearch}
@@ -59,15 +65,14 @@ const Home: FC<HomeScreenNavigationProp> = ({
 }
 
 const styles = StyleSheet.create({
+  buttonMenu: {
+    marginTop: height * 0.03,
+    marginBottom: height * 0.01,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.primary,
     padding: 15,
-  },
-  user: {
-    color: colors.secondary,
-    fontFamily: "poppins-bold-italic",
-    marginTop: height * 0.05,
   },
   betterFields: {
     color: colors.secondary,
