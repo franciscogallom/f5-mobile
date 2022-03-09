@@ -117,16 +117,6 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
 
   return (
     <View style={styles.container}>
-      <View style={styles.userContainer}>
-        <AntDesign
-          style={{ marginRight: 10 }}
-          size={30}
-          name="user"
-          color={colors.secondary}
-        />
-        <Text style={styles.user}>{user}.</Text>
-      </View>
-
       {/* Change password */}
       <View style={styles.section}>
         {changePass ? (
@@ -385,16 +375,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     padding: 10,
     paddingTop: height * 0.075,
-  },
-  userContainer: {
-    flexDirection: "row",
-    alignContent: "center",
-    marginBottom: height * 0.025,
-  },
-  user: {
-    color: colors.secondary,
-    fontSize: 24,
-    fontFamily: "poppins-extrabold-italic",
   },
   section: {
     marginBottom: height * 0.025,
