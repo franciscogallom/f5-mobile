@@ -16,7 +16,7 @@ import { height } from "../assets/dimensions"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { useDispatch } from "react-redux"
 import { removeUser } from "../redux/actions"
-import { removeUsername } from "../asyncStorage/removeUsername"
+import { removeItemFromAsyncStorage } from "../asyncStorage/removeItem"
 
 const { Navigator, Screen } = createDrawerNavigator()
 
@@ -109,7 +109,7 @@ const AppNavigator: FC = () => {
         <TouchableOpacity
           onPress={() => {
             dispatch(removeUser())
-            removeUsername()
+            removeItemFromAsyncStorage("username")
           }}
           style={styles.logoutContainer}
         >

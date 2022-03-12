@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux"
 import { colors } from "../../assets/colors"
 import { handleLogIn } from "../../services/users/handleLogIn"
 import { addUser } from "../../redux/actions"
-import { saveUsername } from "../../asyncStorage/saveUsername"
+import { saveItemInAsyncStorage } from "../../asyncStorage/saveItem"
 import { LogInScreenNavigationProp } from "../../interfaces/props"
 
 import ButtonOne from "../../components/ButtonOne"
@@ -38,7 +38,7 @@ const LogIn: FC<LogInScreenNavigationProp> = ({
         handleLogIn(values)
           .then(() => {
             dispatch(addUser(values.user))
-            saveUsername(values.user)
+            saveItemInAsyncStorage("username", values.user)
           })
           .catch((e) => {
             setLogInStatus(e.response.data.message || "algo salio mal..")
