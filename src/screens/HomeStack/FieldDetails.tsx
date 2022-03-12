@@ -13,7 +13,7 @@ import { images } from "../../assets/images"
 import { getBookingsByFieldUsername } from "../../services/bookings/getBookingsByFieldUsername"
 import { FieldDetailsProps } from "../../interfaces/props"
 import { getBookingForUserForToday } from "../../services/bookings/getBookingForUserForToday"
-import { getUsername } from "../../services/getUsername"
+import { getUsername } from "../../redux/getUsername"
 
 import Bookings, { fadeInBottom, DURATION } from "../../components/Bookings"
 

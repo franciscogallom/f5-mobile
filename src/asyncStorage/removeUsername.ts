@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-export const storeData = async (value: string): Promise<void> => {
+export const removeUsername = async (): Promise<void> => {
   try {
-    await AsyncStorage.setItem("username", value)
+    await AsyncStorage.removeItem("username")
   } catch (e) {
     console.log(e)
   }

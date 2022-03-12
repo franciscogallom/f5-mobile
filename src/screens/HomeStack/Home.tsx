@@ -7,7 +7,7 @@ import { getFieldsWithLimit } from "../../services/fields/getFieldsWithLimit"
 import { height } from "../../assets/dimensions"
 import { Field } from "../../interfaces/interfaces"
 import { HomeScreenNavigationProp } from "../../interfaces/props"
-import { getUsername } from "../../services/getUsername"
+import { getUsername } from "../../redux/getUsername"
 
 import Search from "../../components/Search"
 import Carousel from "../../components/Carousel"

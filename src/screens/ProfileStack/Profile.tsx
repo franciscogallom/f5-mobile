@@ -11,7 +11,7 @@ import { getUserData } from "../../services/users/getUserData"
 import ButtonOne from "../../components/ButtonOne"
 import { updateUser } from "../../services/users/updateUser"
 import { UpdateUserResponse } from "../../interfaces/interfaces"
-import { getUsername } from "../../services/getUsername"
+import { getUsername } from "../../redux/getUsername"
 import { forgotPassword } from "../../services/users/forgotPassword"
 import { ProfileScreenNavigationProp } from "../../interfaces/props"
 

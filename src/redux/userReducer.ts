@@ -30,6 +30,9 @@ export const userReducer = (
     case "MODIFY_USER": {
       return { ...state, username: action.payload }
     }
+    case "REMOVE_USER": {
+      return { ...state, username: "" }
+    }
     default:
       return state
   }

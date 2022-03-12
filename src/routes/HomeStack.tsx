@@ -8,7 +8,7 @@ import FieldDetails from "../screens/HomeStack/FieldDetails"
 import NotFound from "../screens/NotFound"
 import FieldList from "../screens/HomeStack/FieldList"
 import Checkout from "../screens/HomeStack/Checkout"
-import { getUsername } from "../services/getUsername"
+import { getUsername } from "../redux/getUsername"
 
 const { Navigator, Screen } = createSharedElementStackNavigator()
 

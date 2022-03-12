@@ -14,7 +14,7 @@ import { colors } from "../../assets/colors"
 import { userSchema } from "../../schemas/user"
 import { createUser } from "../../services/users/createUser"
 import { addUser } from "../../redux/actions"
-import { storeData } from "../../services/storeData"
+import { saveUsername } from "../../asyncStorage/saveUsername"
 
 import ButtonOne from "../../components/ButtonOne"
 import Input from "../../components/Input"
@@ -46,7 +46,7 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
         } else {
           if (result) {
             dispatch(addUser(result.user))
-            storeData(result.user)
+            saveUsername(result.user)
           }
         }
       })

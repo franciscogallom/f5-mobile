@@ -9,7 +9,7 @@ import { CheckoutProps } from "../../interfaces/props"
 import Loader from "../../components/Loader"
 import GoBack from "../../components/Action"
 import SwipeButton from "../../components/SwipeButton"
-import { getUsername } from "../../services/getUsername"
+import { getUsername } from "../../redux/getUsername"
 
 const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
   const { id, name, price, location, numberOfField, hour } = route.params

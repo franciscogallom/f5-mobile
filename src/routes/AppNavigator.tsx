@@ -10,15 +10,20 @@ import { AntDesign } from "@expo/vector-icons"
 
 import HomeStack from "./HomeStack"
 import ProfileStack from "./ProfileStack"
-import { getUsername } from "../services/getUsername"
+import { getUsername } from "../redux/getUsername"
 import { colors } from "../assets/colors"
 import { height } from "../assets/dimensions"
 import { TouchableOpacity } from "react-native-gesture-handler"
+import { useDispatch } from "react-redux"
+import { removeUser } from "../redux/actions"
+import { removeUsername } from "../asyncStorage/removeUsername"
 
 const { Navigator, Screen } = createDrawerNavigator()
 
 const AppNavigator: FC = () => {
   const user = getUsername()
+
+  const dispatch = useDispatch()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const CustomDrawerContent = ({ navigation }: any) => {
@@ -102,7 +107,10 @@ const AppNavigator: FC = () => {
 
         {/* Log Out */}
         <TouchableOpacity
-          onPress={() => alert("LogOut")}
+          onPress={() => {
+            dispatch(removeUser())
+            removeUsername()
+          }}
           style={styles.logoutContainer}
         >
           <AntDesign
