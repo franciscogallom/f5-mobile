@@ -8,17 +8,22 @@ import { height } from "../../assets/dimensions"
 import Input from "../../components/Input"
 import { UserData } from "../../interfaces/interfaces"
 import { getUserData } from "../../services/users/getUserData"
+import { removeAccount } from "../../services/users/removeAccount"
 import ButtonOne from "../../components/ButtonOne"
 import { updateUser } from "../../services/users/updateUser"
 import { UpdateUserResponse } from "../../interfaces/interfaces"
 import { getUsername } from "../../redux/getUsername"
 import { forgotPassword } from "../../services/users/forgotPassword"
 import { ProfileScreenNavigationProp } from "../../interfaces/props"
+import { useDispatch } from "react-redux"
+import { removeUser } from "../../redux/actions"
+import { removeItemFromAsyncStorage } from "../../asyncStorage/removeItem"
 
 const Profile: FC<ProfileScreenNavigationProp> = ({
   navigation,
 }: ProfileScreenNavigationProp) => {
   const user = getUsername()
+  const dispatch = useDispatch()
 
   const [userData, setUserData] = useState<UserData>()
   const [changePass, setChangePass] = useState(false)
@@ -103,6 +108,36 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
       })
       .catch((error) => {
         console.log(error)
+        Toast.show({
+          type: "error",
+          position: "bottom",
+          text1: "Algo salió mal...",
+          text2: "Vuelve a intentarlo en unos instantes.",
+        })
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }
+
+  const handleDeleteAccount = () => {
+    setLoading(true)
+    removeAccount(user, passToDeleteAccount)
+      .then((res) => {
+        if (res.message) {
+          Toast.show({
+            type: "error",
+            position: "bottom",
+            text1: res.message,
+            text2: "Vuelve a intentarlo.",
+          })
+        } else {
+          dispatch(removeUser())
+          removeItemFromAsyncStorage("username")
+          navigation.navigate("Home")
+        }
+      })
+      .catch(() => {
         Toast.show({
           type: "error",
           position: "bottom",
@@ -317,7 +352,6 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
       </View>
 
       {/* Delete account */}
-      {/* TO-DO: add functionality */}
       <View style={styles.section}>
         {deleteAccount ? (
           <>
@@ -343,7 +377,7 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
             />
             <ButtonOne
               text="eliminar"
-              handleTap={() => alert(passToDeleteAccount)}
+              handleTap={() => handleDeleteAccount()}
               withoutMarginHorizontal
               loading={loading}
             />

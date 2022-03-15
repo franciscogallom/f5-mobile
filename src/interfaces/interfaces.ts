@@ -71,6 +71,7 @@ type HomeStackParamList2 = {
 type ProfileStackParamList = {
   Profile: undefined
   NotFound: undefined
+  Home: undefined
 }
 
 export type SignUpScreenNavigation = StackNavigationProp<
