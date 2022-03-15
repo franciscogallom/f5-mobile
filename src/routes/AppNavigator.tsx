@@ -141,7 +141,7 @@ const AppNavigator: FC = () => {
           name="Home"
           component={HomeStack}
           options={({ route }) => {
-            const routeName = getFocusedRouteNameFromRoute(route)
+            const routeName = getFocusedRouteNameFromRoute(route) || "LogIn"
             if (routeName === "LogIn" || routeName === "SignUp") {
               return { swipeEnabled: false }
             } else {
