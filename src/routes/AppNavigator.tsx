@@ -1,5 +1,8 @@
 import React, { FC, useState } from "react"
-import { NavigationContainer } from "@react-navigation/native"
+import {
+  getFocusedRouteNameFromRoute,
+  NavigationContainer,
+} from "@react-navigation/native"
 import {
   createDrawerNavigator,
   DrawerItem,
@@ -134,7 +137,18 @@ const AppNavigator: FC = () => {
           <CustomDrawerContent navigation={navigation} />
         )}
       >
-        <Screen name="Home" component={HomeStack} />
+        <Screen
+          name="Home"
+          component={HomeStack}
+          options={({ route }) => {
+            const routeName = getFocusedRouteNameFromRoute(route)
+            if (routeName === "LogIn" || routeName === "SignUp") {
+              return { swipeEnabled: false }
+            } else {
+              return { swipeEnabled: true }
+            }
+          }}
+        />
         <Screen name="Profile" component={ProfileStack} />
       </Navigator>
     </NavigationContainer>
