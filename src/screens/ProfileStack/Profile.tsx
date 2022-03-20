@@ -100,11 +100,20 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
     setLoading(true)
     forgotPassword(userData?.email)
       .then((res) => {
-        Toast.show({
-          position: "bottom",
-          text1: "Operación exitosa!",
-          text2: res,
-        })
+        if (res.error) {
+          Toast.show({
+            type: "error",
+            position: "bottom",
+            text1: "Algo salió mal...",
+            text2: res.message,
+          })
+        } else {
+          Toast.show({
+            position: "bottom",
+            text1: "Operación exitosa!",
+            text2: res.message,
+          })
+        }
       })
       .catch((error) => {
         console.log(error)
