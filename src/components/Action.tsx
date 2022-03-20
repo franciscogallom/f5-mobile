@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons"
 import { colors } from "../assets/colors"
 import { ActionProps } from "../interfaces/props"
 
-const GoBack: FC<ActionProps> = ({
+const Action: FC<ActionProps> = ({
   text,
   handleTap,
   icon,
@@ -16,12 +16,12 @@ const GoBack: FC<ActionProps> = ({
       <AntDesign
         name={icon}
         size={24}
-        color={secondary ? colors.primary : colors.tertiary}
+        color={secondary ? colors.tertiaryDark : colors.tertiary}
       />
       <Text
         style={{
           marginLeft: 5,
-          color: `${secondary ? colors.primary : colors.tertiary}`,
+          color: `${secondary ? colors.tertiaryDark : colors.tertiary}`,
           fontFamily: "poppins-extrabold-italic",
         }}
       >
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default GoBack
+export default Action
