@@ -6,8 +6,7 @@ interface Response {
   message: string
 }
 
-// TO-DO: delete 'undefined' when Drawer Navigation is implemented.
-export const forgotPassword = (email: string | undefined): Promise<Response> =>
+export const forgotPassword = (email: string): Promise<Response> =>
   axios
     .put(`${BASE_URL}/users/forgot-password`, {
       email,

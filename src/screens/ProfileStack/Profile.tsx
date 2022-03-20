@@ -13,7 +13,6 @@ import ButtonOne from "../../components/ButtonOne"
 import { updateUser } from "../../services/users/updateUser"
 import { UpdateUserResponse } from "../../interfaces/interfaces"
 import { getUsername } from "../../redux/getUsername"
-import { forgotPassword } from "../../services/users/forgotPassword"
 import { ProfileScreenNavigationProp } from "../../interfaces/props"
 import { useDispatch } from "react-redux"
 import { removeUser } from "../../redux/actions"
@@ -29,7 +28,6 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
   const [changePass, setChangePass] = useState(false)
   const [changePhone, setChangePhone] = useState(false)
   const [changeEmail, setChangeEmail] = useState(false)
-  const [forgotPass, setForgotPass] = useState(false)
   const [loading, setLoading] = useState(false)
   const [deleteAccount, setDeleteAccount] = useState(false)
   const [reload, setReload] = useState(false)
@@ -69,7 +67,6 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
             text1: "Operación exitosa!",
             text2: res.message,
           })
-          setForgotPass(false)
           setChangePass(false)
           setChangePhone(false)
           setChangeEmail(false)
@@ -88,38 +85,6 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
           position: "bottom",
           text1: "Algo salió mal...",
           text2: "No se pudieron actualizar los datos.",
-        })
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }
-
-  const handleForgotPassword = () => {
-    setLoading(true)
-    forgotPassword(userData?.email)
-      .then((res) => {
-        if (res.error) {
-          Toast.show({
-            type: "error",
-            position: "bottom",
-            text1: "Algo salió mal...",
-            text2: res.message,
-          })
-        } else {
-          Toast.show({
-            position: "bottom",
-            text1: "Operación exitosa!",
-            text2: res.message,
-          })
-        }
-      })
-      .catch(() => {
-        Toast.show({
-          type: "error",
-          position: "bottom",
-          text1: "Algo salió mal...",
-          text2: "Vuelve a intentarlo en unos instantes.",
         })
       })
       .finally(() => {
@@ -201,7 +166,6 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
           <TouchableOpacity
             onPress={() => {
               setChangePass(true)
-              setForgotPass(false)
               setChangePhone(false)
               setChangeEmail(false)
               setDeleteAccount(false)
@@ -209,47 +173,6 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
             style={styles.changeContainer}
           >
             <Text style={styles.title}>Cambiar contraseña.</Text>
-            <AntDesign name="down" size={24} color={colors.grey} />
-          </TouchableOpacity>
-        )}
-      </View>
-
-      {/* Forgot password */}
-      <View style={styles.section}>
-        {forgotPass ? (
-          <>
-            <TouchableOpacity
-              onPress={() => setForgotPass(false)}
-              style={styles.changeContainer}
-            >
-              <Text style={{ ...styles.title, color: colors.tertiaryDark }}>
-                Olvide mi contraseña.
-              </Text>
-              <AntDesign name="up" size={24} color={colors.tertiaryDark} />
-            </TouchableOpacity>
-            <Text style={styles.text}>
-              Podemos generar una nueva clave y enviarla a{" "}
-              <Text style={styles.textBold}>{userData?.email}</Text>
-            </Text>
-            <ButtonOne
-              text="Enviar"
-              handleTap={() => handleForgotPassword()}
-              withoutMarginHorizontal
-              loading={loading}
-            />
-          </>
-        ) : (
-          <TouchableOpacity
-            onPress={() => {
-              setForgotPass(true)
-              setChangePass(false)
-              setChangePhone(false)
-              setChangeEmail(false)
-              setDeleteAccount(false)
-            }}
-            style={styles.changeContainer}
-          >
-            <Text style={styles.title}>Olvide mi contraseña.</Text>
             <AntDesign name="down" size={24} color={colors.grey} />
           </TouchableOpacity>
         )}
@@ -296,7 +219,6 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
             onPress={() => {
               setChangePhone(true)
               setChangePass(false)
-              setForgotPass(false)
               setChangeEmail(false)
               setDeleteAccount(false)
             }}
@@ -346,7 +268,6 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
             onPress={() => {
               setChangeEmail(true)
               setChangePass(false)
-              setForgotPass(false)
               setChangePhone(false)
               setDeleteAccount(false)
             }}
@@ -393,7 +314,6 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
           <TouchableOpacity
             onPress={() => {
               setDeleteAccount(true)
-              setForgotPass(false)
               setChangePass(false)
               setChangePhone(false)
               setChangeEmail(false)
