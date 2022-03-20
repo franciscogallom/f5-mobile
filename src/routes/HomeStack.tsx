@@ -3,6 +3,7 @@ import { createSharedElementStackNavigator } from "react-navigation-shared-eleme
 
 import LogIn from "../screens/HomeStack/LogIn"
 import SignUp from "../screens/HomeStack/SignUp"
+import ForgotPassword from "../screens/HomeStack/ForgotPassword"
 import Home from "../screens/HomeStack/Home"
 import FieldDetails from "../screens/HomeStack/FieldDetails"
 import NotFound from "../screens/NotFound"
@@ -69,6 +70,7 @@ const HomeStack: FC = () => {
         <>
           <Screen name="LogIn" component={LogIn} />
           <Screen name="SignUp" component={SignUp} />
+          <Screen name="ForgotPassword" component={ForgotPassword} />
         </>
       )}
     </Navigator>

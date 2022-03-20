@@ -8,13 +8,14 @@ import {
   NotFoundScreenNavigation,
   HomeScreenNavigation,
   ProfileScreenNavigation,
+  ForgotPasswordScreenNavigation,
 } from "./interfaces"
 import { RouteProp } from "@react-navigation/native"
 import { Dispatch, SetStateAction } from "react"
 
 export interface ActionProps {
   text: string
-  icon: "back" | "adduser"
+  icon: "back" | "adduser" | "question"
   handleTap: () => void
   secondary?: boolean
 }
@@ -121,6 +122,10 @@ export interface SignUpScreenNavigationProp {
 
 export interface LogInScreenNavigationProp {
   navigation: LogInScreenNavigation
+}
+
+export interface ForgotPasswordScreenNavigationProp {
+  navigation: ForgotPasswordScreenNavigation
 }
 
 export interface FieldListScreenNavigationProp {

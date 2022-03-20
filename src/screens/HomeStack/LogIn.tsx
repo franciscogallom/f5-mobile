@@ -74,6 +74,12 @@ const LogIn: FC<LogInScreenNavigationProp> = ({
                 icon="adduser"
                 handleTap={() => navigation.navigate("SignUp")}
               />
+              <Action
+                text="olvide mi contraseña"
+                icon="question"
+                handleTap={() => navigation.navigate("ForgotPassword")}
+                secondary
+              />
             </View>
           </TouchableWithoutFeedback>
         </>

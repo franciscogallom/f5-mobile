@@ -66,6 +66,7 @@ export type HomeStackParamList = {
 type HomeStackParamList2 = {
   LogIn: undefined
   SignUp: undefined
+  ForgotPassword: undefined
 }
 
 type ProfileStackParamList = {
@@ -82,6 +83,11 @@ export type SignUpScreenNavigation = StackNavigationProp<
 export type LogInScreenNavigation = StackNavigationProp<
   HomeStackParamList2,
   "LogIn"
+>
+
+export type ForgotPasswordScreenNavigation = StackNavigationProp<
+  HomeStackParamList2,
+  "ForgotPassword"
 >
 
 export type FieldListScreenNavigation = StackNavigationProp<
