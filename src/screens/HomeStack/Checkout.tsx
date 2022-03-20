@@ -26,8 +26,7 @@ const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
           "Genial 😃, tu reserva ya esta agendada! En instantes te redigiremos al Home."
         )
       )
-      .catch((e) => {
-        console.log(e)
+      .catch(() => {
         setMessage(
           "Algo salió mal 😟, o quizas alguien reservo justo antes que vos! Vuelve a intentarlo en un instante."
         )

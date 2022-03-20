@@ -44,8 +44,7 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
       .then((res) => {
         setUserData(res)
       })
-      .catch((e) => {
-        console.log(e)
+      .catch(() => {
         navigation.navigate("NotFound")
       })
   }, [reload])
@@ -115,8 +114,7 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
           })
         }
       })
-      .catch((error) => {
-        console.log(error)
+      .catch(() => {
         Toast.show({
           type: "error",
           position: "bottom",
