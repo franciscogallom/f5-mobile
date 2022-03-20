@@ -39,6 +39,7 @@ const ForgotPassword: FC<ForgotPasswordScreenNavigationProp> = ({
             text1: "Operación exitosa!",
             text2: res.message,
           })
+          setEmail("")
         }
       })
       .catch(() => {
