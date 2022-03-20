@@ -4,7 +4,6 @@ export interface NewUser {
   user: string
   password: string
   email: string
-  emailVerification: string
   phone: string
 }
 
@@ -24,7 +23,6 @@ export interface UpdateUserResponse {
 
 export interface CreateUserResponse {
   thereIsExistingData: boolean
-  validationMessage: string
   result: {
     user: string
     email: string
@@ -32,6 +30,11 @@ export interface CreateUserResponse {
     password: string
     created: string
   } | null
+}
+
+export interface VerifyUserDataResponse {
+  thereIsExistingData: boolean
+  validationMessage: string
 }
 
 export interface Field {
@@ -63,10 +66,16 @@ export type HomeStackParamList = {
   Checkout: Checkout
 }
 
-type HomeStackParamList2 = {
+export type HomeStackParamList2 = {
   LogIn: undefined
   SignUp: undefined
   ForgotPassword: undefined
+  EmailVerification: {
+    user: string
+    password: string
+    email: string
+    phone: string
+  }
 }
 
 type ProfileStackParamList = {
@@ -88,6 +97,11 @@ export type LogInScreenNavigation = StackNavigationProp<
 export type ForgotPasswordScreenNavigation = StackNavigationProp<
   HomeStackParamList2,
   "ForgotPassword"
+>
+
+export type EmailVerificationScreenNavigation = StackNavigationProp<
+  HomeStackParamList2,
+  "EmailVerification"
 >
 
 export type FieldListScreenNavigation = StackNavigationProp<

@@ -2,6 +2,7 @@ import { Animated } from "react-native"
 import {
   Field,
   HomeStackParamList,
+  HomeStackParamList2,
   SignUpScreenNavigation,
   LogInScreenNavigation,
   FieldListScreenNavigation,
@@ -9,13 +10,14 @@ import {
   HomeScreenNavigation,
   ProfileScreenNavigation,
   ForgotPasswordScreenNavigation,
+  EmailVerificationScreenNavigation,
 } from "./interfaces"
 import { RouteProp } from "@react-navigation/native"
 import { Dispatch, SetStateAction } from "react"
 
 export interface ActionProps {
   text: string
-  icon: "back" | "adduser" | "question"
+  icon: "back" | "adduser" | "question" | "sync"
   handleTap: () => void
   secondary?: boolean
 }
@@ -104,7 +106,7 @@ export interface InputProps {
   value: string
   placeholder: string
   secureTextEntry?: boolean
-  icon: "user" | "mail" | "lock" | "sync" | "mobile1" | "unlock"
+  icon: "user" | "mail" | "lock" | "sync" | "mobile1" | "unlock" | "Safety"
   setValue: (value: string) => void
   onBlur?: ((e: unknown) => void) | undefined
   keyboardType?: "numeric" | "email-address"
@@ -126,6 +128,11 @@ export interface LogInScreenNavigationProp {
 
 export interface ForgotPasswordScreenNavigationProp {
   navigation: ForgotPasswordScreenNavigation
+}
+
+export interface EmailVerificationScreenNavigationProp {
+  navigation: EmailVerificationScreenNavigation
+  route: RouteProp<HomeStackParamList2, "EmailVerification">
 }
 
 export interface FieldListScreenNavigationProp {

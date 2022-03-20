@@ -5,16 +5,10 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native"
-
 import { Formik } from "formik"
-import { useDispatch } from "react-redux"
 
 import { colors } from "../../assets/colors"
-
 import { userSchema } from "../../schemas/user"
-import { createUser } from "../../services/users/createUser"
-import { addUser } from "../../redux/actions"
-import { saveItemInAsyncStorage } from "../../asyncStorage/saveItem"
 
 import ButtonOne from "../../components/ButtonOne"
 import Input from "../../components/Input"
@@ -22,6 +16,7 @@ import ErrorText from "../../components/ErrorText"
 import GoBack from "../../components/Action"
 import { SignUpScreenNavigationProp } from "../../interfaces/props"
 import { NewUser } from "../../interfaces/interfaces"
+import { verifyUserData } from "../../services/users/verifyUserData"
 
 const TIMEOUT = 5000
 
@@ -32,27 +27,26 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
   const [loading, setLoading] = useState(false)
   const [existingData, setexistingData] = useState("")
 
-  const dispatch = useDispatch()
-
   const handleSignUp = (values: NewUser) => {
     setLoading(true)
-    createUser(values)
-      .then(({ thereIsExistingData, result, validationMessage }) => {
+    verifyUserData(values)
+      .then(({ thereIsExistingData, validationMessage }) => {
         if (thereIsExistingData) {
           setexistingData(validationMessage)
           setTimeout(() => {
             setexistingData("")
           }, TIMEOUT)
         } else {
-          if (result) {
-            dispatch(addUser(result.user))
-            saveItemInAsyncStorage("username", result.user)
-          }
+          navigation.navigate("EmailVerification", {
+            user: values.user,
+            password: values.password,
+            email: values.email,
+            phone: values.phone,
+          })
         }
       })
-      .catch((e) => {
-        console.log(e)
-        setError("algo salio mal..")
+      .catch(() => {
+        setError("algo salió mal..")
         setTimeout(() => {
           setError("")
         }, TIMEOUT)
@@ -66,7 +60,6 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
         user: "",
         password: "",
         email: "",
-        emailVerification: "",
         phone: "",
       }}
       validationSchema={userSchema}
@@ -109,21 +102,6 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
                 keyboardType="email-address"
               />
               {touched.email && <ErrorText text={`${errors.email}`} />}
-              <Input
-                value={values.emailVerification}
-                placeholder="repetir email."
-                icon="sync"
-                setValue={handleChange("emailVerification")}
-                onBlur={
-                  values.emailVerification
-                    ? handleBlur("emailVerification")
-                    : undefined
-                }
-                keyboardType="email-address"
-              />
-              {touched.emailVerification && (
-                <ErrorText text={`${errors.emailVerification}`} />
-              )}
               <Input
                 value={values.phone}
                 placeholder="celular (opcional)."

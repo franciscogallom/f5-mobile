@@ -9,6 +9,7 @@ import FieldDetails from "../screens/HomeStack/FieldDetails"
 import NotFound from "../screens/NotFound"
 import FieldList from "../screens/HomeStack/FieldList"
 import Checkout from "../screens/HomeStack/Checkout"
+import EmailVerification from "../screens/HomeStack/EmailVerification"
 import { getUsername } from "../redux/getUsername"
 
 const { Navigator, Screen } = createSharedElementStackNavigator()
@@ -71,6 +72,7 @@ const HomeStack: FC = () => {
           <Screen name="LogIn" component={LogIn} />
           <Screen name="SignUp" component={SignUp} />
           <Screen name="ForgotPassword" component={ForgotPassword} />
+          <Screen name="EmailVerification" component={EmailVerification} />
         </>
       )}
     </Navigator>
