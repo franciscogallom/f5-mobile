@@ -3,13 +3,14 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import Toast from "react-native-toast-message"
 import { AntDesign } from "@expo/vector-icons"
 
+import Input from "../../components/Input"
+import Action from "../../components/Action"
+import ButtonOne from "../../components/ButtonOne"
 import { colors } from "../../assets/colors"
 import { height } from "../../assets/dimensions"
-import Input from "../../components/Input"
 import { UserData } from "../../interfaces/interfaces"
 import { getUserData } from "../../services/users/getUserData"
 import { removeAccount } from "../../services/users/removeAccount"
-import ButtonOne from "../../components/ButtonOne"
 import { updateUser } from "../../services/users/updateUser"
 import { UpdateUserResponse } from "../../interfaces/interfaces"
 import { getUsername } from "../../redux/getUsername"
@@ -17,6 +18,8 @@ import { ProfileScreenNavigationProp } from "../../interfaces/props"
 import { useDispatch } from "react-redux"
 import { removeUser } from "../../redux/actions"
 import { removeItemFromAsyncStorage } from "../../asyncStorage/removeItem"
+import { getVerificationCode } from "../../services/users/getVerificationCode"
+import { verifyEmailExists } from "../../services/users/verifyEmailExists"
 
 const Profile: FC<ProfileScreenNavigationProp> = ({
   navigation,
@@ -31,6 +34,9 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
   const [loading, setLoading] = useState(false)
   const [deleteAccount, setDeleteAccount] = useState(false)
   const [reload, setReload] = useState(false)
+  const [showVerificationCode, setShowVerificationCode] = useState(false)
+  const [verificationCode, setVerificationCode] = useState("")
+  const [generatedCode, setGeneratedCode] = useState("")
   const [currentPass, setCurrentPass] = useState("")
   const [newPass, setNewPass] = useState("")
   const [newPhoneNumber, setNewPhoneNumber] = useState("")
@@ -48,48 +54,60 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
   }, [reload])
 
   const handleUpdate = (
-    attribute: string,
+    attribute: "phone" | "password" | "email",
     data: Record<string, unknown>
   ): void => {
     setLoading(true)
-    updateUser(user, attribute, data)
-      .then((res: UpdateUserResponse) => {
-        if (res.error) {
+    if (attribute === "email" && verificationCode != generatedCode) {
+      Toast.show({
+        type: "error",
+        position: "bottom",
+        text1: "El código es incorrecto.",
+        text2: "Vuelve a intentarlo.",
+      })
+      setLoading(false)
+    } else {
+      updateUser(user, attribute, data)
+        .then((res: UpdateUserResponse) => {
+          if (res.error) {
+            Toast.show({
+              type: "error",
+              position: "bottom",
+              text1: res.message,
+              text2: "Revisa los datos ingresados.",
+            })
+          } else {
+            Toast.show({
+              position: "bottom",
+              text1: "Operación exitosa!",
+              text2: res.message,
+            })
+            setChangePass(false)
+            setChangePhone(false)
+            setChangeEmail(false)
+            setDeleteAccount(false)
+            setNewEmail("")
+            setNewPhoneNumber("")
+            setNewPass("")
+            setCurrentPass("")
+            setPassToDeleteAccount("")
+            setVerificationCode("")
+            setShowVerificationCode(false)
+            setReload((prevState) => !prevState)
+          }
+        })
+        .catch(() => {
           Toast.show({
             type: "error",
             position: "bottom",
-            text1: res.message,
-            text2: "Revisa los datos ingresados.",
+            text1: "Algo salió mal...",
+            text2: "No se pudieron actualizar los datos.",
           })
-        } else {
-          Toast.show({
-            position: "bottom",
-            text1: "Operación exitosa!",
-            text2: res.message,
-          })
-          setChangePass(false)
-          setChangePhone(false)
-          setChangeEmail(false)
-          setDeleteAccount(false)
-          setNewEmail("")
-          setNewPhoneNumber("")
-          setNewPass("")
-          setCurrentPass("")
-          setPassToDeleteAccount("")
-          setReload((prevState) => !prevState)
-        }
-      })
-      .catch(() => {
-        Toast.show({
-          type: "error",
-          position: "bottom",
-          text1: "Algo salió mal...",
-          text2: "No se pudieron actualizar los datos.",
         })
-      })
-      .finally(() => {
-        setLoading(false)
-      })
+        .finally(() => {
+          setLoading(false)
+        })
+    }
   }
 
   const handleDeleteAccount = () => {
@@ -118,6 +136,54 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
         })
       })
       .finally(() => {
+        setLoading(false)
+      })
+  }
+
+  const sendVerificationCode = () => {
+    setLoading(true)
+    verifyEmailExists(newEmail)
+      .then((res) => {
+        if (res.length > 0) {
+          Toast.show({
+            type: "error",
+            position: "bottom",
+            text1: "Hmmm...",
+            text2: res,
+          })
+          setLoading(false)
+        } else {
+          getVerificationCode(newEmail)
+            .then((res) => {
+              Toast.show({
+                position: "bottom",
+                text1: "Código enviado!",
+                text2: "Revisa tu correo.",
+              })
+              setGeneratedCode(res)
+              setShowVerificationCode(true)
+            })
+            .catch(() => {
+              Toast.show({
+                type: "error",
+                position: "bottom",
+                text1: "Algo salió mal al enviar el código...",
+                text2: "Vuelve a intentarlo.",
+              })
+              setShowVerificationCode(false)
+            })
+            .finally(() => {
+              setLoading(false)
+            })
+        }
+      })
+      .catch(() => {
+        Toast.show({
+          type: "error",
+          position: "bottom",
+          text1: "Algo salió mal...",
+          text2: "Revisa el email y vuelve a intentarlo.",
+        })
         setLoading(false)
       })
   }
@@ -247,21 +313,49 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
               </Text>
               <AntDesign name="up" size={24} color={colors.tertiaryDark} />
             </TouchableOpacity>
-            <Input
-              value={newEmail}
-              placeholder={`${userData?.email}`}
-              icon="mail"
-              setValue={(value) => setNewEmail(value)}
-              fullWidth
-              keyboardType="email-address"
-            />
+            {showVerificationCode ? (
+              <>
+                <Input
+                  value={verificationCode}
+                  placeholder="código."
+                  keyboardType="numeric"
+                  icon="Safety"
+                  setValue={(value) => setVerificationCode(value)}
+                />
+                <ButtonOne
+                  text="confirmar"
+                  handleTap={() => handleUpdate("email", { newEmail })}
+                  loading={loading}
+                  withoutMarginHorizontal
+                />
+                <Action
+                  icon="sync"
+                  text=" reenviar código"
+                  handleTap={() => sendVerificationCode()}
+                />
+              </>
+            ) : (
+              <>
+                <Text style={styles.text}>
+                  Enviaremos un código de verificación a tu nuevo correo.
+                </Text>
+                <Input
+                  value={newEmail}
+                  placeholder={`${userData?.email}`}
+                  icon="mail"
+                  setValue={(value) => setNewEmail(value)}
+                  fullWidth
+                  keyboardType="email-address"
+                />
 
-            <ButtonOne
-              text="Confirmar"
-              handleTap={() => handleUpdate("email", { newEmail })}
-              withoutMarginHorizontal
-              loading={loading}
-            />
+                <ButtonOne
+                  text="enviar"
+                  handleTap={() => sendVerificationCode()}
+                  withoutMarginHorizontal
+                  loading={loading}
+                />
+              </>
+            )}
           </>
         ) : (
           <TouchableOpacity
