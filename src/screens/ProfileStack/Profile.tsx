@@ -16,10 +16,11 @@ import { UpdateUserResponse } from "../../interfaces/interfaces"
 import { getUsername } from "../../redux/getUsername"
 import { ProfileScreenNavigationProp } from "../../interfaces/props"
 import { useDispatch } from "react-redux"
-import { removeUser } from "../../redux/actions"
+import { addUser, removeUser } from "../../redux/actions"
 import { removeItemFromAsyncStorage } from "../../asyncStorage/removeItem"
 import { getVerificationCode } from "../../services/users/getVerificationCode"
 import { verifyEmailExists } from "../../services/users/verifyEmailExists"
+import { saveItemInAsyncStorage } from "../../asyncStorage/saveItem"
 
 const Profile: FC<ProfileScreenNavigationProp> = ({
   navigation,
@@ -35,6 +36,8 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
   const [deleteAccount, setDeleteAccount] = useState(false)
   const [reload, setReload] = useState(false)
   const [showVerificationCode, setShowVerificationCode] = useState(false)
+  const [changeUsername, setChangeUsername] = useState(false)
+  const [newUsername, setNewUsername] = useState("")
   const [verificationCode, setVerificationCode] = useState("")
   const [generatedCode, setGeneratedCode] = useState("")
   const [currentPass, setCurrentPass] = useState("")
@@ -54,7 +57,7 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
   }, [reload])
 
   const handleUpdate = (
-    attribute: "phone" | "password" | "email",
+    attribute: "phone" | "password" | "email" | "username",
     data: Record<string, unknown>
   ): void => {
     setLoading(true)
@@ -82,17 +85,23 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
               text1: "Operación exitosa!",
               text2: res.message,
             })
+            if (attribute === "username") {
+              dispatch(addUser(newUsername))
+              saveItemInAsyncStorage("username", newUsername)
+            }
             setChangePass(false)
             setChangePhone(false)
             setChangeEmail(false)
             setDeleteAccount(false)
+            setShowVerificationCode(false)
+            setChangeUsername(false)
+            setNewUsername("")
             setNewEmail("")
             setNewPhoneNumber("")
             setNewPass("")
             setCurrentPass("")
             setPassToDeleteAccount("")
             setVerificationCode("")
-            setShowVerificationCode(false)
             setReload((prevState) => !prevState)
           }
         })
@@ -190,6 +199,53 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
 
   return (
     <View style={styles.container}>
+      {/* Change username */}
+      <View style={styles.section}>
+        {changeUsername ? (
+          <>
+            <TouchableOpacity
+              onPress={() => setChangeUsername(false)}
+              style={styles.changeContainer}
+            >
+              <Text style={{ ...styles.title, color: colors.tertiaryDark }}>
+                Cambiar nombre de usuario.
+              </Text>
+              <AntDesign name="up" size={24} color={colors.tertiaryDark} />
+            </TouchableOpacity>
+            <Text style={styles.text}>
+              Debe contener entre 3 y 20 caracteres.
+            </Text>
+            <Input
+              value={newUsername}
+              placeholder={`${userData?.user}`}
+              icon="user"
+              setValue={(value) => setNewUsername(value)}
+              fullWidth
+            />
+            <ButtonOne
+              text="Confirmar"
+              handleTap={() => handleUpdate("username", { newUsername })}
+              withoutMarginHorizontal
+              loading={loading}
+            />
+          </>
+        ) : (
+          <TouchableOpacity
+            onPress={() => {
+              setChangeUsername(true)
+              setChangePass(false)
+              setChangePhone(false)
+              setChangeEmail(false)
+              setDeleteAccount(false)
+            }}
+            style={styles.changeContainer}
+          >
+            <Text style={styles.title}>Cambiar nombre de usuario.</Text>
+            <AntDesign name="down" size={24} color={colors.grey} />
+          </TouchableOpacity>
+        )}
+      </View>
+
       {/* Change password */}
       <View style={styles.section}>
         {changePass ? (
@@ -235,6 +291,7 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
               setChangePhone(false)
               setChangeEmail(false)
               setDeleteAccount(false)
+              setChangeUsername(false)
             }}
             style={styles.changeContainer}
           >
@@ -287,6 +344,7 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
               setChangePass(false)
               setChangeEmail(false)
               setDeleteAccount(false)
+              setChangeUsername(false)
             }}
             style={styles.changeContainer}
           >
@@ -364,6 +422,7 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
               setChangePass(false)
               setChangePhone(false)
               setDeleteAccount(false)
+              setChangeUsername(false)
             }}
             style={styles.changeContainer}
           >
@@ -411,6 +470,7 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
               setChangePass(false)
               setChangePhone(false)
               setChangeEmail(false)
+              setChangeUsername(false)
             }}
             style={styles.changeContainer}
           >
