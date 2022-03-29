@@ -26,7 +26,7 @@ const Footer: FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    borderTopColor: "#7c7c7c",
+    borderTopColor: colors.shadow,
     borderTopWidth: 0.75,
     marginTop: 75,
     marginBottom: 25,
@@ -38,9 +38,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     fontFamily: "poppins-bold-italic",
-    textDecorationLine: "underline",
-    color: colors.secondary,
-    opacity: 0.75,
+    color: colors.grey,
   },
   image: {
     height: height * 0.1,

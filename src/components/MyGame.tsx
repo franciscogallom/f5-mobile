@@ -133,7 +133,7 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
       </View>
     </Shadow>
   ) : (
-    <Text style={styles.greeting}>hey 👋! se juega?</Text>
+    <Text style={styles.greeting}>hey 👋 ! se juega?</Text>
   )
 }
 

@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderRadius: 5,
     textAlign: "center",
+    overflow: "hidden",
   },
 })
 

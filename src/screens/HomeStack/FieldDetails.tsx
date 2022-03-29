@@ -60,15 +60,16 @@ const FieldDetails: FC<FieldDetailsProps> = ({
   return (
     <View style={styles.container}>
       <Image blurRadius={1} source={images[field.id]} style={styles.image} />
-      <AntDesign
-        name="close"
-        size={28}
-        style={styles.close}
-        color={colors.secondary}
-        onPress={() => {
-          navigation.goBack()
-        }}
-      />
+      <View style={styles.close}>
+        <AntDesign
+          name="close"
+          size={28}
+          color={colors.secondary}
+          onPress={() => {
+            navigation.goBack()
+          }}
+        />
+      </View>
       <SharedElement
         id="details"
         style={[
