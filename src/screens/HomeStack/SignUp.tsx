@@ -13,7 +13,7 @@ import { userSchema } from "../../schemas/user"
 import ButtonOne from "../../components/ButtonOne"
 import Input from "../../components/Input"
 import ErrorText from "../../components/ErrorText"
-import GoBack from "../../components/Action"
+import Action from "../../components/Action"
 import { SignUpScreenNavigationProp } from "../../interfaces/props"
 import { NewUser } from "../../interfaces/interfaces"
 import { verifyUserData } from "../../services/users/verifyUserData"
@@ -118,7 +118,7 @@ const SignUp: FC<SignUpScreenNavigationProp> = ({
                 handleTap={handleSubmit}
                 loading={loading}
               />
-              <GoBack
+              <Action
                 icon="back"
                 text="volver atrás"
                 handleTap={() => navigation.goBack()}
