@@ -7,7 +7,7 @@ import { reserve } from "../../services/bookings/reserve"
 import { CheckoutProps } from "../../interfaces/props"
 
 import Loader from "../../components/Loader"
-import GoBack from "../../components/Action"
+import Action from "../../components/Action"
 import SwipeButton from "../../components/SwipeButton"
 import { getUsername } from "../../redux/getUsername"
 
@@ -58,7 +58,7 @@ const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
           <Text style={styles.textCard}>💲{price}.</Text>
         </View>
         <SwipeButton handleSwipe={handleSwipe} />
-        <GoBack
+        <Action
           icon="back"
           text="volver atrás"
           handleTap={() => navigation.goBack()}
