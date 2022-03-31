@@ -1,7 +1,8 @@
-import React, { FC, useEffect, useState } from "react"
+import React, { FC, useCallback, useEffect, useState } from "react"
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import Toast from "react-native-toast-message"
 import { AntDesign } from "@expo/vector-icons"
+import { useFocusEffect } from "@react-navigation/native"
 
 import Input from "../../components/Input"
 import Action from "../../components/Action"
@@ -45,6 +46,14 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
   const [newPhoneNumber, setNewPhoneNumber] = useState("")
   const [newEmail, setNewEmail] = useState("")
   const [passToDeleteAccount, setPassToDeleteAccount] = useState("")
+
+  useFocusEffect(
+    useCallback(() => {
+      const parent = navigation.getParent()
+      parent?.setOptions({ swipeEnabled: true })
+      return () => parent?.setOptions({ swipeEnabled: false })
+    }, [navigation])
+  )
 
   useEffect(() => {
     getUserData(user)

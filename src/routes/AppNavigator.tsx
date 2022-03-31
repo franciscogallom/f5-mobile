@@ -1,8 +1,5 @@
 import React, { FC, useState } from "react"
-import {
-  getFocusedRouteNameFromRoute,
-  NavigationContainer,
-} from "@react-navigation/native"
+import { NavigationContainer } from "@react-navigation/native"
 import {
   createDrawerNavigator,
   DrawerItem,
@@ -113,6 +110,7 @@ const AppNavigator: FC = () => {
           onPress={() => {
             dispatch(removeUser())
             removeItemFromAsyncStorage("username")
+            navigation.navigate("Home")
           }}
           style={styles.logoutContainer}
         >
@@ -120,7 +118,7 @@ const AppNavigator: FC = () => {
             style={{ marginRight: 10 }}
             name="logout"
             size={24}
-            color="white"
+            color={colors.grey}
           />
           <Text style={styles.logout}>Cerrar sesión.</Text>
         </TouchableOpacity>
@@ -140,14 +138,7 @@ const AppNavigator: FC = () => {
         <Screen
           name="Home"
           component={HomeStack}
-          options={({ route }) => {
-            const routeName = getFocusedRouteNameFromRoute(route) || "LogIn"
-            if (routeName === "LogIn" || routeName === "SignUp") {
-              return { swipeEnabled: false }
-            } else {
-              return { swipeEnabled: true }
-            }
-          }}
+          options={() => ({ swipeEnabled: false })}
         />
         <Screen name="Profile" component={ProfileStack} />
       </Navigator>
@@ -157,7 +148,7 @@ const AppNavigator: FC = () => {
 
 const styles = StyleSheet.create({
   userContainer: {
-    marginTop: height * 0.05,
+    marginTop: height * 0.075,
     padding: 10,
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -175,14 +166,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   logoutContainer: {
-    marginBottom: 27,
-    marginLeft: 15,
+    marginBottom: height * 0.03,
+    padding: 20,
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
   },
   logout: {
-    color: colors.secondary,
+    color: colors.grey,
     fontSize: 15,
     fontFamily: "poppins-extrabold",
     marginLeft: 5,

@@ -1,6 +1,7 @@
-import React, { FC, useState, useEffect } from "react"
+import React, { FC, useState, useEffect, useCallback } from "react"
 import { Text, StyleSheet, ScrollView } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
+import { useFocusEffect } from "@react-navigation/native"
 
 import { colors } from "../../assets/colors"
 import { getFieldsWithLimit } from "../../services/fields/getFieldsWithLimit"
@@ -25,6 +26,14 @@ const Home: FC<HomeScreenNavigationProp> = ({
   const [search, setSearch] = useState("")
 
   const user = getUsername()
+
+  useFocusEffect(
+    useCallback(() => {
+      const parent = navigation.getParent()
+      parent?.setOptions({ swipeEnabled: true })
+      return () => parent?.setOptions({ swipeEnabled: false })
+    }, [navigation])
+  )
 
   useEffect(() => {
     getFieldsWithLimit(5)
