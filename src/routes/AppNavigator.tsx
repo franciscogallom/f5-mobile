@@ -4,6 +4,7 @@ import {
   createDrawerNavigator,
   DrawerItem,
   DrawerContentScrollView,
+  DrawerContentComponentProps,
 } from "@react-navigation/drawer"
 import { View, Text, StyleSheet } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
@@ -25,8 +26,7 @@ const AppNavigator: FC = () => {
 
   const dispatch = useDispatch()
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const CustomDrawerContent = ({ navigation }: any) => {
+  const CustomDrawerContent = ({ navigation }: DrawerContentComponentProps) => {
     const [activeIndex, setActiveIndex] = useState(0)
 
     return (
@@ -130,9 +130,8 @@ const AppNavigator: FC = () => {
     <NavigationContainer>
       <Navigator
         screenOptions={{ headerShown: false, swipeEnabled: false }}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        drawerContent={({ navigation }: any) => (
-          <CustomDrawerContent navigation={navigation} />
+        drawerContent={(props: DrawerContentComponentProps) => (
+          <CustomDrawerContent {...props} />
         )}
       >
         <Screen name="Home" component={HomeStack} />
