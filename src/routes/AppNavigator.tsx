@@ -129,17 +129,13 @@ const AppNavigator: FC = () => {
   return (
     <NavigationContainer>
       <Navigator
-        screenOptions={{ headerShown: false }}
+        screenOptions={{ headerShown: false, swipeEnabled: false }}
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         drawerContent={({ navigation }: any) => (
           <CustomDrawerContent navigation={navigation} />
         )}
       >
-        <Screen
-          name="Home"
-          component={HomeStack}
-          options={() => ({ swipeEnabled: false })}
-        />
+        <Screen name="Home" component={HomeStack} />
         <Screen name="Profile" component={ProfileStack} />
       </Navigator>
     </NavigationContainer>
