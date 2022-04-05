@@ -9,7 +9,6 @@ import { useIsFocused } from "@react-navigation/native"
 
 import { colors } from "../../assets/colors"
 import { height, width } from "../../assets/dimensions"
-import { images } from "../../assets/images"
 import { getBookingsByFieldUsername } from "../../services/bookings/getBookingsByFieldUsername"
 import { FieldDetailsProps } from "../../interfaces/props"
 import { getBookingForUserForToday } from "../../services/bookings/getBookingForUserForToday"
@@ -59,7 +58,11 @@ const FieldDetails: FC<FieldDetailsProps> = ({
 
   return (
     <View style={styles.container}>
-      <Image blurRadius={1} source={images[field.id]} style={styles.image} />
+      <Image
+        blurRadius={1}
+        source={{ uri: field.image }}
+        style={styles.image}
+      />
       <View style={styles.close}>
         <AntDesign
           name="close"

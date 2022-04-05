@@ -1,7 +1,6 @@
 import React, { FC } from "react"
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native"
 
-import { images } from "../assets/images"
 import { height } from "../assets/dimensions"
 import { colors } from "../assets/colors"
 import { FieldCardProps } from "../interfaces/props"
@@ -18,7 +17,7 @@ const FieldCard: FC<FieldCardProps> = ({
           <Text style={styles.detail}>📍 {field.location}.</Text>
           <Text style={styles.detail}>💲{field.price}.</Text>
         </View>
-        <Image source={images[field.id]} style={styles.image} />
+        <Image source={{ uri: field.image }} style={styles.image} />
       </View>
     </TouchableOpacity>
   )

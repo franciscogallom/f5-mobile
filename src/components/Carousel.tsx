@@ -16,7 +16,6 @@ import {
 import { SharedElement } from "react-navigation-shared-element"
 
 import { height, width } from "../assets/dimensions"
-import { images } from "../assets/images"
 import { CarouselProps } from "../interfaces/props"
 
 import OverflowItems from "./OverflowItems"
@@ -80,7 +79,7 @@ const Carousel: FC<CarouselProps> = ({ data, navigation }: CarouselProps) => {
                 </View>
               )
             }}
-            renderItem={({ item, index: i }) => {
+            renderItem={({ index: i }) => {
               const inputRange = [i - 1, i, i + 1]
               const translateX = scrollXAnimated.interpolate({
                 inputRange,
@@ -115,7 +114,10 @@ const Carousel: FC<CarouselProps> = ({ data, navigation }: CarouselProps) => {
                     }}
                     style={{}}
                   >
-                    <Image source={images[item.id]} style={styles.image} />
+                    <Image
+                      source={{ uri: data[i].image }}
+                      style={styles.image}
+                    />
                   </TouchableOpacity>
                 </Animated.View>
               )
