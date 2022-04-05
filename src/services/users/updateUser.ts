@@ -1,5 +1,5 @@
 import axios from "axios"
-import { BASE_URL } from "../../BASE_URL"
+import { API_URL_BASE } from "../API_URL_BASE"
 import { UpdateUserResponse } from "../../interfaces/interfaces"
 
 export const updateUser = async (
@@ -8,5 +8,5 @@ export const updateUser = async (
   data: Record<string, unknown>
 ): Promise<UpdateUserResponse> =>
   axios
-    .put(`${BASE_URL}/users/update/${attribute}/${user}`, data)
+    .put(`${API_URL_BASE}/users/update/${attribute}/${user}`, data)
     .then((response) => response.data)

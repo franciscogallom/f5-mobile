@@ -1,5 +1,5 @@
 import axios from "axios"
-import { BASE_URL } from "../../BASE_URL"
+import { API_URL_BASE } from "../API_URL_BASE"
 
 interface User {
   user: string
@@ -8,5 +8,5 @@ interface User {
 
 export const handleLogIn = (values: User): Promise<User> =>
   axios
-    .post(`${BASE_URL}/users/login`, values)
+    .post(`${API_URL_BASE}/users/login`, values)
     .then((response) => response.data)

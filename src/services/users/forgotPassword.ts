@@ -1,5 +1,5 @@
 import axios from "axios"
-import { BASE_URL } from "../../BASE_URL"
+import { API_URL_BASE } from "../API_URL_BASE"
 
 interface Response {
   error: boolean
@@ -8,7 +8,7 @@ interface Response {
 
 export const forgotPassword = (email: string): Promise<Response> =>
   axios
-    .put(`${BASE_URL}/users/forgot-password`, {
+    .put(`${API_URL_BASE}/users/forgot-password`, {
       email,
     })
     .then((res) => res.data)

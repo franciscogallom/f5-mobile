@@ -1,10 +1,10 @@
 import axios from "axios"
-import { BASE_URL } from "../../BASE_URL"
+import { API_URL_BASE } from "../API_URL_BASE"
 import { NewUser, CreateUserResponse } from "../../interfaces/interfaces"
 
 export const createUser = async (
   newUser: NewUser
 ): Promise<CreateUserResponse> =>
   axios
-    .post(`${BASE_URL}/users/signup`, newUser)
+    .post(`${API_URL_BASE}/users/signup`, newUser)
     .then((response) => response.data)

@@ -1,7 +1,7 @@
 import axios from "axios"
-import { BASE_URL } from "../../BASE_URL"
+import { API_URL_BASE } from "../API_URL_BASE"
 
 export const verifyEmailExists = async (email: string): Promise<string> =>
   axios
-    .post(`${BASE_URL}/users/verify-email-exists`, { newEmail: email })
+    .post(`${API_URL_BASE}/users/verify-email-exists`, { newEmail: email })
     .then((response) => response.data)

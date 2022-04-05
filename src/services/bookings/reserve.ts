@@ -1,5 +1,5 @@
 import axios, { AxiosPromise } from "axios"
-import { BASE_URL } from "../../BASE_URL"
+import { API_URL_BASE } from "../API_URL_BASE"
 
 export const reserve = (
   id: string,
@@ -7,7 +7,7 @@ export const reserve = (
   hour: string,
   user: string
 ): AxiosPromise =>
-  axios.post(`${BASE_URL}/bookings/reserve`, {
+  axios.post(`${API_URL_BASE}/bookings/reserve`, {
     id,
     field,
     hour,

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { BASE_URL } from "../../BASE_URL"
+import { API_URL_BASE } from "../API_URL_BASE"
 
 interface Response {
   message: string
@@ -10,5 +10,5 @@ export const removeAccount = (
   password: string
 ): Promise<Response> =>
   axios
-    .delete(`${BASE_URL}/users/delete/${username}`, { data: { password } })
+    .delete(`${API_URL_BASE}/users/delete/${username}`, { data: { password } })
     .then((res) => res.data)

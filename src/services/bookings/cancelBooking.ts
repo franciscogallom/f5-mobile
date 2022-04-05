@@ -1,5 +1,5 @@
 import axios from "axios"
-import { BASE_URL } from "../../BASE_URL"
+import { API_URL_BASE } from "../API_URL_BASE"
 
 export const cancelBooking = (
   bookingId: number,
@@ -8,7 +8,7 @@ export const cancelBooking = (
   fieldUser: string
 ): Promise<string> => {
   return axios
-    .put(`${BASE_URL}/bookings/cancel`, {
+    .put(`${API_URL_BASE}/bookings/cancel`, {
       bookingId,
       field,
       hour,
