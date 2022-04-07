@@ -58,6 +58,7 @@ const FieldList: FC<FieldListScreenNavigationProp> = ({
             data={filterFields}
             keyExtractor={(item) => String(item.id)}
             contentContainerStyle={styles.contentContainerStyle}
+            showsVerticalScrollIndicator={false}
             renderItem={({ item }) => {
               return (
                 <FieldCard

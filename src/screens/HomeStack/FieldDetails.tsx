@@ -138,7 +138,10 @@ const FieldDetails: FC<FieldDetailsProps> = ({
           >
             👇 DISPONIBILIDAD.
           </Animatable.Text>
-          <ScrollView style={{ marginBottom: height * 0.2 }}>
+          <ScrollView
+            style={{ marginBottom: height * 0.2 }}
+            showsVerticalScrollIndicator={false}
+          >
             {bookings &&
               Object.values(bookings).map(
                 (fields: { [key: string]: boolean }, index: number) => {
