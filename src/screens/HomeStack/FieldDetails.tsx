@@ -216,11 +216,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginVertical: MARGIN_VERTICAL,
   },
-  phone: {
-    color: colors.secondary,
-    fontFamily: "poppins-extrabold",
-    fontSize: 15,
-  },
   rating: {
     color: "#FFDF00",
     fontFamily: "poppins-extrabold",
