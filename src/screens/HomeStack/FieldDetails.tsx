@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react"
 import { View, StyleSheet, Image } from "react-native"
-import { ScrollView } from "react-native-gesture-handler"
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler"
 import { AntDesign } from "@expo/vector-icons"
 import { SharedElement } from "react-navigation-shared-element"
 import * as Animatable from "react-native-animatable"
@@ -117,17 +117,18 @@ const FieldDetails: FC<FieldDetailsProps> = ({
           >
             💲{field.price}.
           </Animatable.Text>
-          <Animatable.Text
-            animation={fadeInBottom}
-            duration={DURATION}
-            delay={DURATION + 900}
-            style={styles.details}
-            onPress={() => {
-              Linking.openURL(`tel:${field.phone}`)
-            }}
+          <TouchableOpacity
+            onPress={async () => await Linking.openURL(`tel:${field.phone}`)}
           >
-            📞 {field.phone}.
-          </Animatable.Text>
+            <Animatable.Text
+              animation={fadeInBottom}
+              duration={DURATION}
+              delay={DURATION + 900}
+              style={styles.details}
+            >
+              📞 {field.phone}.
+            </Animatable.Text>
+          </TouchableOpacity>
           <Animatable.Text
             animation={fadeInBottom}
             duration={DURATION}
@@ -213,6 +214,11 @@ const styles = StyleSheet.create({
     fontFamily: "poppins-extrabold",
     fontSize: 15,
     marginVertical: MARGIN_VERTICAL,
+  },
+  phone: {
+    color: colors.secondary,
+    fontFamily: "poppins-extrabold",
+    fontSize: 15,
   },
   rating: {
     color: "#FFDF00",
