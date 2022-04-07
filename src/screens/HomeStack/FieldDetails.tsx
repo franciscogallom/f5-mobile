@@ -92,14 +92,15 @@ const FieldDetails: FC<FieldDetailsProps> = ({
             >
               {field.name}.
             </Animatable.Text>
-            <Animatable.Text
+            {/* FUTURE PREVIEW */}
+            {/* <Animatable.Text
               animation={fadeInBottom}
               duration={DURATION + 900}
               delay={DURATION * 2}
               style={[styles.details, styles.rating]}
             >
               ⭐ {(field.sumOfRatings / field.numberOfRatings).toFixed(2)}
-            </Animatable.Text>
+            </Animatable.Text> */}
           </View>
           <Animatable.Text
             animation={fadeInBottom}
