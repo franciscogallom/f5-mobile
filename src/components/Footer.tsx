@@ -14,8 +14,8 @@ const Footer: FC = () => {
       />
       <Text
         style={styles.text}
-        onPress={() =>
-          Linking.openURL("mailto: franciscogallomolinuevo@gmail.com")
+        onPress={async () =>
+          await Linking.openURL("mailto: franciscogallomolinuevo@gmail.com")
         }
       >
         Contáctanos.
