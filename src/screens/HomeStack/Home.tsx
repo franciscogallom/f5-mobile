@@ -1,11 +1,9 @@
 import React, { FC, useState, useEffect, useCallback } from "react"
 import { Text, StyleSheet, ScrollView } from "react-native"
-import { AntDesign } from "@expo/vector-icons"
 import { useFocusEffect } from "@react-navigation/native"
 
 import { colors } from "../../assets/colors"
 import { getFieldsWithLimit } from "../../services/fields/getFieldsWithLimit"
-import { height } from "../../assets/dimensions"
 import { Field } from "../../interfaces/interfaces"
 import { HomeScreenNavigationProp } from "../../interfaces/props"
 import { getUsername } from "../../redux/getUsername"
@@ -17,6 +15,7 @@ import Footer from "../../components/Footer"
 import Banner from "../../components/Banner"
 import RentPlayRepeat from "../../components/RentPlayRepeat"
 import MyGame from "../../components/MyGame"
+import OpenMenu from "../../components/OpenMenu"
 
 const Home: FC<HomeScreenNavigationProp> = ({
   navigation,
@@ -46,12 +45,7 @@ const Home: FC<HomeScreenNavigationProp> = ({
     <Loader />
   ) : (
     <ScrollView style={styles.container}>
-      <AntDesign
-        style={styles.buttonMenu}
-        name="menu-fold"
-        size={24}
-        color={colors.grey}
-      />
+      <OpenMenu />
       <MyGame user={user} navigation={navigation} />
       <Search
         setSearch={setSearch}
@@ -74,10 +68,6 @@ const Home: FC<HomeScreenNavigationProp> = ({
 }
 
 const styles = StyleSheet.create({
-  buttonMenu: {
-    marginTop: height * 0.03,
-    marginBottom: height * 0.01,
-  },
   container: {
     flex: 1,
     backgroundColor: colors.primary,

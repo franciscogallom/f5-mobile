@@ -7,6 +7,7 @@ import { useFocusEffect } from "@react-navigation/native"
 import Input from "../../components/Input"
 import Action from "../../components/Action"
 import ButtonOne from "../../components/ButtonOne"
+import OpenMenu from "../../components/OpenMenu"
 import { colors } from "../../assets/colors"
 import { height } from "../../assets/dimensions"
 import { UserData } from "../../interfaces/interfaces"
@@ -208,6 +209,8 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
 
   return (
     <View style={styles.container}>
+      <OpenMenu />
+
       {/* Change username */}
       <View style={styles.section}>
         {changeUsername ? (
@@ -498,7 +501,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     padding: 10,
-    paddingTop: height * 0.075,
   },
   section: {
     marginBottom: height * 0.025,

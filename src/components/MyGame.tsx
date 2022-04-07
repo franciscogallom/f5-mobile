@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   },
   greeting: {
     color: colors.secondary,
-    paddingVertical: 10,
+    paddingBottom: 10,
     fontSize: 30,
     fontFamily: "poppins-extrabold",
   },
