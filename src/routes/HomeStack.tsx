@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import createSharedElementStackNavigator from "react-navigation-shared-element/src/createSharedElementStackNavigator"
+import { createSharedElementStackNavigator } from "react-navigation-shared-element"
 
 import LogIn from "../screens/HomeStack/LogIn"
 import SignUp from "../screens/HomeStack/SignUp"
