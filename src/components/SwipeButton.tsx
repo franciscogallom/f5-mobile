@@ -1,12 +1,17 @@
 import React, { FC } from "react"
 import { SafeAreaView } from "react-native"
 import SwipeBtn from "rn-swipe-button"
+import { AntDesign } from "@expo/vector-icons"
 
 import { colors } from "../assets/colors"
 import { width } from "../assets/dimensions"
 import { SwipeButtonProps } from "../interfaces/props"
 
 const swipeColor = "#A5FFD6"
+
+const SwipeIcon = () => (
+  <AntDesign name="right" size={30} color={colors.primary} />
+)
 
 const SwipeButton: FC<SwipeButtonProps> = ({
   handleSwipe,
@@ -26,10 +31,12 @@ const SwipeButton: FC<SwipeButtonProps> = ({
         railBorderColor="rgba(25, 20, 20, 0.75)"
         thumbIconBackgroundColor={swipeColor}
         thumbIconBorderColor={swipeColor}
-        thumbIconImageSource={require("../assets/images/swipe-arrow.png")}
+        // @ts-expect-error: ignore error.
+        thumbIconComponent={SwipeIcon}
         titleStyles={{
           fontFamily: "poppins-extrabold-italic",
           color: colors.secondary,
+          opacity: 0.75,
         }}
       />
     </SafeAreaView>
