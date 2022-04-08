@@ -5,6 +5,7 @@ import { Shadow } from "react-native-shadow-2"
 
 import { colors } from "../assets/colors"
 import { height } from "../assets/dimensions"
+import { images } from "../assets/images"
 import { BannerProps } from "../interfaces/props"
 
 const Banner: FC<BannerProps> = ({ text, handleTap }: BannerProps) => {
@@ -17,10 +18,7 @@ const Banner: FC<BannerProps> = ({ text, handleTap }: BannerProps) => {
       radius={40}
     >
       <TouchableOpacity style={styles.container} onPress={handleTap}>
-        <ImageBackground
-          style={styles.image}
-          source={require("../assets/images/banner.jpg")}
-        >
+        <ImageBackground style={styles.image} source={{ uri: images.banner }}>
           <Text style={styles.text}>{text}</Text>
         </ImageBackground>
       </TouchableOpacity>
