@@ -20,7 +20,6 @@
     "expo-constants": "^13.0.2",
     "expo-linear-gradient": "~11.0.3",
     "expo-linking": "^3.0.0",
-    "expo-updates": "~0.11.6",
     "formik": "^2.2.6",
     "react": "17.0.1",
     "react-native": "0.64.3",
