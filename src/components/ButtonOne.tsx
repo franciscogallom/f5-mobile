@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from "react-native"
-import { LinearGradient } from "expo-linear-gradient"
+import { LinearGradient } from "expo-linear-gradient/build/LinearGradient"
 
 import { colors } from "../assets/colors"
 import { ButtonOneProps } from "../interfaces/props"

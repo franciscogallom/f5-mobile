@@ -1,6 +1,10 @@
 import React, { FC } from "react"
-import { ImageBackground, Text, StyleSheet } from "react-native"
-import { TouchableOpacity } from "react-native-gesture-handler"
+import {
+  ImageBackground,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native"
 import { Shadow } from "react-native-shadow-2"
 
 import { colors } from "../assets/colors"

@@ -1,13 +1,12 @@
 import React, { FC } from "react"
-import { View, Text, StyleSheet } from "react-native"
-import { TouchableOpacity } from "react-native-gesture-handler"
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import * as Animatable from "react-native-animatable"
 import Toast from "react-native-toast-message"
+import { SharedElement } from "react-navigation-shared-element"
 
 import { colors } from "../assets/colors"
 import { width } from "../assets/dimensions"
 import { BookingsProps } from "../interfaces/props"
-import { SharedElement } from "react-navigation-shared-element"
 
 export const fadeInBottom = {
   0: {

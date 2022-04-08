@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { NavigationContainer } from "@react-navigation/native"
+import NavigationContainer from "@react-navigation/native/src/NavigationContainer"
 import {
   createDrawerNavigator,
   DrawerContentComponentProps,

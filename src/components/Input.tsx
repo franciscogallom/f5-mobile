@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { TextInput, View, StyleSheet } from "react-native"
-import { AntDesign } from "@expo/vector-icons"
+import AntDesign from "@expo/vector-icons/AntDesign"
 
 import { colors } from "../assets/colors"
 import { InputProps } from "../interfaces/props"

@@ -44,7 +44,7 @@ const Home: FC<HomeScreenNavigationProp> = ({
   return loader ? (
     <Loader />
   ) : (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <OpenMenu />
       <MyGame user={user} navigation={navigation} />
       <Search

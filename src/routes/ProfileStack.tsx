@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { createStackNavigator } from "@react-navigation/stack"
+import createStackNavigator from "@react-navigation/stack/src/navigators/createStackNavigator"
 
 import Profile from "../screens/ProfileStack/Profile"
 import NotFound from "../screens/NotFound"

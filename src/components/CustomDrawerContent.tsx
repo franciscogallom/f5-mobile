@@ -4,14 +4,13 @@ import {
   DrawerContentScrollView,
   DrawerContentComponentProps,
 } from "@react-navigation/drawer"
-import { View, Text, StyleSheet } from "react-native"
-import { AntDesign } from "@expo/vector-icons"
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import AntDesign from "@expo/vector-icons/AntDesign"
+import { useDispatch } from "react-redux"
 
 import { getUsername } from "../redux/getUsername"
 import { colors } from "../assets/colors"
 import { height } from "../assets/dimensions"
-import { TouchableOpacity } from "react-native-gesture-handler"
-import { useDispatch } from "react-redux"
 import { removeUser } from "../redux/actions"
 import { removeItemFromAsyncStorage } from "../asyncStorage/removeItem"
 

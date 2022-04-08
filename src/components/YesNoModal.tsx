@@ -1,11 +1,11 @@
 import React, { FC } from "react"
 import { Modal, StyleSheet, Text, View } from "react-native"
-import { BlurView } from "expo-blur"
+import BlurView from "expo-blur/build/BlurView"
 import { Shadow } from "react-native-shadow-2"
 
+import ButtonOne from "./ButtonOne"
 import { YesNoModalProps } from "../interfaces/props"
 import { colors } from "../assets/colors"
-import ButtonOne from "./ButtonOne"
 import { height } from "../assets/dimensions"
 
 const YesNoModal: FC<YesNoModalProps> = ({

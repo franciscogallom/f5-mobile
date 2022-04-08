@@ -1,4 +1,4 @@
-import { StackNavigationProp } from "@react-navigation/stack"
+import { StackNavigationProp } from "@react-navigation/stack/src/types"
 
 export interface NewUser {
   user: string

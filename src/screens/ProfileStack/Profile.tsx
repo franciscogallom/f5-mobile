@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useEffect, useState } from "react"
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import Toast from "react-native-toast-message"
-import { AntDesign } from "@expo/vector-icons"
+import AntDesign from "@expo/vector-icons/AntDesign"
 import { useFocusEffect } from "@react-navigation/native"
 
 import Input from "../../components/Input"

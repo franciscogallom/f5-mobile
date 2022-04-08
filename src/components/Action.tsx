@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { TouchableOpacity, Text, StyleSheet } from "react-native"
-import { AntDesign } from "@expo/vector-icons"
+import AntDesign from "@expo/vector-icons/AntDesign"
 
 import { colors } from "../assets/colors"
 import { ActionProps } from "../interfaces/props"

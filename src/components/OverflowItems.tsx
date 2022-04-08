@@ -2,7 +2,6 @@ import React, { FC } from "react"
 import { Text, View, StyleSheet, Animated } from "react-native"
 
 import { colors } from "../assets/colors"
-
 import { OverflowItemsProps } from "../interfaces/props"
 
 const OVERFLOW_HEIGHT = 100

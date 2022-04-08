@@ -1,9 +1,10 @@
 import React, { FC } from "react"
 import { View, TextInput, StyleSheet } from "react-native"
-import { AntDesign } from "@expo/vector-icons"
+import AntDesign from "@expo/vector-icons/AntDesign"
+import { Shadow } from "react-native-shadow-2"
+
 import { colors } from "../assets/colors"
 import { SearchProps } from "../interfaces/props"
-import { Shadow } from "react-native-shadow-2"
 
 const Search: FC<SearchProps> = ({
   setSearch,

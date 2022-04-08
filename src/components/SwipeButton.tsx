@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { SafeAreaView } from "react-native"
 import SwipeBtn from "rn-swipe-button"
-import { AntDesign } from "@expo/vector-icons"
+import AntDesign from "@expo/vector-icons/AntDesign"
 
 import { colors } from "../assets/colors"
 import { width } from "../assets/dimensions"

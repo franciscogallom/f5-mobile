@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react"
 import { View, StyleSheet, Image } from "react-native"
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler"
-import { AntDesign } from "@expo/vector-icons"
+import AntDesign from "@expo/vector-icons/AntDesign"
 import { SharedElement } from "react-navigation-shared-element"
 import * as Animatable from "react-native-animatable"
 import * as Linking from "expo-linking"
