@@ -1,5 +1,6 @@
 import React, { FC } from "react"
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
+import { TouchableOpacity } from "react-native-gesture-handler"
 import * as Animatable from "react-native-animatable"
 import Toast from "react-native-toast-message"
 import { SharedElement } from "react-navigation-shared-element"
@@ -23,7 +24,7 @@ export const DURATION = 800
 
 const Bookings: FC<BookingsProps> = ({
   index,
-  numberOfField,
+  label,
   startsAt,
   fieldHours,
   navigate,
@@ -65,7 +66,7 @@ const Bookings: FC<BookingsProps> = ({
       style={{ marginVertical: 10 }}
       key={index}
     >
-      <Text style={styles.numberOfField}>{numberOfField}</Text>
+      <Text style={styles.label}>{label}</Text>
       <View key={index} style={styles.booking}>
         {/* Not visible in this component */}
         <SharedElement
@@ -119,11 +120,10 @@ const Bookings: FC<BookingsProps> = ({
 }
 
 const styles = StyleSheet.create({
-  numberOfField: {
+  label: {
     color: colors.secondary,
     fontSize: 25,
     fontFamily: "poppins-extrabold-italic",
-    textTransform: "uppercase",
   },
   booking: {
     flexDirection: "row",

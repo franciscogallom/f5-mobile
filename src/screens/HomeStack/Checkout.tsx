@@ -12,7 +12,7 @@ import SwipeButton from "../../components/SwipeButton"
 import { getUsername } from "../../redux/getUsername"
 
 const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
-  const { id, name, price, location, numberOfField, hour } = route.params
+  const { id, name, price, location, label, hour } = route.params
   const [message, setMessage] = useState("")
   const [loading, setLoading] = useState(false)
 
@@ -20,7 +20,7 @@ const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
 
   function handleSwipe() {
     setLoading(true)
-    reserve(id, numberOfField, hour, user)
+    reserve(id, label, hour, user)
       .then(() =>
         setMessage(
           "Genial 😃, tu reserva ya esta agendada! En instantes te redigiremos al Home."
@@ -53,7 +53,7 @@ const Checkout: FC<CheckoutProps> = ({ navigation, route }: CheckoutProps) => {
           <Text style={styles.textCard}>⚽ {name}.</Text>
           <Text style={styles.textCard}>📍 {location}.</Text>
           <Text style={styles.textCard}>
-            🕑 {hour}:00hs, {numberOfField}.
+            🕑 {hour}:00hs, {label}.
           </Text>
           <Text style={styles.textCard}>💲{price}.</Text>
         </View>
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   textCard: {
     fontFamily: "poppins-extrabold",
     textAlign: "left",
-    fontSize: 22,
+    fontSize: 18,
     color: colors.secondary,
     margin: 5,
     letterSpacing: 0.8,

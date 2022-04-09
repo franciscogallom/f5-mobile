@@ -29,7 +29,7 @@ export interface BannerProps {
 
 export interface BookingsProps {
   index: number
-  numberOfField: string
+  label: string
   startsAt: number
   fieldHours: boolean[]
   hasBooking: boolean

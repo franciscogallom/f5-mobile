@@ -1,16 +1,6 @@
 import axios from "axios"
 import { API_URL_BASE } from "../API_URL_BASE"
-
-interface Bookings {
-  _id: string
-  fieldUsername: string
-  bookings: {
-    [fieldSchedule: string]: {
-      [hour: string]: boolean
-    }
-  }
-  startsAt: number
-}
+import { Bookings } from "../../interfaces/interfaces"
 
 export const getBookingsByFieldUsername = (
   fieldUsername: string

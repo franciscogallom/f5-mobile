@@ -13,30 +13,22 @@ import { getBookingsByFieldUsername } from "../../services/bookings/getBookingsB
 import { FieldDetailsProps } from "../../interfaces/props"
 import { getBookingForUserForToday } from "../../services/bookings/getBookingForUserForToday"
 import { getUsername } from "../../redux/getUsername"
+import { Bookings as IBookings } from "../../interfaces/interfaces"
 
 import Bookings, { fadeInBottom, DURATION } from "../../components/Bookings"
 
 const MARGIN_VERTICAL = 5
-
-interface BookingsData {
-  [fieldSchedule: string]: {
-    [hour: string]: boolean
-  }
-}
 
 const FieldDetails: FC<FieldDetailsProps> = ({
   navigation,
   route,
 }: FieldDetailsProps) => {
   const field = route.params
-  const [bookings, setBookings] = useState<BookingsData>()
-  const [startsAt, setStartsAt] = useState(0)
-  const [id, setId] = useState("")
-  const [hasBooking, setHasBooking] = useState(false)
-
   const user = getUsername()
-
   const isFocused = useIsFocused()
+
+  const [bookingsData, setBookingsData] = useState<IBookings>()
+  const [hasBooking, setHasBooking] = useState(false)
 
   useEffect(() => {
     if (isFocused) {
@@ -49,9 +41,7 @@ const FieldDetails: FC<FieldDetailsProps> = ({
   useEffect(() => {
     getBookingsByFieldUsername(route.params.user)
       .then((res) => {
-        setId(res._id)
-        setBookings(res.bookings)
-        setStartsAt(res.startsAt)
+        setBookingsData(res)
       })
       .catch(() => navigation.navigate("NotFound"))
   }, [])
@@ -142,36 +132,32 @@ const FieldDetails: FC<FieldDetailsProps> = ({
             style={{ marginBottom: height * 0.2 }}
             showsVerticalScrollIndicator={false}
           >
-            {bookings &&
-              Object.values(bookings).map(
-                (fields: { [key: string]: boolean }, index: number) => {
-                  const numberOfField = `cancha ${index + 1}`
-                  const fieldHours = Object.values(fields).map(
-                    (hour: boolean) => hour
-                  )
-                  const { name, price, location } = field
-                  return (
-                    <Bookings
-                      key={index}
-                      index={index}
-                      numberOfField={numberOfField}
-                      startsAt={startsAt}
-                      fieldHours={fieldHours}
-                      hasBooking={hasBooking}
-                      navigate={(hour: string) =>
-                        navigation.navigate("Checkout", {
-                          id,
-                          name,
-                          price,
-                          location,
-                          numberOfField,
-                          hour,
-                        })
-                      }
-                    />
-                  )
-                }
-              )}
+            {bookingsData?.bookings &&
+              bookingsData.bookings.map((fieldData, index) => {
+                const label = `CANCHA ${index + 1} ( f${fieldData.type} )`
+                const fieldHours = fieldData.hours
+                const { name, price, location } = field
+                return (
+                  <Bookings
+                    key={index}
+                    index={index}
+                    label={label}
+                    startsAt={bookingsData.startsAt}
+                    fieldHours={fieldHours}
+                    hasBooking={hasBooking}
+                    navigate={(hour: string) =>
+                      navigation.navigate("Checkout", {
+                        id: bookingsData._id,
+                        name,
+                        price,
+                        location,
+                        label,
+                        hour,
+                      })
+                    }
+                  />
+                )
+              })}
           </ScrollView>
         </View>
       </SharedElement>

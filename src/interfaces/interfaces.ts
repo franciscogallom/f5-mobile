@@ -54,8 +54,20 @@ export interface Checkout {
   name: string
   location: string
   price: string
-  numberOfField: string
+  label: string
   hour: string
+}
+
+export interface Bookings {
+  _id: string
+  fieldUsername: string
+  bookings: BookingsEntity[]
+  startsAt: number
+}
+
+export interface BookingsEntity {
+  type: string
+  hours: boolean[]
 }
 
 export type HomeStackParamList = {
