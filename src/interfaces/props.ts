@@ -62,7 +62,7 @@ export interface CheckoutProps {
 
 export interface MyGameData {
   fieldUser: string
-  bookingId: number
+  bookingId: string
   name: string
   location: string
   price: string

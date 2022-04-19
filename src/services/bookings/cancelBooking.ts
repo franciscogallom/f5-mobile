@@ -2,7 +2,7 @@ import axios from "axios"
 import { API_URL_BASE } from "../API_URL_BASE"
 
 export const cancelBooking = (
-  bookingId: number,
+  bookingId: string,
   field: string,
   hour: string,
   fieldUser: string

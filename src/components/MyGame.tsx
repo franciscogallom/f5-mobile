@@ -2,8 +2,8 @@ import React, { useState, FC, useEffect } from "react"
 import { Text, View, StyleSheet } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { useIsFocused } from "@react-navigation/native"
+import { LinearGradient } from "expo-linear-gradient/build/LinearGradient"
 import Toast from "react-native-toast-message"
-import { Shadow } from "react-native-shadow-2"
 
 import { colors } from "../assets/colors"
 import { MyGameData, MyGameProps } from "../interfaces/props"
@@ -16,9 +16,6 @@ const FONT_SIZE = 24
 
 const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
   const [modalVisible, setModalVisible] = useState(false)
-  const [canCancel, setCanCancel] = useState(true)
-  const [message, setMessage] = useState("Hoy se juega!")
-  const [showdData, setShowData] = useState(true)
   const [data, setData] = useState<MyGameData>()
   const [loading, setLoading] = useState(false)
 
@@ -31,42 +28,6 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
         .catch(() => navigation.navigate("NotFound"))
     }
   }, [isFocused])
-
-  useEffect(() => {
-    if (data) {
-      const { hour, name } = data
-      const date = new Date()
-
-      const currentHour = date.getHours()
-      const lessThanAnHourLeft = Number(hour) - currentHour === 1
-
-      const currentMinutes = date.getMinutes()
-      const lessThan30Minutes = currentMinutes > 30
-
-      const itIsPlaying = Number(hour) === currentHour
-      const wasPlayed = Number(hour) < currentHour
-
-      if (
-        (lessThanAnHourLeft && lessThan30Minutes) ||
-        itIsPlaying ||
-        wasPlayed
-      ) {
-        setCanCancel(false)
-      }
-
-      if (itIsPlaying || wasPlayed) {
-        setShowData(false)
-      }
-
-      if (lessThanAnHourLeft && lessThan30Minutes) {
-        setMessage("Esta por comenzar.")
-      } else if (itIsPlaying) {
-        setMessage(`Se está jugando en ${name}!`)
-      } else if (wasPlayed) {
-        setMessage(`¿Cómo estuvo el partido de hoy en ${name}?`)
-      }
-    }
-  }, [])
 
   const handleYes = () => {
     if (data) {
@@ -87,51 +48,69 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
     }
   }
 
+  const handleCancel = () => {
+    const matchHour = Number(data?.hour)
+    const date = new Date()
+
+    const currentHour = date.getHours()
+    const currentMinutes = date.getMinutes()
+
+    const lessThanAnHourLeft = matchHour - currentHour === 1
+    const lessThan30Minutes = currentMinutes >= 30
+    const itIsPlayingOrWasPlayed = currentHour >= matchHour
+
+    if ((lessThanAnHourLeft && lessThan30Minutes) || itIsPlayingOrWasPlayed) {
+      Toast.show({
+        type: "error",
+        position: "bottom",
+        text1: "Ya no podés cancelar el turno.",
+        text2: "Faltan menos de 30 minutos para el partido.",
+      })
+    } else {
+      setModalVisible(true)
+    }
+  }
+
   return data ? (
-    <Shadow
-      distance={1}
-      startColor={colors.quaternaryDark}
-      offset={[5, 5]}
-      viewStyle={{ width: "98%" }}
-      containerViewStyle={{ marginVertical: 20 }}
+    <LinearGradient
+      style={styles.container}
+      colors={[colors.tertiary, colors.quaternary]}
+      start={[0, 1]}
+      end={[0.9, 0.1]}
     >
-      <View style={styles.container}>
-        <Text style={styles.text}>{message}</Text>
+      <Text style={styles.text}>mi turno.</Text>
 
-        {showdData && (
-          <View>
-            <Text style={[styles.textCard, { fontSize: FONT_SIZE - 2 }]}>
-              ⚽ {data.name}.
-            </Text>
-            <Text style={[styles.textCard, { fontSize: FONT_SIZE - 4 }]}>
-              📍 {data.location}.
-            </Text>
-            <Text style={[styles.textCard, { fontSize: FONT_SIZE - 6 }]}>
-              🕑 {data.hour}:00hs, {data.field}.
-            </Text>
-          </View>
-        )}
-
-        {canCancel && (
-          <TouchableOpacity
-            style={styles.cancelContainer}
-            onPress={() => setModalVisible(true)}
-          >
-            <Text style={styles.cancelText}>❌ CANCELAR.</Text>
-          </TouchableOpacity>
-        )}
-
-        {modalVisible && (
-          <YesNoModal
-            visible={modalVisible}
-            setVisible={(value: boolean) => setModalVisible(value)}
-            text="¿Estás seguro que quieres cancelar?"
-            handleYes={handleYes}
-            loading={loading}
-          />
-        )}
+      <View>
+        <Text style={[styles.textCard, { fontSize: FONT_SIZE - 2 }]}>
+          ⚽ {data.name}.
+        </Text>
+        <Text style={[styles.textCard, { fontSize: FONT_SIZE - 4 }]}>
+          📍 {data.location}.
+        </Text>
+        <Text style={[styles.textCard, { fontSize: FONT_SIZE - 6 }]}>
+          🕑 {data.hour}:00hs, {data.field}.
+        </Text>
       </View>
-    </Shadow>
+
+      <View style={styles.cancelContainer}>
+        <Text style={styles.cancelText}>
+          Podés cancelar hasta 30 minutos antes del partido.
+        </Text>
+        <TouchableOpacity onPress={handleCancel}>
+          <Text style={styles.cancelButton}>CANCELAR ❌.</Text>
+        </TouchableOpacity>
+      </View>
+
+      {modalVisible && (
+        <YesNoModal
+          visible={modalVisible}
+          setVisible={(value: boolean) => setModalVisible(value)}
+          text="¿Estás seguro que querés cancelar?"
+          handleYes={handleYes}
+          loading={loading}
+        />
+      )}
+    </LinearGradient>
   ) : (
     <Text style={styles.greeting}>hey 👋 ! se juega?</Text>
   )
@@ -143,6 +122,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 10,
     padding: 10,
+    marginVertical: 20,
   },
   text: {
     color: colors.primary,
@@ -155,11 +135,16 @@ const styles = StyleSheet.create({
   },
   cancelContainer: {
     marginTop: 20,
-    width: "50%",
   },
-  cancelText: {
+  cancelButton: {
     fontFamily: "poppins-extrabold",
     fontSize: FONT_SIZE - 6,
+    marginTop: 5,
+  },
+  cancelText: {
+    fontFamily: "poppins-bold-italic",
+    color: colors.primary,
+    fontSize: 12,
   },
   greeting: {
     color: colors.secondary,
