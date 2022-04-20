@@ -1,4 +1,5 @@
 import axios from "axios"
+import { CancelBookingResponse } from "../../interfaces/interfaces"
 import { API_URL_BASE } from "../API_URL_BASE"
 
 export const cancelBooking = (
@@ -6,7 +7,7 @@ export const cancelBooking = (
   field: string,
   hour: string,
   fieldUser: string
-): Promise<string> => {
+): Promise<CancelBookingResponse> => {
   return axios
     .put(`${API_URL_BASE}/bookings/cancel`, {
       bookingId,

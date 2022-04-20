@@ -37,6 +37,11 @@ export interface VerifyUserDataResponse {
   validationMessage: string
 }
 
+export interface CancelBookingResponse {
+  error: boolean
+  message: string
+}
+
 export interface Field {
   user: string
   name: string
