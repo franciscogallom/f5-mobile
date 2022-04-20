@@ -34,11 +34,20 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
       setLoading(true)
       cancelBooking(data.bookingId, data.field, data.hour, data.fieldUser)
         .then((response) => {
-          Toast.show({
-            text1: "Operación exitosa!",
-            text2: response,
-          })
-          setData(undefined)
+          if (response.error) {
+            Toast.show({
+              position: "bottom",
+              type: "error",
+              text1: "Ya no podés cancelar el turno.",
+              text2: response.message,
+            })
+          } else {
+            Toast.show({
+              text1: "Operación exitosa!",
+              text2: response.message,
+            })
+            setData(undefined)
+          }
         })
         .catch(() => navigation.navigate("NotFound"))
         .finally(() => {
@@ -64,7 +73,7 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
         type: "error",
         position: "bottom",
         text1: "Ya no podés cancelar el turno.",
-        text2: "Faltan menos de 30 minutos para el partido.",
+        text2: "Podías cancelar hasta 30 minutos antes.",
       })
     } else {
       setModalVisible(true)
@@ -142,7 +151,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   cancelText: {
-    fontFamily: "poppins-bold-italic",
+    fontFamily: "poppins-extrabold",
     color: colors.primary,
     fontSize: 12,
   },
