@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   checkout: {
     fontFamily: "poppins-extrabold-italic",
-    fontSize: 60,
+    fontSize: 50,
     textAlign: "center",
   },
   card: {
