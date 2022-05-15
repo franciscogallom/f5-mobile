@@ -6,7 +6,11 @@ interface User {
   password: string
 }
 
-export const handleLogIn = (values: User): Promise<User> =>
+interface Response {
+  token: string
+}
+
+export const handleLogIn = (values: User): Promise<Response> =>
   axios
     .post(`${API_URL_BASE}/users/login`, values)
     .then((response) => response.data)

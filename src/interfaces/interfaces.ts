@@ -30,6 +30,7 @@ export interface CreateUserResponse {
     password: string
     created: string
   } | null
+  token: string | null
 }
 
 export interface VerifyUserDataResponse {

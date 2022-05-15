@@ -103,6 +103,7 @@ const CustomDrawerContent = ({
         onPress={() => {
           dispatch(removeUser())
           removeItemFromAsyncStorage("username")
+          removeItemFromAsyncStorage("token")
           navigation.navigate("Home")
         }}
         style={styles.logoutContainer}

@@ -143,6 +143,7 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
         } else {
           dispatch(removeUser())
           removeItemFromAsyncStorage("username")
+          removeItemFromAsyncStorage("token")
           navigation.navigate("Home")
         }
       })

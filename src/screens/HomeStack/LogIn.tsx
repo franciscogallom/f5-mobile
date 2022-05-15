@@ -35,12 +35,13 @@ const LogIn: FC<LogInScreenNavigationProp> = ({
       onSubmit={(values) => {
         setLoading(true)
         handleLogIn(values)
-          .then(() => {
+          .then(({ token }) => {
             dispatch(addUser(values.user))
             saveItemInAsyncStorage("username", values.user)
+            saveItemInAsyncStorage("token", token)
           })
           .catch((e) => {
-            setLogInStatus(e.response.data.message || "algo salio mal..")
+            setLogInStatus(e.response?.data.message || "algo salio mal..")
           })
           .finally(() => setLoading(false))
       }}

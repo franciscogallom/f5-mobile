@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-export type Items = "username"
+export type Items = "username" | "token"
 
 export const saveItemInAsyncStorage = async (
   item: Items,

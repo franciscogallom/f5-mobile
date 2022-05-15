@@ -61,7 +61,7 @@ const EmailVerification: FC<EmailVerificationScreenNavigationProp> = ({
     if (verificationCode == generatedCode) {
       setLoading(true)
       createUser({ user, email, password, phone })
-        .then(({ thereIsExistingData, result }) => {
+        .then(({ thereIsExistingData, result, token }) => {
           if (thereIsExistingData) {
             Toast.show({
               type: "error",
@@ -71,9 +71,10 @@ const EmailVerification: FC<EmailVerificationScreenNavigationProp> = ({
             })
             navigation.navigate("SignUp")
           } else {
-            if (result) {
+            if (result && token) {
               dispatch(addUser(result.user))
               saveItemInAsyncStorage("username", result.user)
+              saveItemInAsyncStorage("token", token)
             }
           }
         })
