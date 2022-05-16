@@ -14,8 +14,7 @@ export default {
       backgroundColor: "#191414",
     },
     extra: {
-      devApiUrlBase: process.env.DEV_API_URL_BASE,
-      prodApiUrlBase: process.env.PROD_API_URL_BASE,
+      apiUrlBase: process.env.API_URL_BASE,
     },
     updates: {
       fallbackToCacheTimeout: 0,
