@@ -1,38 +1,35 @@
-import React, { useState, FC, useEffect } from "react"
+import React, { useState, FC, useEffect, useContext } from "react"
 import { Text, View, StyleSheet } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
-import { useIsFocused } from "@react-navigation/native"
 import { LinearGradient } from "expo-linear-gradient/build/LinearGradient"
 import Toast from "react-native-toast-message"
 
 import { colors } from "../assets/colors"
-import { MyGameData, MyGameProps } from "../interfaces/props"
+import { MyGameProps } from "../interfaces/props"
 import { cancelBooking } from "../services/bookings/cancelBooking"
 import { getBookingForUserForToday } from "../services/bookings/getBookingForUserForToday"
 
 import YesNoModal from "./YesNoModal"
+import Context from "../context/context"
 
 const FONT_SIZE = 24
 
 const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
   const [modalVisible, setModalVisible] = useState(false)
-  const [data, setData] = useState<MyGameData>()
   const [loading, setLoading] = useState(false)
-
-  const isFocused = useIsFocused()
+  const { myGameData, setMyGameData } = useContext(Context)
 
   useEffect(() => {
-    if (isFocused) {
-      getBookingForUserForToday(user)
-        .then((res) => res.length > 0 && setData(res[0]))
-        .catch(() => navigation.navigate("NotFound"))
-    }
-  }, [isFocused])
+    getBookingForUserForToday(user)
+      .then((res) => res.length > 0 && setMyGameData(res[0]))
+      .catch(() => navigation.navigate("NotFound"))
+  }, [])
 
   const handleYes = () => {
-    if (data) {
+    if (myGameData) {
+      const { bookingId, field, hour, fieldUser } = myGameData
       setLoading(true)
-      cancelBooking(data.bookingId, data.field, data.hour, data.fieldUser)
+      cancelBooking(bookingId, field, hour, fieldUser)
         .then((response) => {
           if (response.error) {
             Toast.show({
@@ -46,7 +43,7 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
               text1: "Operación exitosa!",
               text2: response.message,
             })
-            setData(undefined)
+            setMyGameData(undefined)
           }
         })
         .catch(() => navigation.navigate("NotFound"))
@@ -58,29 +55,31 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
   }
 
   const handleCancel = () => {
-    const matchHour = Number(data?.hour)
-    const date = new Date()
+    if (myGameData) {
+      const matchHour = Number(myGameData.hour)
+      const date = new Date()
 
-    const currentHour = date.getHours()
-    const currentMinutes = date.getMinutes()
+      const currentHour = date.getHours()
+      const currentMinutes = date.getMinutes()
 
-    const lessThanAnHourLeft = matchHour - currentHour === 1
-    const lessThan30Minutes = currentMinutes >= 30
-    const itIsPlayingOrWasPlayed = currentHour >= matchHour
+      const lessThanAnHourLeft = matchHour - currentHour === 1
+      const lessThan30Minutes = currentMinutes >= 30
+      const itIsPlayingOrWasPlayed = currentHour >= matchHour
 
-    if ((lessThanAnHourLeft && lessThan30Minutes) || itIsPlayingOrWasPlayed) {
-      Toast.show({
-        type: "error",
-        position: "bottom",
-        text1: "Ya no podés cancelar el turno.",
-        text2: "Podías cancelar hasta 30 minutos antes.",
-      })
-    } else {
-      setModalVisible(true)
+      if ((lessThanAnHourLeft && lessThan30Minutes) || itIsPlayingOrWasPlayed) {
+        Toast.show({
+          type: "error",
+          position: "bottom",
+          text1: "Ya no podés cancelar el turno.",
+          text2: "Podías cancelar hasta 30 minutos antes.",
+        })
+      } else {
+        setModalVisible(true)
+      }
     }
   }
 
-  return data ? (
+  return myGameData ? (
     <LinearGradient
       style={styles.container}
       colors={[colors.tertiary, colors.quaternary]}
@@ -91,13 +90,13 @@ const MyGame: FC<MyGameProps> = ({ user, navigation }: MyGameProps) => {
 
       <View>
         <Text style={[styles.textCard, { fontSize: FONT_SIZE - 2 }]}>
-          ⚽ {data.name}.
+          ⚽ {myGameData.name}.
         </Text>
         <Text style={[styles.textCard, { fontSize: FONT_SIZE - 4 }]}>
-          📍 {data.location}.
+          📍 {myGameData.location}.
         </Text>
         <Text style={[styles.textCard, { fontSize: FONT_SIZE - 6 }]}>
-          🕑 {data.hour}:00hs, {data.field}.
+          🕑 {myGameData.hour}:00hs, {myGameData.field}.
         </Text>
       </View>
 

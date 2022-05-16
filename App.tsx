@@ -10,6 +10,7 @@ import { toastConfig } from "./src/config/toastConfig"
 import { Provider } from "react-redux"
 import { store } from "./src/redux/store"
 import { getFonts } from "./src/config/getFonts"
+import { ContextProvider } from "./src/context/context"
 
 const App: FC = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false)
@@ -22,8 +23,10 @@ const App: FC = () => {
 
   return fontsLoaded ? (
     <Provider store={store}>
-      <AppNavigator />
-      <Toast config={toastConfig} />
+      <ContextProvider>
+        <AppNavigator />
+        <Toast config={toastConfig} />
+      </ContextProvider>
     </Provider>
   ) : (
     <AppLoading

@@ -1,21 +1,19 @@
-import React, { FC, useEffect, useState } from "react"
+import React, { FC, useContext, useEffect, useState } from "react"
 import { View, StyleSheet, Image } from "react-native"
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler"
 import AntDesign from "@expo/vector-icons/AntDesign"
 import { SharedElement } from "react-navigation-shared-element"
 import * as Animatable from "react-native-animatable"
 import * as Linking from "expo-linking"
-import { useIsFocused } from "@react-navigation/native"
 
 import { colors } from "../../assets/colors"
 import { height, width } from "../../assets/dimensions"
 import { getBookingsByFieldUsername } from "../../services/bookings/getBookingsByFieldUsername"
 import { FieldDetailsProps } from "../../interfaces/props"
-import { getBookingForUserForToday } from "../../services/bookings/getBookingForUserForToday"
-import { getUsername } from "../../redux/getUsername"
 import { Bookings as IBookings } from "../../interfaces/interfaces"
 
 import Bookings, { fadeInBottom, DURATION } from "../../components/Bookings"
+import Context from "../../context/context"
 
 const MARGIN_VERTICAL = 5
 
@@ -24,19 +22,8 @@ const FieldDetails: FC<FieldDetailsProps> = ({
   route,
 }: FieldDetailsProps) => {
   const field = route.params
-  const user = getUsername()
-  const isFocused = useIsFocused()
-
   const [bookingsData, setBookingsData] = useState<IBookings>()
-  const [hasBooking, setHasBooking] = useState(false)
-
-  useEffect(() => {
-    if (isFocused) {
-      getBookingForUserForToday(user)
-        .then((res) => res.length > 0 && setHasBooking(true))
-        .catch(() => navigation.navigate("NotFound"))
-    }
-  }, [isFocused])
+  const { myGameData } = useContext(Context)
 
   useEffect(() => {
     getBookingsByFieldUsername(route.params.user)
@@ -144,7 +131,7 @@ const FieldDetails: FC<FieldDetailsProps> = ({
                     label={label}
                     startsAt={bookingsData.startsAt}
                     fieldHours={fieldHours}
-                    hasBooking={hasBooking}
+                    hasBooking={myGameData ? true : false}
                     navigate={(hour: string) =>
                       navigation.navigate("Checkout", {
                         id: bookingsData._id,
