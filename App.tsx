@@ -1,40 +1,44 @@
 import "react-native-gesture-handler"
 import React, { FC, useEffect, useState } from "react"
-import AppLoading from "expo-app-loading"
 import Toast from "react-native-toast-message"
-import axios from "axios"
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import * as SplashScreen from "expo-splash-screen/src/SplashScreen"
+import { Provider } from "react-redux"
 
 import AppNavigator from "./src/routes/AppNavigator"
 import { toastConfig } from "./src/config/toastConfig"
-import { Provider } from "react-redux"
 import { store } from "./src/redux/store"
 import { getFonts } from "./src/config/getFonts"
 import { ContextProvider } from "./src/context/context"
+import { setTokenFromStorage } from "./src/asyncStorage/setTokenFromStorage"
 
 const App: FC = () => {
-  const [fontsLoaded, setFontsLoaded] = useState(false)
+  const [appIsReady, setAppIsReady] = useState(false)
 
   useEffect(() => {
-    AsyncStorage.getItem("token").then((token) => {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
-    })
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync()
+        await getFonts()
+        await setTokenFromStorage()
+      } catch (e) {
+        console.warn(e)
+      } finally {
+        setAppIsReady(true)
+        await SplashScreen.hideAsync()
+      }
+    }
+
+    prepare()
   }, [])
 
-  return fontsLoaded ? (
+  return appIsReady ? (
     <Provider store={store}>
       <ContextProvider>
         <AppNavigator />
         <Toast config={toastConfig} />
       </ContextProvider>
     </Provider>
-  ) : (
-    <AppLoading
-      startAsync={getFonts}
-      onFinish={() => setFontsLoaded(true)}
-      onError={console.warn}
-    />
-  )
+  ) : null
 }
 
 export default App
