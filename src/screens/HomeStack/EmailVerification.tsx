@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react"
+import React, { FC, useContext, useEffect, useState } from "react"
 import {
   View,
   TouchableWithoutFeedback,
@@ -19,6 +19,7 @@ import { addUser } from "../../redux/actions"
 import { createUser } from "../../services/users/createUser"
 import { useDispatch } from "react-redux"
 import { getVerificationCode } from "../../services/users/getVerificationCode"
+import Context from "../../context/context"
 
 const EmailVerification: FC<EmailVerificationScreenNavigationProp> = ({
   route,
@@ -28,6 +29,7 @@ const EmailVerification: FC<EmailVerificationScreenNavigationProp> = ({
   const [generatedCode, setGeneratedCode] = useState("")
   const [loading, setLoading] = useState(false)
   const [sendAgain, setSendAgain] = useState(false)
+  const { setToken } = useContext(Context)
 
   const { user, password, email, phone } = route.params
 
@@ -72,9 +74,17 @@ const EmailVerification: FC<EmailVerificationScreenNavigationProp> = ({
             navigation.navigate("SignUp")
           } else {
             if (result && token) {
-              dispatch(addUser(result.user))
-              saveItemInAsyncStorage("username", result.user)
-              saveItemInAsyncStorage("token", token)
+              setToken(token)
+              Promise.all([
+                saveItemInAsyncStorage("username", result.user),
+                saveItemInAsyncStorage("token", token),
+              ])
+                .then(() => {
+                  dispatch(addUser(result.user))
+                })
+                .finally(() => {
+                  setLoading(false)
+                })
             }
           }
         })
@@ -85,8 +95,8 @@ const EmailVerification: FC<EmailVerificationScreenNavigationProp> = ({
             text1: "Algo salió mal...",
             text2: "Vuelve a intentarlo.",
           })
+          setLoading(false)
         })
-        .finally(() => setLoading(false))
     } else {
       Toast.show({
         type: "error",

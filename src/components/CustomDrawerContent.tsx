@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import {
   DrawerItem,
   DrawerContentScrollView,
@@ -13,11 +13,13 @@ import { colors } from "../assets/colors"
 import { height } from "../assets/dimensions"
 import { removeUser } from "../redux/actions"
 import { removeItemFromAsyncStorage } from "../asyncStorage/removeItem"
+import Context from "../context/context"
 
 const CustomDrawerContent = ({
   navigation,
 }: DrawerContentComponentProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0)
+  const { setToken } = useContext(Context)
 
   const user = getUsername()
   const dispatch = useDispatch()
@@ -104,6 +106,7 @@ const CustomDrawerContent = ({
           dispatch(removeUser())
           removeItemFromAsyncStorage("username")
           removeItemFromAsyncStorage("token")
+          setToken("")
           navigation.navigate("Home")
         }}
         style={styles.logoutContainer}

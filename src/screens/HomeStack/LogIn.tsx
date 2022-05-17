@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import React, { FC, useContext, useState } from "react"
 import {
   View,
   TouchableWithoutFeedback,
@@ -18,6 +18,7 @@ import ButtonOne from "../../components/ButtonOne"
 import Input from "../../components/Input"
 import ErrorText from "../../components/ErrorText"
 import Action from "../../components/Action"
+import Context from "../../context/context"
 
 const LogIn: FC<LogInScreenNavigationProp> = ({
   navigation,
@@ -25,6 +26,7 @@ const LogIn: FC<LogInScreenNavigationProp> = ({
   const [logInStatus, setLogInStatus] = useState("")
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
+  const { setToken } = useContext(Context)
 
   return (
     <Formik
@@ -35,15 +37,23 @@ const LogIn: FC<LogInScreenNavigationProp> = ({
       onSubmit={(values) => {
         setLoading(true)
         handleLogIn(values)
-          .then(({ token }) => {
-            dispatch(addUser(values.user))
-            saveItemInAsyncStorage("username", values.user)
-            saveItemInAsyncStorage("token", token)
+          .then(async ({ token }) => {
+            setToken(token)
+            Promise.all([
+              saveItemInAsyncStorage("username", values.user),
+              saveItemInAsyncStorage("token", token),
+            ])
+              .then(() => {
+                dispatch(addUser(values.user))
+              })
+              .finally(() => {
+                setLoading(false)
+              })
           })
           .catch((e) => {
             setLogInStatus(e.response?.data.message || "algo salio mal..")
+            setLoading(false)
           })
-          .finally(() => setLoading(false))
       }}
     >
       {({ handleChange, handleSubmit, values }) => (
