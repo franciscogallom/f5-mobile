@@ -37,7 +37,7 @@ const LogIn: FC<LogInScreenNavigationProp> = ({
       onSubmit={(values) => {
         setLoading(true)
         handleLogIn(values)
-          .then(async ({ token }) => {
+          .then(({ token }) => {
             setToken(token)
             Promise.all([
               saveItemInAsyncStorage("username", values.user),
@@ -45,6 +45,9 @@ const LogIn: FC<LogInScreenNavigationProp> = ({
             ])
               .then(() => {
                 dispatch(addUser(values.user))
+              })
+              .catch(() => {
+                setLogInStatus("algo salió mal..")
               })
               .finally(() => {
                 setLoading(false)

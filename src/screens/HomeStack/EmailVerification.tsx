@@ -82,6 +82,14 @@ const EmailVerification: FC<EmailVerificationScreenNavigationProp> = ({
                 .then(() => {
                   dispatch(addUser(result.user))
                 })
+                .catch(() => {
+                  Toast.show({
+                    type: "error",
+                    position: "bottom",
+                    text1: "Algo salió mal...",
+                    text2: "Vuelve a intentarlo.",
+                  })
+                })
                 .finally(() => {
                   setLoading(false)
                 })
