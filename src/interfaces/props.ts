@@ -6,7 +6,6 @@ import {
   SignUpScreenNavigation,
   LogInScreenNavigation,
   FieldListScreenNavigation,
-  NotFoundScreenNavigation,
   HomeScreenNavigation,
   ProfileScreenNavigation,
   ForgotPasswordScreenNavigation,

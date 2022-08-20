@@ -127,11 +127,6 @@ export type FieldListScreenNavigation = StackNavigationProp<
   "FieldList"
 >
 
-export type NotFoundScreenNavigation = StackNavigationProp<
-  HomeStackParamList,
-  "NotFound"
->
-
 export type HomeScreenNavigation = StackNavigationProp<
   HomeStackParamList,
   "Home"
