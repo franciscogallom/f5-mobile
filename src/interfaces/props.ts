@@ -140,10 +140,6 @@ export interface FieldListScreenNavigationProp {
   route: RouteProp<HomeStackParamList, "FieldList">
 }
 
-export interface NotFoundScreenNavigationProp {
-  navigation: NotFoundScreenNavigation
-}
-
 export interface HomeScreenNavigationProp {
   navigation: HomeScreenNavigation
 }

@@ -1,21 +1,19 @@
 import React, { FC } from "react"
 import { View, ImageBackground, Text, StyleSheet } from "react-native"
+import * as Updates from "expo-updates"
 
 import { colors } from "../assets/colors"
-import { NotFoundScreenNavigationProp } from "../interfaces/props"
 import { images } from "../assets/images"
 
 import ButtonOne from "../components/ButtonOne"
 
-const NotFound: FC<NotFoundScreenNavigationProp> = ({
-  navigation,
-}: NotFoundScreenNavigationProp) => (
+const NotFound: FC = () => (
   <View style={styles.container}>
     <ImageBackground source={{ uri: images.notFound }} style={styles.image}>
       <Text style={styles.text}>Algo salió mal 😕...</Text>
       <ButtonOne
-        text="volver al home"
-        handleTap={() => navigation.navigate("Home")}
+        text="volver a cargar la app"
+        handleTap={async () => await Updates.reloadAsync()}
         tertiary
       />
     </ImageBackground>
