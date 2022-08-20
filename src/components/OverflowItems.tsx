@@ -39,7 +39,6 @@ const OverflowItems: FC<OverflowItemsProps> = ({
 const styles = StyleSheet.create({
   title: {
     fontSize: 28,
-    fontWeight: "900",
     textTransform: "uppercase",
     letterSpacing: -1,
     color: colors.secondary,
