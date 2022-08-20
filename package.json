@@ -20,7 +20,7 @@
     "expo-linear-gradient": "~11.4.0",
     "expo-linking": "~3.2.2",
     "expo-splash-screen": "~0.16.1",
-    "expo-updates": "~0.14.3",
+    "expo-updates": "~0.14.4",
     "formik": "^2.2.6",
     "react": "18.0.0",
     "react-native": "0.69.4",
