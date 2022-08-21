@@ -21,6 +21,10 @@ export interface ActionProps {
   secondary?: boolean
 }
 
+export interface OpenMenuProps {
+  handleTap: () => void
+}
+
 export interface BannerProps {
   text: string
   handleTap: () => void

@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useState } from "react"
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import Toast from "react-native-toast-message"
 import AntDesign from "@expo/vector-icons/AntDesign"
-import { useFocusEffect } from "@react-navigation/native"
+import { DrawerActions, useFocusEffect } from "@react-navigation/native"
 
 import Input from "../../components/Input"
 import Action from "../../components/Action"
@@ -210,8 +210,9 @@ const Profile: FC<ProfileScreenNavigationProp> = ({
 
   return (
     <View style={styles.container}>
-      <OpenMenu />
-
+      <OpenMenu
+        handleTap={() => navigation.dispatch(DrawerActions.openDrawer())}
+      />
       {/* Change username */}
       <View style={styles.section}>
         {changeUsername ? (

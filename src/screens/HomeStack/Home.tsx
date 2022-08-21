@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useCallback } from "react"
 import { Text, StyleSheet, ScrollView } from "react-native"
-import { useFocusEffect } from "@react-navigation/native"
+import { DrawerActions, useFocusEffect } from "@react-navigation/native"
 
 import { colors } from "../../assets/colors"
 import { getFieldsWithLimit } from "../../services/fields/getFieldsWithLimit"
@@ -45,7 +45,9 @@ const Home: FC<HomeScreenNavigationProp> = ({
     <Loader />
   ) : (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <OpenMenu />
+      <OpenMenu
+        handleTap={() => navigation.dispatch(DrawerActions.openDrawer())}
+      />
       <MyGame user={user} navigation={navigation} />
       <Search
         setSearch={setSearch}
