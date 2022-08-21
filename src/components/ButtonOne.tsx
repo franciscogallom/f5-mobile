@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet,
   ActivityIndicator,
+  Keyboard,
 } from "react-native"
 import { LinearGradient } from "expo-linear-gradient/build/LinearGradient"
 
@@ -24,7 +25,10 @@ const ButtonOne: FC<ButtonOneProps> = ({
         ...styles.button,
         marginHorizontal: withoutMarginHorizontal ? 0 : 20,
       }}
-      onPress={() => !loading && handleTap()}
+      onPress={() => {
+        Keyboard.dismiss()
+        !loading && handleTap()
+      }}
     >
       {tertiary ? (
         <Text style={styles.tertiaryButton}>{text}</Text>
