@@ -7,6 +7,7 @@ export default {
     owner: "franciscogallom",
     version: "1.0.0",
     orientation: "portrait",
+    backgroundColor: "#191414",
     icon: "./src/assets/icon.png",
     splash: {
       image: "./src/assets/splash.png",
