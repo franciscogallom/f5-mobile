@@ -16,6 +16,9 @@ export default {
     },
     extra: {
       apiUrlBase: process.env.API_URL_BASE,
+      eas: {
+        projectId: "4f8a3713-7c69-4853-b58b-525d43b1fa1e",
+      },
     },
     updates: {
       fallbackToCacheTimeout: 0,
