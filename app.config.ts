@@ -5,7 +5,7 @@ export default {
     name: "f5",
     slug: "f5",
     owner: "franciscogallom",
-    version: "1.0.0",
+    version: "0.0.1",
     orientation: "portrait",
     backgroundColor: "#191414",
     icon: "./src/assets/icon.png",
@@ -15,7 +15,6 @@ export default {
       backgroundColor: "#191414",
     },
     extra: {
-      apiUrlBase: process.env.API_URL_BASE,
       eas: {
         projectId: "4f8a3713-7c69-4853-b58b-525d43b1fa1e",
       },
@@ -28,6 +27,7 @@ export default {
       supportsTablet: true,
     },
     android: {
+      versionCode: 4,
       adaptiveIcon: {
         foregroundImage: "./src/assets/adaptive-icon.png",
         backgroundColor: "#191414",

@@ -1,3 +1,1 @@
-import Constants from "expo-constants/build/Constants"
-
-export const API_URL_BASE = Constants?.manifest?.extra?.apiUrlBase
+export const API_URL_BASE = process.env.API_URL_BASE
