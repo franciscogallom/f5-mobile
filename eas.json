@@ -6,15 +6,6 @@
         "node": "v14.21.1"
       }
     },
-    "preview2": {
-      "android": {
-        "gradleCommand": ":app:assembleRelease"
-      }
-    },
-    "preview3": {
-      "developmentClient": true,
-      "distribution": "internal"
-    },
     "production": {
       "android": {
         "node": "v14.21.1"
